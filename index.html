@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 서비스 비교 · 구독 요금 & 기능 비교표 (2026.03)</title>
+<meta name="description" content="Perplexity Computer, Claude Cowork/Code, OpenAI Codex, OpenClaw 서비스별 구독 요금과 기능을 비교합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  /* ── Color system ── */
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --border: #f1f5f9;
+    --border-strong: #e2e8f0;
+    --text: #1e293b;
+    --text-mid: #475569;
+    --text-dim: #94a3b8;
+    --accent: #0ea5e9;
+    --accent-light: #e0f2fe;
+    --green: #10b981;
+    --green-light: #d1fae5;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --border-strong: #475569;
+      --text: #f1f5f9;
+      --text-mid: #cbd5e1;
+      --text-dim: #64748b;
+      --accent: #38bdf8;
+      --accent-light: rgba(56,189,248,0.1);
+      --green-light: rgba(16,185,129,0.1);
+      --amber-light: rgba(245,158,11,0.1);
+      --red-light: rgba(239,68,68,0.1);
+      --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+      --shadow-hover: 0 2px 8px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.2);
+    }
+  }
+
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --border-strong: #475569;
+    --text: #f1f5f9;
+    --text-mid: #cbd5e1;
+    --text-dim: #64748b;
+    --accent: #38bdf8;
+    --accent-light: rgba(56,189,248,0.1);
+    --green-light: rgba(16,185,129,0.1);
+    --amber-light: rgba(245,158,11,0.1);
+    --red-light: rgba(239,68,68,0.1);
+    --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+    --shadow-hover: 0 2px 8px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="light"] {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --border: #f1f5f9;
+    --border-strong: #e2e8f0;
+    --text: #1e293b;
+    --text-mid: #475569;
+    --text-dim: #94a3b8;
+    --accent: #0ea5e9;
+    --accent-light: #e0f2fe;
+    --green-light: #d1fae5;
+    --amber-light: #fef3c7;
+    --red-light: #fee2e2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  /* ── Reset & base ── */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 48px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Container ── */
+  .container { max-width: 1120px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .header { margin-bottom: 32px; }
+  .header-label {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 32px; font-weight: 800; color: var(--text);
+    letter-spacing: -0.8px; line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 14px; color: var(--text-dim); margin-top: 8px; line-height: 1.6;
+  }
+
+  /* ── Main tabs ── */
+  .main-tabs {
+    display: flex; gap: 4px; background: var(--card); border-radius: 14px;
+    padding: 4px; box-shadow: var(--shadow); margin-bottom: 32px; width: fit-content;
+  }
+  .main-tab {
+    padding: 10px 24px; border-radius: 10px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; color: var(--text-dim); background: transparent;
+    border: none; font-family: inherit;
+  }
+  .main-tab:hover { color: var(--text-mid); }
+  .main-tab.active { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(14,165,233,0.3); }
+
+  /* ── Sections ── */
+  .section { margin-bottom: 48px; }
+  .section-label {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 20px; font-weight: 800; color: var(--text);
+    letter-spacing: -0.3px; margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 13px; color: var(--text-dim); margin-bottom: 24px; line-height: 1.6;
+  }
+
+  /* ── Insight cards ── */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .insight-card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 24px; display: flex; gap: 16px; align-items: flex-start;
+    transition: all 0.25s;
+  }
+  .insight-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .insight-icon {
+    font-size: 24px; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .insight-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .insight-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── Billing cards ── */
+  .billing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .billing-card {
+    background: var(--card); border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: var(--shadow); position: relative; overflow: hidden; transition: all 0.25s;
+  }
+  .billing-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .billing-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .billing-head {
+    display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;
+  }
+  .billing-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .billing-name { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+  .billing-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 16px; }
+  .billing-strength { font-size: 12px; color: var(--text-mid); margin-bottom: 12px; line-height: 1.5; }
+  .billing-model {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+    border-radius: 8px; font-size: 11px; font-weight: 700; margin-bottom: 16px;
+  }
+  .billing-model-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .billing-tiers { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .billing-tier {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; border-radius: 10px; background: var(--border); font-size: 12px;
+  }
+  .billing-tier.rec { background: var(--accent-light); }
+  .tier-name { font-weight: 600; color: var(--text-mid); }
+  .tier-rec { font-size: 9px; font-weight: 700; color: var(--accent); margin-left: 4px; text-transform: uppercase; }
+  .tier-price { font-weight: 800; color: var(--text); }
+  .billing-price-main { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .billing-divider { height: 1px; background: var(--border); margin: 16px 0; }
+  .pc-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .pc-list { list-style: none; margin-bottom: 12px; }
+  .pc-list li {
+    font-size: 12px; line-height: 1.6; color: var(--text-mid);
+    padding-left: 16px; position: relative;
+  }
+  .pc-list li::before { position: absolute; left: 0; font-size: 11px; }
+  .pros li::before { content: '+'; color: var(--green); font-weight: 800; }
+  .cons li::before { content: '−'; color: var(--red); font-weight: 800; }
+
+  /* ── Table ── */
+  .table-wrap {
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .table-header {
+    padding: 20px 24px 12px; display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .table-inner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px 14px; text-align: center; font-size: 13px; }
+  th {
+    font-size: 10px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border);
+  }
+  td { border-bottom: 1px solid var(--border); }
+  th:first-child, td:first-child {
+    text-align: left; font-weight: 600; color: var(--text);
+    padding-left: 24px; min-width: 160px;
+    position: sticky; left: 0; z-index: 1; background: var(--card);
+  }
+  th:first-child { z-index: 3; }
+  tr:last-child td { border-bottom: none; }
+
+  .cat-row td {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text-dim); background: var(--border); text-align: left;
+    padding: 8px 24px;
+  }
+  .check { color: var(--accent); font-size: 18px; font-weight: 700; }
+  .cross { color: var(--text-dim); font-size: 14px; }
+  .col-head { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .col-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .col-name { font-size: 11px; font-weight: 700; }
+  .col-tier { font-size: 10px; color: var(--text-dim); }
+  .col-price { font-size: 12px; font-weight: 800; color: var(--text); margin-top: 2px; }
+  .col-rec {
+    font-size: 8px; font-weight: 700; color: var(--accent);
+    background: var(--accent-light); padding: 2px 6px; border-radius: 4px; margin-top: 2px;
+  }
+  .limit-row td {
+    font-size: 11px; color: var(--text-mid);
+    background: color-mix(in srgb, var(--accent-light) 30%, var(--card));
+  }
+  .limit-val { font-weight: 700; color: var(--text); }
+
+  /* ── Filters / pills ── */
+  .filters { display: flex; gap: 4px; flex-wrap: wrap; }
+  .pill {
+    padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    background: transparent; color: var(--text-dim); border: none; cursor: pointer;
+    font-family: inherit; transition: all 0.15s;
+  }
+  .pill:hover { background: var(--border); color: var(--text-mid); }
+  .pill.active { background: var(--accent); color: #fff; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-dim); line-height: 1.8; text-align: center;
+  }
+
+  /* ── Theme toggle ── */
+  .theme-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: var(--card); box-shadow: var(--shadow);
+    border-radius: 12px; padding: 8px 12px; cursor: pointer;
+    font-size: 16px; transition: all 0.2s; border: none;
+  }
+  .theme-toggle:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .billing-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .billing-grid, .insight-grid { grid-template-columns: 1fr; }
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+const DATA = {
+  services: [
+    {
+      name: "Perplexity", sub: "Computer", color: "#0ea5e9", icon: "🔍",
+      strength: "19개 모델 자동 오케스트레이션 · 클라우드 격리 실행",
+      billingModel: "크레딧 소진형",
+      pros: ["19개 모델 자동 오케스트레이션", "클라우드 격리 실행"],
+      cons: ["에이전트 시 크레딧 빠르게 소진", "$200 이상에서만 Computer"],
+      prosEnt: ["Spaces 팀 협업", "SSO + 관리자 제어"],
+      consEnt: ["Ent. Max 석당 $325 고비용", "HIPAA 미지원"],
+      plans: [
+        { tier: "Free", price: "$0", cat: "personal", f: [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0], note: "기본 검색만, 제한된 Pro Search", limit: "제한적", resetCycle: "—", onExhaust: "대기", rec: null },
+        { tier: "Pro", price: "$20/월", cat: "personal", f: [1,1,0,0,0,0,1,1,1,0,1,0,0,0,0,0], note: "Computer 미포함", limit: "크레딧", resetCycle: "월간", onExhaust: "대기/추가결제", rec: null },
+        { tier: "Max", price: "$200/월", cat: "personal", f: [1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0], note: "Computer 포함, 19개 모델", limit: "크레딧 ↑", resetCycle: "월간", onExhaust: "대기/추가결제", rec: "personal", hl: 1 },
+        { tier: "Ent. Pro", price: "$40/석/월", cat: "enterprise", f: [1,1,0,0,0,0,1,1,1,0,1,1,0,1,0,1], note: "팀 협업, Spaces", limit: "크레딧", resetCycle: "월간", onExhaust: "대기/추가결제", rec: null },
+        { tier: "Ent. Max", price: "$325/석/월", cat: "enterprise", f: [1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1], note: "전체 기능 + 엔터프라이즈 보안", limit: "크레딧 ↑↑", resetCycle: "월간", onExhaust: "대기/추가결제", rec: "enterprise" },
+      ]
+    },
+    {
+      name: "Claude", sub: "Cowork / Code", color: "#f59e0b", icon: "🤖",
+      strength: "롤링 5hr 윈도우 정액제 · $20에 Code + Cowork + 데스크톱",
+      billingModel: "시간 윈도우 정액제",
+      pros: ["5hr 윈도우 리셋, 지속 사용", "$20에 Code + Cowork + 데스크톱"],
+      cons: ["윈도우 내 소진 시 대기", "이미지/비디오 생성 없음"],
+      prosEnt: ["HIPAA, SCIM, 감사 로그", "500K ctx 윈도우", "사용량 비례 과금 옵션"],
+      consEnt: ["사용량 과금 예측 어려움", "Team Std는 Code/Cowork 미포함"],
+      plans: [
+        { tier: "Free", price: "$0", cat: "personal", f: [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0], note: "Chat만, Code/Cowork 불가", limit: "극소", resetCycle: "—", onExhaust: "대기", rec: null },
+        { tier: "Pro", price: "$20/월", cat: "personal", f: [1,1,1,1,1,0,0,1,0,0,1,1,1,0,0,0], note: "Code + Cowork 포함", limit: "롤링 5hr 윈도우", resetCycle: "5시간", onExhaust: "윈도우 대기", rec: "personal", hl: 1 },
+        { tier: "Max 5x", price: "$100/월", cat: "personal", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,0,0,0], note: "5배 사용량, Agent Teams", limit: "5x", resetCycle: "5시간", onExhaust: "윈도우 대기", rec: null },
+        { tier: "Max 20x", price: "$200/월", cat: "personal", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,0,0,0], note: "20배 사용량", limit: "20x", resetCycle: "5시간", onExhaust: "윈도우 대기", rec: null },
+        { tier: "Team Std", price: "$25/석/월", cat: "enterprise", f: [1,1,0,0,0,0,0,1,0,0,1,1,0,1,0,1], note: "Code/Cowork 미포함", limit: "롤링 5hr 윈도우", resetCycle: "5시간", onExhaust: "윈도우 대기", rec: null },
+        { tier: "Team Prem", price: "$125/석/월", cat: "enterprise", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,1,0,1], note: "Code + Cowork + 5배", limit: "5x", resetCycle: "5시간", onExhaust: "윈도우 대기", rec: null },
+        { tier: "Enterprise", price: "$20/석+사용량", cat: "enterprise", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,1,1,1], note: "500K ctx, HIPAA, SCIM", limit: "사용량 과금", resetCycle: "—", onExhaust: "사용량 청구", rec: "enterprise" },
+      ]
+    },
+    {
+      name: "OpenAI", sub: "Codex", color: "#10b981", icon: "⚡",
+      strength: "Codex + Sora 통합 · Web+CLI+App 3채널",
+      billingModel: "메시지 카운트제",
+      pros: ["Codex + Sora 통합", "Web+CLI+App 3채널"],
+      cons: ["에이전트 1작업 = 다수 메시지", "Free에 광고 포함"],
+      prosEnt: ["SOC 2, SCIM, EKM", "팀 워크스페이스 + Codex", "24/7 지원 (Enterprise)"],
+      consEnt: ["Enterprise 가격 비공개", "HIPAA는 Enterprise만"],
+      plans: [
+        { tier: "Free", price: "$0", cat: "personal", f: [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0], note: "GPT-5.3, 10msg/5hr, 광고(미국)", limit: "10msg/5hr", resetCycle: "5시간", onExhaust: "대기", rec: null },
+        { tier: "Go", price: "$8/월", cat: "personal", f: [1,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0], note: "GPT-5.2 Instant, 광고 포함", limit: "— 미확인", resetCycle: "— 미확인", onExhaust: "— 미확인", rec: null },
+        { tier: "Plus", price: "$20/월", cat: "personal", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,0,0,0], note: "Codex + Sora, 160msg/3hr", limit: "160msg/3hr", resetCycle: "3시간", onExhaust: "3hr 대기", rec: "personal", hl: 1 },
+        { tier: "Pro", price: "$200/월", cat: "personal", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,0,0,0], note: "무제한, GPT-5.3 Spark, 4K Sora", limit: "무제한", resetCycle: "—", onExhaust: "—", rec: null },
+        { tier: "Business", price: "$25/석/월", cat: "enterprise", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,1,0,1], note: "팀 워크스페이스, SOC 2", limit: "메시지제", resetCycle: "— 미확인", onExhaust: "— 미확인", rec: "enterprise" },
+        { tier: "Enterprise", price: "커스텀", cat: "enterprise", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1], note: "SCIM, EKM, 24/7 지원", limit: "무제한", resetCycle: "—", onExhaust: "—", rec: null },
+      ]
+    },
+    {
+      name: "OpenClaw", sub: "오픈소스 에이전트", color: "#ef4444", icon: "🦞",
+      strength: "완전 무료 오픈소스 · BYO API Key · 모델 자유 선택",
+      billingModel: "API 종량제",
+      pros: ["소프트웨어 완전 무료", "모델 자유 선택", "소량 시 최저 비용"],
+      cons: ["대량 시 비용 폭증", "기업 기능 없음"],
+      prosEnt: ["완전한 데이터 통제", "커스텀 보안 정책 적용", "벤더 종속 없음"],
+      consEnt: ["SSO/감사 로그 직접 구축", "운영 인력 필요", "보안 책임 전적으로 자체"],
+      plans: [
+        { tier: "오픈소스", price: "무료", cat: "both", f: [1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1], note: "BYO API Key, 로컬 실행, 145K+ ⭐", limit: "API 한도", resetCycle: "없음", onExhaust: "API 요금 청구", rec: "personal", hl: 1 },
+      ]
+    },
+  ],
+  features: [
+    { key: 0, label: "AI 채팅", cat: "기본" },
+    { key: 1, label: "웹 검색", cat: "기본" },
+    { key: 2, label: "코딩 에이전트", cat: "에이전트" },
+    { key: 3, label: "데스크톱 자동화", cat: "에이전트" },
+    { key: 4, label: "브라우저 에이전트", cat: "에이전트" },
+    { key: 5, label: "멀티/병렬 에이전트", cat: "에이전트" },
+    { key: 6, label: "멀티모델 지원", cat: "모델" },
+    { key: 7, label: "딥 리서치", cat: "모델" },
+    { key: 8, label: "이미지 생성", cat: "생성" },
+    { key: 9, label: "비디오 생성", cat: "생성" },
+    { key: 10, label: "파일 시스템 접근", cat: "통합" },
+    { key: 11, label: "외부 앱 연동", cat: "통합" },
+    { key: 12, label: "모바일 원격 제어", cat: "통합" },
+    { key: 13, label: "SSO / 관리자 제어", cat: "보안" },
+    { key: 14, label: "감사 로그", cat: "보안" },
+    { key: 15, label: "데이터 학습 제외", cat: "보안" },
+  ],
+};
+
+const INSIGHTS = {
+  personal: [
+    { icon: "⏱", bg: "amber-light", title: "Claude — 시간 기반 정액제", text: "롤링 5시간 윈도우. 토큰 소진 후에도 <strong>시간 지나면 리셋</strong>. 지속적 사용 가능, 예측 가능한 월 비용." },
+    { icon: "💳", bg: "accent-light", title: "Perplexity — 크레딧 소진형", text: "월 정액이나 <strong>크레딧 소진 시 대기/추가 결제</strong>. 복잡한 에이전트 작업은 크레딧 소모가 큼." },
+    { icon: "📊", bg: "green-light", title: "OpenAI — 메시지 카운트제", text: "3시간당 160msg(Plus). <strong>에이전트 1작업이 다수 메시지 소모</strong>하므로 체감 사용량 적을 수 있음." },
+    { icon: "🔓", bg: "red-light", title: "OpenClaw — API 종량제", text: "소프트웨어 무료, <strong>API 호출 비용만 직접 부담</strong>. 소량이면 저렴, 대량이면 오히려 비쌀 수 있음." },
+  ],
+  enterprise: [
+    { icon: "🔐", bg: "accent-light", title: "보안 & 컴플라이언스", text: "SSO, SCIM, 감사 로그, HIPAA, SOC 2 등 기업 필수 보안 기능의 지원 범위가 서비스마다 크게 다릅니다." },
+    { icon: "💰", bg: "amber-light", title: "비용 구조", text: "석당 정액 vs 석당+사용량 혼합 모델. <strong>대규모 배포 시 TCO</strong>를 반드시 비교해야 합니다." },
+    { icon: "👥", bg: "green-light", title: "팀 협업", text: "공유 워크스페이스, Spaces, 팀 에이전트 등 <strong>협업 기능의 깊이</strong>가 생산성에 직결됩니다." },
+    { icon: "📊", bg: "red-light", title: "데이터 거버넌스", text: "데이터 학습 제외 여부, EKM(Enterprise Key Management), 데이터 리전 선택 등을 확인하세요." },
+  ],
+};
+
+const SECTION_LABELS = {
+  featureTable: { label: "Billing Comparison", title: "플랜별 기능 & 제약사항 비교표" },
+  insightsPersonal: { label: "Key Insights", title: "과금 모델 핵심 차이" },
+  insightsEnterprise: { label: "Key Insights", title: "기업 도입 시 핵심 고려사항" },
+  cardsPersonal: { label: "Plans & Pricing", title: "개인용 플랜 & 장단점" },
+  cardsEnterprise: { label: "Plans & Pricing", title: "기업용 플랜 & 장단점" },
+};
+
+const CATS = [...new Set(DATA.features.map(f => f.cat))];
+
+let state = { tab: 'personal', filterCat: '전체' };
+
+function render() { /* to be implemented in next task */ }
+render();
+</script>
+</body>
+</html>
