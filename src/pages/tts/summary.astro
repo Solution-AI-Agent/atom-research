@@ -1,0 +1,156 @@
+---
+import Research from '../../layouts/Research.astro';
+
+const navLinks = [
+  { href: './', label: '상세 비교표' },
+  { href: 'insights', label: 'TCO 분석' },
+];
+---
+<Research
+  title="TTS 서비스 비교"
+  label="Executive Summary"
+  sub="가상상담사 도입을 위한 한국어 TTS 서비스 핵심 요약"
+  meta="2026년 3월 27일 기준"
+  description="가상상담사 도입을 위한 한국어 TTS 서비스 핵심 요약."
+  navLinks={navLinks}
+>
+  <!-- Hero Cards -->
+  <div class="sec">
+    <div class="sec-label">Overview</div>
+    <div class="sec-title">서비스 요약</div>
+    <div class="hero-grid">
+      <div class="hero">
+        <div class="avg" style="background:var(--blue)">EL</div>
+        <div class="hero-name">ElevenLabs</div>
+        <div class="hero-billing">프리미엄 품질</div>
+        <div class="hero-price" style="color:var(--blue)">$206<span>/1M chars</span></div>
+        <div class="hero-note">~75ms TTFB</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">품질 최고 MOS 4.8</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--green)">OA</div>
+        <div class="hero-name">OpenAI</div>
+        <div class="hero-billing">분당 과금</div>
+        <div class="hero-price" style="color:var(--green)">~$0.015<span>/분</span></div>
+        <div class="hero-note">Realtime API</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">생태계 통합</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--amber)">GC</div>
+        <div class="hero-name">Google Cloud</div>
+        <div class="hero-billing">문자 종량제</div>
+        <div class="hero-price" style="color:var(--amber)">$16<span>/1M chars</span></div>
+        <div class="hero-note">~200ms TTFB</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">99.9% SLA, 안정성</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--purple)">AZ</div>
+        <div class="hero-name">Azure</div>
+        <div class="hero-billing">문자 종량제</div>
+        <div class="hero-price" style="color:var(--purple)">$15<span>/1M chars</span></div>
+        <div class="hero-note">&lt;300ms TTFB</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">12 한국어 보이스, DragonHD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 판단 기준 -->
+  <div class="take">
+    <div class="take-title">핵심 판단 기준</div>
+    <div class="take-grid">
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--blue)">EL</div>
+        <div class="take-text"><strong>품질 최우선 &rarr; ElevenLabs</strong><br>MOS 4.8, Flash 75ms. 단, 비용 $206/1M chars</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--purple)">AZ</div>
+        <div class="take-text"><strong>비용 효율 &rarr; Azure Speech</strong><br>$15/1M, 12 한국어 보이스, DragonHD, &lt;300ms, 99.9% SLA</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--green)">OA</div>
+        <div class="take-text"><strong>OpenAI 생태계 &rarr; OpenAI TTS</strong><br>GPT 통합, Realtime API, ~$0.015/분</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--amber)">OS</div>
+        <div class="take-text"><strong>자체 운영 &rarr; Kokoro/Fish Speech</strong><br>오픈소스, 한국어 지원, self-hosting으로 비용 절감</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 가상상담사 적합도 -->
+  <div class="sec" style="margin-top:56px">
+    <div class="sec-label">Suitability</div>
+    <div class="sec-title">가상상담사 적합도</div>
+    <div class="rank-list">
+      <div class="rank-item">
+        <div class="rank-num" style="background:var(--purple)">1</div>
+        <div class="rank-body">
+          <div class="rank-name">Azure Speech</div>
+          <div class="rank-desc">한국어 DragonHD + &lt;300ms + 99.9% SLA + 합리적 가격</div>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num" style="background:var(--blue)">2</div>
+        <div class="rank-body">
+          <div class="rank-name">ElevenLabs</div>
+          <div class="rank-desc">최고 품질 + 75ms + WebSocket. 비용 주의</div>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num" style="background:var(--amber)">3</div>
+        <div class="rank-body">
+          <div class="rank-name">Google Cloud</div>
+          <div class="rank-desc">안정적 + gRPC 스트리밍. 레이턴시 살짝 높음</div>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num" style="background:var(--green)">4</div>
+        <div class="rank-body">
+          <div class="rank-name">Fish Speech (OSS)</div>
+          <div class="rank-desc">150ms + 한국어 + MOS 5.53. self-hosting 필요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 부적합 서비스 -->
+  <div class="sec">
+    <div class="sec-label">Not Recommended</div>
+    <div class="sec-title">부적합 서비스</div>
+    <div class="unsuit-grid">
+      <div class="unsuit">
+        <div class="unsuit-name">Naver Clova</div>
+        <div class="unsuit-reason">스트리밍 없음 -- 가상상담사 실시간 응답에 부적합</div>
+      </div>
+      <div class="unsuit">
+        <div class="unsuit-name">Typecast</div>
+        <div class="unsuit-reason">오프라인 -- 실시간 상담 시나리오에 부적합</div>
+      </div>
+    </div>
+  </div>
+</Research>
+
+<style>
+  /* Ranked list */
+  .rank-list{display:flex;flex-direction:column;gap:12px}
+  .rank-item{display:flex;align-items:flex-start;gap:14px;padding:20px;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
+  .rank-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+  .rank-body{flex:1}
+  .rank-name{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
+  .rank-desc{font-size:14px;color:var(--mid);line-height:1.7}
+
+  /* Unsuitable */
+  .unsuit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .unsuit{padding:20px;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
+  .unsuit-name{font-size:16px;font-weight:800;color:var(--red);margin-bottom:4px}
+  .unsuit-reason{font-size:14px;color:var(--dim);line-height:1.7}
+
+  /* Mobile */
+  @media(max-width:768px){
+    .unsuit-grid{grid-template-columns:1fr}
+  }
+</style>

@@ -1,0 +1,380 @@
+---
+import Research from '../../layouts/Research.astro';
+
+const navLinks = [
+  { href: 'summary', label: 'Executive Summary' },
+  { href: 'insights', label: 'TCO 분석' },
+];
+---
+<Research
+  title="TTS 서비스 비교"
+  label="TTS Service Comparison"
+  sub="가상상담사를 위한 한국어 TTS — 초저지연, 고품질 음성 합성 서비스 비교"
+  meta="2026년 3월 27일 기준"
+  description="가상상담사를 위한 한국어 TTS — 초저지연, 고품질 음성 합성 서비스 비교"
+  navLinks={navLinks}
+>
+  <!-- Section 1: Overview -->
+  <div class="sec">
+    <div class="sec-label">Overview</div>
+    <div class="sec-title">서비스 요약</div>
+    <div class="hero-grid">
+      <div class="hero">
+        <div class="avg" style="background:var(--blue)">EL</div>
+        <div class="hero-name">ElevenLabs</div>
+        <div class="hero-billing">대화 AI 분당 과금</div>
+        <div class="hero-price" style="color:var(--blue)">$0.10<span>/분</span></div>
+        <div class="hero-note">Multilingual v2: $206/1M chars</div>
+        <div class="hero-note">TTFB ~75ms (Flash v2.5)</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">MOS 4.8 · WebSocket 스트리밍<br>32개 언어 · 한국어 우수</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--green)">OA</div>
+        <div class="hero-name">OpenAI TTS</div>
+        <div class="hero-billing">토큰 기반 종량제</div>
+        <div class="hero-price" style="color:var(--green)">~$0.015<span>/분</span></div>
+        <div class="hero-note">$0.60/1M input + $12/1M audio</div>
+        <div class="hero-note">TTFB ~400ms (tts-1)</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">Realtime API · 13 voices<br>50+ 언어 · gpt-4o-mini-tts</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--amber)">GC</div>
+        <div class="hero-name">Google Cloud</div>
+        <div class="hero-billing">글자수 종량제</div>
+        <div class="hero-price" style="color:var(--amber)">$16<span>/1M chars</span></div>
+        <div class="hero-note">1M 글자 무료 티어</div>
+        <div class="hero-note">TTFB 200~250ms (Neural2)</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">ko-KR ~12 voices · gRPC<br>99.9% SLA · 안정적 운영</div>
+      </div>
+      <div class="hero">
+        <div class="avg" style="background:var(--purple)">AZ</div>
+        <div class="hero-name">Azure Speech</div>
+        <div class="hero-billing">글자수 종량제</div>
+        <div class="hero-price" style="color:var(--purple)">$15<span>/1M chars</span></div>
+        <div class="hero-note">0.5M 글자 무료 티어</div>
+        <div class="hero-note">TTFB &lt;300ms (Neural)</div>
+        <div class="hero-sep"></div>
+        <div class="hero-strength">12 한국어 voices (2 DragonHD)<br>1000 TPS · 99.9% SLA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Latency Benchmark -->
+  <div class="sec">
+    <div class="sec-label">Latency Benchmark</div>
+    <div class="sec-title">레이턴시 벤치마크</div>
+    <div class="bar-chart">
+      <div style="position:relative;padding-top:20px">
+        <!-- Reference line at 300ms -->
+        <div style="position:absolute;top:0;bottom:0;left:calc(160px + 12px + (100% - 160px - 12px - 60px - 4px) * 0.6);width:0;z-index:2">
+          <div style="position:absolute;top:0;left:0;width:2px;height:100%;background:var(--red);opacity:0.6"></div>
+          <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--red);white-space:nowrap">300ms 실시간 대화 임계치</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">Cartesia Sonic Turbo</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:8%;background:var(--green)"></div>
+          </div>
+          <div class="bar-val">~40ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">ElevenLabs Flash v2.5</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:15%;background:var(--blue)"></div>
+          </div>
+          <div class="bar-val">~75ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Fish Audio</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:30%;background:var(--amber)"></div>
+          </div>
+          <div class="bar-val">~150ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google Neural2</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:40%;background:var(--amber)"></div>
+          </div>
+          <div class="bar-val">~200ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Azure Neural</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:60%;background:var(--purple)"></div>
+          </div>
+          <div class="bar-val">&lt;300ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">OpenAI tts-1</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:80%;background:var(--red)"></div>
+          </div>
+          <div class="bar-val">~400ms</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Naver Clova</div>
+          <div class="bar-track">
+            <div class="bar-na" style="padding-left:12px">-- 미확인</div>
+          </div>
+          <div class="bar-val"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Detailed Comparison -->
+  <div class="sec">
+    <div class="sec-label">Detailed Comparison</div>
+    <div class="sec-title">상세 비교</div>
+    <div class="tbl-wrap">
+      <div class="tbl-inner">
+        <table>
+          <thead>
+            <tr>
+              <th>기능</th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--blue)"></span><span class="col-name">ElevenLabs</span></div></th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--green)"></span><span class="col-name">OpenAI</span></div></th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--amber)"></span><span class="col-name">Google</span></div></th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--purple)"></span><span class="col-name">Azure</span></div></th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--amber)"></span><span class="col-name">Fish Audio</span></div></th>
+              <th><div class="col-head"><span class="col-dot" style="background:var(--red)"></span><span class="col-name">Kokoro(OSS)</span></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 가격 -->
+            <tr class="cat-row"><td colspan="7">가격</td></tr>
+            <tr>
+              <td>1M 글자당 비용</td>
+              <td>$206</td>
+              <td>$0.60 input<br>+ $12 audio</td>
+              <td>$16</td>
+              <td>$15</td>
+              <td>종량제</td>
+              <td class="good">무료</td>
+            </tr>
+            <tr>
+              <td>무료 티어</td>
+              <td>10K chars/월</td>
+              <td>없음</td>
+              <td class="good">1M chars</td>
+              <td>0.5M chars</td>
+              <td>제한적</td>
+              <td class="good">무제한</td>
+            </tr>
+
+            <!-- 한국어 -->
+            <tr class="cat-row"><td colspan="7">한국어</td></tr>
+            <tr>
+              <td>보이스 수</td>
+              <td>다수 (32개 언어)</td>
+              <td>13</td>
+              <td>~12</td>
+              <td>12 (+2 DragonHD)</td>
+              <td>다수</td>
+              <td>지원</td>
+            </tr>
+            <tr>
+              <td>품질 평가</td>
+              <td class="good">MOS 4.8</td>
+              <td>양호</td>
+              <td>양호</td>
+              <td>양호 (DragonHD 우수)</td>
+              <td class="good">MOS 5.53</td>
+              <td>ELO 1059</td>
+            </tr>
+
+            <!-- 성능 -->
+            <tr class="cat-row"><td colspan="7">성능</td></tr>
+            <tr>
+              <td>TTFB</td>
+              <td class="good">~75ms</td>
+              <td class="warn">~400ms</td>
+              <td>200~250ms</td>
+              <td>&lt;300ms</td>
+              <td class="good">~150ms</td>
+              <td class="good">&lt;0.3s</td>
+            </tr>
+            <tr>
+              <td>스트리밍</td>
+              <td class="good">WebSocket</td>
+              <td>Realtime API</td>
+              <td class="good">gRPC</td>
+              <td class="good">SDK</td>
+              <td>지원</td>
+              <td>로컬</td>
+            </tr>
+            <tr>
+              <td>동시접속</td>
+              <td>제한 없음</td>
+              <td>Rate limit</td>
+              <td>할당량 기반</td>
+              <td class="good">1000 TPS</td>
+              <td>API 제한</td>
+              <td>하드웨어 의존</td>
+            </tr>
+
+            <!-- 보안 -->
+            <tr class="cat-row"><td colspan="7">보안</td></tr>
+            <tr>
+              <td>SLA</td>
+              <td>99.99%</td>
+              <td>제공</td>
+              <td class="good">99.9%</td>
+              <td class="good">99.9%</td>
+              <td class="na">N/A</td>
+              <td class="na">N/A</td>
+            </tr>
+            <tr>
+              <td>엔터프라이즈</td>
+              <td>지원</td>
+              <td>지원</td>
+              <td class="good">GCP 통합</td>
+              <td class="good">Azure 통합</td>
+              <td>제한적</td>
+              <td class="na">자체 운영</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Open Source -->
+  <div class="sec">
+    <div class="sec-label">Open Source</div>
+    <div class="sec-title">오픈소스 대안</div>
+    <div class="oss-grid">
+      <div class="oss-card">
+        <div class="oss-accent" style="background:var(--red)"></div>
+        <div class="oss-head">
+          <div class="avg" style="background:var(--red)">KK</div>
+          <div>
+            <div class="oss-name">Kokoro 82M</div>
+            <div class="oss-sub">TTS Arena #1 · Apache 2.0</div>
+          </div>
+        </div>
+        <div class="oss-rows">
+          <div class="oss-row"><span class="oss-row-label">한국어</span><span class="oss-row-val good">지원</span></div>
+          <div class="oss-row"><span class="oss-row-label">레이턴시</span><span class="oss-row-val good">&lt;0.3s</span></div>
+          <div class="oss-row"><span class="oss-row-label">품질</span><span class="oss-row-val">ELO 1059 · #1 TTS Arena</span></div>
+          <div class="oss-row"><span class="oss-row-label">성능</span><span class="oss-row-val">210x realtime (4090)</span></div>
+          <div class="oss-row"><span class="oss-row-label">HW 요구사항</span><span class="oss-row-val">GPU 권장 (82M params)</span></div>
+          <div class="oss-row"><span class="oss-row-label">라이선스</span><span class="oss-row-val good">Apache 2.0</span></div>
+        </div>
+      </div>
+      <div class="oss-card">
+        <div class="oss-accent" style="background:var(--amber)"></div>
+        <div class="oss-head">
+          <div class="avg" style="background:var(--amber)">FS</div>
+          <div>
+            <div class="oss-name">Fish Speech 1.5</div>
+            <div class="oss-sub">최고 MOS 점수 · ELO 1339</div>
+          </div>
+        </div>
+        <div class="oss-rows">
+          <div class="oss-row"><span class="oss-row-label">한국어</span><span class="oss-row-val good">지원</span></div>
+          <div class="oss-row"><span class="oss-row-label">레이턴시</span><span class="oss-row-val good">~150ms (스트리밍)</span></div>
+          <div class="oss-row"><span class="oss-row-label">품질</span><span class="oss-row-val good">MOS 5.53 · ELO 1339</span></div>
+          <div class="oss-row"><span class="oss-row-label">성능</span><span class="oss-row-val">실시간 스트리밍</span></div>
+          <div class="oss-row"><span class="oss-row-label">HW 요구사항</span><span class="oss-row-val">GPU 필수</span></div>
+          <div class="oss-row"><span class="oss-row-label">라이선스</span><span class="oss-row-val">오픈소스</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Not Recommended -->
+  <div class="sec">
+    <div class="sec-label">Not Recommended</div>
+    <div class="sec-title">가상상담사 부적합</div>
+    <div class="nr-grid">
+      <div class="nr-card">
+        <div class="nr-head">
+          <div class="avg" style="background:var(--dim);font-size:14px">NC</div>
+          <div class="nr-name">Naver Clova</div>
+        </div>
+        <div class="nr-reason">
+          20+ 한국어 음성, 최고 수준의 한국어 프로소디. 그러나 <strong>스트리밍 API 미지원</strong>으로 실시간 대화에 부적합. 전체 텍스트를 한 번에 합성해야 하므로 가상상담사의 즉각 응답이 불가능합니다.
+        </div>
+        <div class="nr-tag">스트리밍 미지원</div>
+      </div>
+      <div class="nr-card">
+        <div class="nr-head">
+          <div class="avg" style="background:var(--dim);font-size:14px">TC</div>
+          <div class="nr-name">Typecast</div>
+        </div>
+        <div class="nr-reason">
+          400+ 한국어 음성, 뛰어난 감정 표현. 그러나 <strong>오프라인 전용</strong>($8.99/월)으로 실시간 API를 제공하지 않음. 콘텐츠 제작용으로 설계되어 실시간 대화 시나리오에 적용 불가합니다.
+        </div>
+        <div class="nr-tag">오프라인 전용</div>
+      </div>
+    </div>
+  </div>
+</Research>
+
+<style>
+  /* Bar chart */
+  .bar-chart{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card);padding:24px}
+  .bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .bar-row:last-child{margin-bottom:0}
+  .bar-label{width:160px;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text);text-align:right}
+  .bar-track{flex:1;position:relative;height:28px;background:var(--border);border-radius:6px;overflow:visible}
+  .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:11px;font-weight:700;color:#fff;min-width:40px;transition:width 0.6s ease}
+  .bar-val{font-size:12px;font-weight:700;color:var(--dim);width:60px;flex-shrink:0;text-align:left;margin-left:4px}
+  .bar-na{font-size:12px;color:var(--dim);font-style:italic;line-height:28px}
+
+  /* Table */
+  .tbl-wrap{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .tbl-inner{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tbl-wrap table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tbl-wrap th,.tbl-wrap td{padding:10px 8px;text-align:center;font-size:12px;white-space:normal;word-break:keep-all}
+  .tbl-wrap th{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.3px;border-bottom:2px solid var(--border)}
+  .tbl-wrap td{border-bottom:1px solid var(--border)}
+  .tbl-wrap th:first-child,.tbl-wrap td:first-child{text-align:left;font-weight:600;color:var(--text);padding-left:14px;width:110px;min-width:110px}
+  .tbl-wrap tr:last-child td{border-bottom:none}
+  .cat-row td{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);background:var(--border);text-align:left;padding:8px 14px}
+  .col-head{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .col-dot{width:6px;height:6px;border-radius:50%}
+  .col-name{font-size:9px;font-weight:700}
+  .good{color:var(--green);font-weight:700}
+  .warn{color:var(--red);font-weight:700}
+  .na{color:var(--dim);font-style:italic}
+
+  /* OSS cards */
+  .oss-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .oss-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border2);padding:24px;position:relative;overflow:hidden;transition:all 0.25s}
+  .oss-card:hover{border-color:var(--dim)}
+  .oss-accent{position:absolute;top:0;left:0;right:0;height:3px}
+  .oss-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .oss-name{font-size:18px;font-weight:800;color:var(--text)}
+  .oss-sub{font-size:12px;color:var(--dim);margin-top:2px}
+  .oss-rows{display:flex;flex-direction:column;gap:6px}
+  .oss-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border)}
+  .oss-row:last-child{border-bottom:none}
+  .oss-row-label{color:var(--dim)}
+  .oss-row-val{font-weight:700;color:var(--text)}
+
+  /* Not recommended */
+  .nr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .nr-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border2);padding:24px;transition:all 0.25s}
+  .nr-card:hover{border-color:var(--dim)}
+  .nr-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .nr-name{font-size:16px;font-weight:800;color:var(--text)}
+  .nr-reason{font-size:13px;color:var(--mid);line-height:1.7}
+  .nr-reason strong{color:var(--red)}
+  .nr-tag{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;background:var(--red-bg);color:var(--red)}
+
+  /* Mobile */
+  @media(max-width:768px){
+    .oss-grid,.nr-grid{grid-template-columns:1fr}
+    .bar-label{width:100px;font-size:11px}
+    .bar-val{font-size:11px;width:50px}
+    .tbl-wrap th:first-child,.tbl-wrap td:first-child{position:sticky;left:0;z-index:1;background:var(--card)}
+    .tbl-wrap table{table-layout:auto}
+  }
+</style>

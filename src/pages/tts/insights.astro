@@ -1,0 +1,373 @@
+---
+import Research from '../../layouts/Research.astro';
+
+const navLinks = [
+  { href: './', label: '상세 비교표' },
+  { href: 'summary', label: 'Executive Summary' },
+];
+---
+<Research
+  title="TTS TCO 분석 &<br>서비스 평가"
+  label="Insights"
+  sub="가상상담사 월 통화량에 따른 연간 비용과 서비스별 평가"
+  meta="2026년 3월 27일 기준 · 실측 데이터 기반"
+  description="가상상담사 도입을 위한 TTS TCO 분석 및 서비스 평가"
+  navLinks={navLinks}
+>
+  <!-- TCO Simulator -->
+  <div class="sec">
+    <div class="sec-label">TCO Simulator</div>
+    <div class="sec-title">사용량별 연간 비용</div>
+    <div class="sec-desc">슬라이더로 월간 TTS 생성량을 조정하면 서비스별 연간 총비용이 계산됩니다.</div>
+
+    <div class="sim-controls">
+      <div class="sim-group">
+        <div class="sim-label">월간 TTS 생성량</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <input type="range" class="sim-slider" id="charSlider" min="1" max="1000" value="100">
+          <span class="sim-val" id="charVal">1,000,000</span><span style="font-size:12px;color:var(--dim)">chars/월</span>
+        </div>
+      </div>
+      <div class="sim-group">
+        <div class="sim-label">용도</div>
+        <div class="sim-pills" id="complexPills">
+          <button class="sim-pill active" data-complex="normal">일반 대화</button>
+          <button class="sim-pill" data-complex="emotion">감정 표현</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tco-grid" id="tcoGrid"></div>
+  </div>
+
+  <!-- Radar Scores -->
+  <div class="sec">
+    <div class="sec-label">Service Evaluation</div>
+    <div class="sec-title">서비스 강점/약점 평가</div>
+    <div class="sec-desc">6개 축으로 평가. 10점 만점, 실측 데이터와 전문가 리뷰 기반.</div>
+    <div class="radar-grid" id="radarGrid"></div>
+  </div>
+
+  <!-- Hidden Costs & Risks -->
+  <div class="sec">
+    <div class="sec-label">Hidden Costs & Risks</div>
+    <div class="sec-title">숨겨진 비용과 리스크</div>
+    <div class="sec-desc">공식 가격표에 드러나지 않는 실질 비용 요소.</div>
+    <div class="risk-grid" id="riskGrid"></div>
+  </div>
+
+  <!-- Data Sources -->
+  <div class="sec">
+    <div class="sec-label">Data Sources</div>
+    <div class="sec-title">TCO 산출 기초 데이터 및 출처</div>
+    <div class="sec-desc">본 분석에 사용된 비용 추정치의 근거입니다. 실측 데이터와 공식 문서를 기반으로 합니다.</div>
+    <div class="src-grid">
+      <div class="src-card">
+        <div class="src-head">
+          <div class="avg avg-sm" style="background:var(--blue)">EL</div>
+          <div class="src-name">ElevenLabs</div>
+        </div>
+        <div class="src-rows">
+          <div class="src-row"><strong>가격:</strong> $206/1M chars — ElevenLabs 공식 가격표 (Scale 플랜 기준)</div>
+          <div class="src-row"><strong>모델:</strong> Multilingual v2 (감정), Flash v2.5 (저지연) — 동일 가격</div>
+          <div class="src-row"><strong>레이턴시:</strong> Flash v2.5 ~75ms — 공식 벤치마크</div>
+          <div class="src-row">
+            <strong>스트리밍:</strong> WebSocket 실시간 — 공식 API 문서</div>
+        </div>
+      </div>
+      <div class="src-card">
+        <div class="src-head">
+          <div class="avg avg-sm" style="background:var(--amber)">OA</div>
+          <div class="src-name">OpenAI</div>
+        </div>
+        <div class="src-rows">
+          <div class="src-row"><strong>가격:</strong> ~$15/1M chars (환산) — OpenAI TTS API 공식 가격 ($12/1M audio tokens)</div>
+          <div class="src-row"><strong>모델:</strong> gpt-4o-mini-tts — 감정/스타일 제어 가능</div>
+          <div class="src-row"><strong>보이스:</strong> 6개 범용 보이스 (한국어 전용 없음) — 공식 문서</div>
+          <div class="src-row"><strong>Rate Limit:</strong> Tier 1: 7 RPM — 공식 Rate Limits 페이지</div>
+        </div>
+      </div>
+      <div class="src-card">
+        <div class="src-head">
+          <div class="avg avg-sm" style="background:var(--green)">GC</div>
+          <div class="src-name">Google Cloud</div>
+        </div>
+        <div class="src-rows">
+          <div class="src-row"><strong>Neural2:</strong> $16/1M chars — Google Cloud TTS 공식 가격표</div>
+          <div class="src-row"><strong>무료 티어:</strong> 1M chars/월 (Neural2) — 공식 무료 티어</div>
+          <div class="src-row"><strong>Journey:</strong> $30/1M chars — 대화형 고급 보이스</div>
+          <div class="src-row"><strong>SLA:</strong> 99.9% — Google Cloud SLA 문서</div>
+        </div>
+      </div>
+      <div class="src-card">
+        <div class="src-head">
+          <div class="avg avg-sm" style="background:var(--red)">AZ</div>
+          <div class="src-name">Azure</div>
+        </div>
+        <div class="src-rows">
+          <div class="src-row"><strong>Neural:</strong> $15/1M chars — Microsoft Azure Speech 공식 가격표</div>
+          <div class="src-row"><strong>무료 티어:</strong> 0.5M chars/월 — 공식 무료 티어</div>
+          <div class="src-row"><strong>한국어 보이스:</strong> 12개 Neural + DragonHD 2개 — Azure Speech 보이스 갤러리</div>
+          <div class="src-row"><strong>한자 카운트:</strong> 한자 1글자 = 2글자 카운트 — Microsoft 공식 문서 확인</div>
+        </div>
+      </div>
+    </div>
+    <div class="src-note">
+      <strong style="color:var(--text)">산출 방식:</strong> TCO 시뮬레이터는 월간 문자 생성량에 각 서비스의 공식 단가를 적용하고, 무료 티어가 있는 서비스는 무료 할당량을 차감한 후 계산합니다. Google Cloud는 월 1M chars, Azure는 월 0.5M chars 무료입니다. 실제 비용은 보이스 모델 선택, 스트리밍 여부, 한자 비율에 따라 달라질 수 있습니다.
+    </div>
+  </div>
+</Research>
+
+<style>
+  .sec-desc{font-size:14px;color:var(--dim);margin-bottom:20px;line-height:1.7}
+
+  /* TCO Simulator */
+  .sim-controls{display:flex;gap:16px;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap}
+  .sim-group{display:flex;flex-direction:column;gap:4px}
+  .sim-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+  .sim-slider{-webkit-appearance:none;width:220px;height:6px;background:var(--border2);border-radius:3px;outline:none}
+  .sim-slider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--text);cursor:pointer}
+  .sim-val{font-size:24px;font-weight:800;letter-spacing:-0.5px;min-width:60px}
+  .sim-pills{display:flex;gap:6px}
+  .sim-pill{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;border:1px solid var(--border2);background:var(--card);color:var(--dim);cursor:pointer;font-family:inherit}
+  .sim-pill.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+  /* TCO Results */
+  .tco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border-radius:var(--r);overflow:hidden}
+  .tco-card{background:var(--card);padding:24px 18px;position:relative}
+  .tco-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .tco-name{font-size:15px;font-weight:800}
+  .tco-monthly{font-size:13px;color:var(--dim);margin-bottom:4px}
+  .tco-annual{font-size:30px;font-weight:800;letter-spacing:-1px}
+  .tco-annual span{font-size:13px;font-weight:500;color:var(--dim)}
+  .tco-bar-wrap{margin-top:14px;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+  .tco-bar{height:100%;border-radius:4px;transition:width 0.5s ease}
+  .tco-breakdown{margin-top:10px;font-size:12px;color:var(--dim);line-height:1.5}
+  .tco-warn{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;line-height:1.5}
+
+  /* Radar / Score */
+  .radar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border-radius:var(--r);overflow:hidden}
+  .radar-card{background:var(--card);padding:24px 18px}
+  .radar-head{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+  .radar-name{font-size:16px;font-weight:800}
+  .radar-scores{display:flex;flex-direction:column;gap:10px}
+  .radar-row{display:flex;align-items:center;gap:10px}
+  .radar-label{font-size:13px;color:var(--dim);width:80px;flex-shrink:0}
+  .radar-bar-wrap{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+  .radar-bar{height:100%;border-radius:4px;transition:width 0.5s ease}
+  .radar-val{font-size:13px;font-weight:800;width:28px;text-align:right}
+  .radar-summary{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--mid);line-height:1.7}
+
+  /* Hidden costs */
+  .risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+  .risk-card{border:1px solid var(--border2);border-radius:var(--r);padding:22px;background:var(--card)}
+  .risk-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .risk-title{font-size:15px;font-weight:800}
+  .risk-items{display:flex;flex-direction:column;gap:8px}
+  .risk-item{font-size:13px;color:var(--mid);line-height:1.6;padding-left:14px;position:relative}
+  .risk-item::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--red)}
+  .risk-item.ok::before{background:var(--green)}
+
+  /* Data sources */
+  .src-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .src-card{border:1px solid var(--border2);border-radius:var(--r);padding:22px;background:var(--card)}
+  .src-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .src-name{font-size:15px;font-weight:800}
+  .src-rows{font-size:13px;color:var(--mid);line-height:1.8}
+  .src-row{padding:6px 0;border-bottom:1px solid var(--border)}
+  .src-row:last-child{border-bottom:none}
+  .src-note{margin-top:16px;padding:16px;border-radius:var(--r);background:var(--border);font-size:13px;color:var(--mid);line-height:1.7}
+
+  /* Mobile */
+  @media(max-width:768px){
+    .tco-grid,.radar-grid{grid-template-columns:1fr}
+    .risk-grid,.src-grid{grid-template-columns:1fr}
+    .sim-controls{flex-direction:column;align-items:flex-start}
+    .sim-slider{width:100%}
+  }
+</style>
+
+<script>
+const SVC = [
+  { id:'el', name:'ElevenLabs', color:'var(--blue)', bg:'var(--blue-bg)',
+    pricePerMil: 206,
+    freeCharsPerMonth: 0,
+    scores: { cost:3, korean:7, latency:9, stability:6, scalability:7, integration:8 },
+    summary: 'Flash v2.5 75ms 초저지연. WebSocket 스트리밍으로 실시간 대화 최적. 단, $206/1M chars로 대량 사용 시 비용 폭증. 한국어 전용 보이스 없이 다국어 보이스로 대체.',
+    risks: [
+      '$206/1M chars — 대량 사용 시 비용 폭증',
+      '한국어 전용 보이스 없음 — 다국어 보이스로 대체',
+      'Enterprise 외 SLA 없음'
+    ],
+    oks: [
+      'Flash v2.5 75ms 초저지연',
+      'WebSocket 스트리밍 실시간 대화 최적'
+    ] },
+  { id:'oa', name:'OpenAI', color:'var(--amber)', bg:'var(--amber-bg)',
+    pricePerMil: 15,
+    freeCharsPerMonth: 0,
+    scores: { cost:7, korean:6, latency:7, stability:7, scalability:8, integration:9 },
+    summary: 'gpt-4o-mini-tts로 감정/스타일 프롬프트 제어. OpenAI 생태계와 자연스러운 통합. $15/1M chars로 가성비 양호. 단, 한국어 전용 보이스 없고 Rate limit 주의.',
+    risks: [
+      'Realtime API 별도 과금 ($100/1M tokens)',
+      '한국어 전용 보이스 없음 — 6개 범용 보이스',
+      'Rate limit 티어별 제한 (Tier 1: 7 RPM)'
+    ],
+    oks: [
+      'gpt-4o-mini-tts로 감정/스타일 제어 가능',
+      'OpenAI 생태계와 자연스러운 통합'
+    ] },
+  { id:'gc', name:'Google Cloud', color:'var(--green)', bg:'var(--green-bg)',
+    pricePerMil: 16,
+    freeCharsPerMonth: 1000000,
+    scores: { cost:8, korean:7, latency:7, stability:9, scalability:9, integration:8 },
+    summary: 'Neural2 $16/1M + 월 1M 무료로 소량 사용 시 최고 가성비. 99.9% SLA + 글로벌 인프라. Journey 보이스는 $30/1M으로 대화형에 적합하나 비용 높음.',
+    risks: [
+      'Journey 보이스 $30/1M — 대화형은 비용 높음',
+      '한국어 Journey 보이스 미확인',
+      'gRPC 전용 스트리밍 — REST는 스트리밍 불가'
+    ],
+    oks: [
+      'Neural2 $16/1M + 1M 무료/월 — 가성비',
+      '99.9% SLA + 글로벌 인프라'
+    ] },
+  { id:'az', name:'Azure', color:'var(--red)', bg:'var(--red-bg)',
+    pricePerMil: 15,
+    freeCharsPerMonth: 500000,
+    scores: { cost:8, korean:8, latency:8, stability:9, scalability:9, integration:8 },
+    summary: 'Korea Central 리전으로 한국 최저 레이턴시. 12 한국어 보이스 + DragonHD. $15/1M + 월 0.5M 무료. 1,000 TPS 확장. 단, 한자 2글자 카운트로 실질 10-15% 비용 증가.',
+    risks: [
+      '한자(hanja) 2글자 카운트 — 한국어 비용 실질 10-15% 증가',
+      'DragonHD Flash 한국어 미지원 (현재 en/zh만)',
+      'Custom Neural Voice 추가 비용'
+    ],
+    oks: [
+      'Korea Central 리전 — 한국 사용자 최저 레이턴시',
+      '12 한국어 보이스 + DragonHD 2개',
+      '1,000 TPS까지 확장 — 대규모 콜센터 대응'
+    ] }
+];
+
+const DIMS = [
+  { key:'cost', label:'비용 효율' },
+  { key:'korean', label:'한국어 품질' },
+  { key:'latency', label:'레이턴시' },
+  { key:'stability', label:'안정성(SLA)' },
+  { key:'scalability', label:'확장성' },
+  { key:'integration', label:'통합 용이성' },
+];
+
+let complexity = 'normal';
+
+document.querySelectorAll('.sim-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    complexity = btn.dataset.complex;
+    document.querySelectorAll('.sim-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    updateTCO();
+  });
+});
+
+document.getElementById('charSlider').addEventListener('input', updateTCO);
+
+function sliderToChars(val) {
+  const minLog = Math.log10(10000);
+  const maxLog = Math.log10(10000000);
+  const log = minLog + (val - 1) / (1000 - 1) * (maxLog - minLog);
+  return Math.round(Math.pow(10, log));
+}
+
+function formatChars(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+  return n.toLocaleString();
+}
+
+function updateTCO() {
+  const sliderVal = parseInt(document.getElementById('charSlider').value);
+  const chars = sliderToChars(sliderVal);
+  document.getElementById('charVal').textContent = formatChars(chars);
+
+  const results = SVC.map(s => {
+    const billableChars = Math.max(0, chars - s.freeCharsPerMonth);
+    const monthly = billableChars / 1000000 * s.pricePerMil;
+    const annual = monthly * 12;
+    let breakdown;
+    if (s.freeCharsPerMonth > 0) {
+      breakdown = `$${s.pricePerMil}/1M chars · 무료 ${formatChars(s.freeCharsPerMonth)}/월`;
+    } else {
+      breakdown = `$${s.pricePerMil}/1M chars`;
+    }
+    return { ...s, monthly, annual, breakdown, billableChars };
+  });
+
+  const maxAnnual = Math.max(...results.map(r => r.annual));
+
+  let html = '';
+  results.forEach(r => {
+    const pct = maxAnnual > 0 ? (r.annual / maxAnnual * 100) : 0;
+    let warn = '';
+    if (r.id === 'el' && r.annual > 5000) {
+      warn = `<div class="tco-warn" style="background:var(--blue-bg);color:var(--blue)">연 $${Math.round(r.annual).toLocaleString()} — 대량 사용 시 비용 검토 필요</div>`;
+    }
+    if (r.id === 'oa' && r.annual > 3000) {
+      warn = `<div class="tco-warn" style="background:var(--amber-bg);color:var(--amber)">Realtime API 사용 시 추가 비용 발생</div>`;
+    }
+    if (r.id === 'az' && complexity === 'emotion') {
+      warn = `<div class="tco-warn" style="background:var(--red-bg);color:var(--red)">DragonHD Flash 한국어 미지원 — Neural 보이스 사용</div>`;
+    }
+    html += `
+      <div class="tco-card">
+        <div class="tco-head"><div class="avg" style="background:${r.color}">${r.id.toUpperCase().slice(0,2)}</div><div class="tco-name">${r.name}</div></div>
+        <div class="tco-monthly">${r.breakdown}</div>
+        <div class="tco-annual" style="color:${r.color}">$${Math.round(r.annual).toLocaleString()}<span>/년</span></div>
+        <div class="tco-bar-wrap"><div class="tco-bar" style="width:${pct}%;background:${r.color}"></div></div>
+        <div class="tco-breakdown">월 $${Math.round(r.monthly).toLocaleString()}</div>
+        ${warn}
+      </div>`;
+  });
+  document.getElementById('tcoGrid').innerHTML = html;
+}
+
+function renderRadar() {
+  let html = '';
+  SVC.forEach(s => {
+    const avg = (Object.values(s.scores).reduce((a,b) => a+b, 0) / DIMS.length).toFixed(1);
+    html += `
+      <div class="radar-card">
+        <div class="radar-head"><div class="avg" style="background:${s.color}">${s.id.toUpperCase().slice(0,2)}</div><div class="radar-name">${s.name}</div></div>
+        <div class="radar-scores">
+          ${DIMS.map(d => `
+            <div class="radar-row">
+              <span class="radar-label">${d.label}</span>
+              <div class="radar-bar-wrap"><div class="radar-bar" style="width:${s.scores[d.key]*10}%;background:${s.color}"></div></div>
+              <span class="radar-val">${s.scores[d.key]}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="margin-top:10px;text-align:right;font-size:18px;font-weight:800;color:${s.color}">${avg}<span style="font-size:11px;color:var(--dim)">/10</span></div>
+        <div class="radar-summary">${s.summary}</div>
+      </div>`;
+  });
+  document.getElementById('radarGrid').innerHTML = html;
+}
+
+function renderRisks() {
+  let html = '';
+  SVC.forEach(s => {
+    html += `
+      <div class="risk-card">
+        <div class="risk-head"><div class="avg avg-sm" style="background:${s.color}">${s.id.toUpperCase().slice(0,2)}</div><div class="risk-title">${s.name}</div></div>
+        <div class="risk-items">
+          ${s.risks.map(r => `<div class="risk-item">${r}</div>`).join('')}
+          ${s.oks.map(r => `<div class="risk-item ok">${r}</div>`).join('')}
+        </div>
+      </div>`;
+  });
+  document.getElementById('riskGrid').innerHTML = html;
+}
+
+updateTCO();
+renderRadar();
+renderRisks();
+</script>
