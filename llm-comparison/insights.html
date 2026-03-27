@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM 시장 인사이트 & 전략 가이드 (2025)</title>
+<meta name="description" content="2025 LLM 시장 트렌드, 모델 출시 타임라인, 배포 전략, 라이선스 비교, 컴플라이언스 매트릭스">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --bg:#fafafa;--card:#fff;--text:#111;--mid:#444;--dim:#999;--mute:#ccc;
+    --border:#eee;--border2:#e0e0e0;
+    --blue:#0066FF;--amber:#E68A00;--green:#00875A;--red:#CC3333;--purple:#7B3FE4;--teal:#0891B2;
+    --blue-bg:#EBF3FF;--amber-bg:#FFF5E0;--green-bg:#E6F6F0;--red-bg:#FFEBEB;--purple-bg:#F3EEFF;--teal-bg:#E0F7FA;
+    --r:12px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#111;--card:#1a1a1a;--text:#eee;--mid:#bbb;--dim:#777;--mute:#444;
+    --border:#222;--border2:#333;
+    --blue:#4D9AFF;--amber:#FFB84D;--green:#36B37E;--red:#FF6B6B;--purple:#A67BFF;--teal:#22D3EE;
+    --blue-bg:rgba(77,154,255,0.1);--amber-bg:rgba(255,184,77,0.1);--green-bg:rgba(54,179,126,0.1);--red-bg:rgba(255,107,107,0.1);--purple-bg:rgba(166,123,255,0.1);--teal-bg:rgba(34,211,238,0.1);
+  }}
+  [data-theme="dark"]{--bg:#111;--card:#1a1a1a;--text:#eee;--mid:#bbb;--dim:#777;--mute:#444;--border:#222;--border2:#333;--blue:#4D9AFF;--amber:#FFB84D;--green:#36B37E;--red:#FF6B6B;--purple:#A67BFF;--teal:#22D3EE;--blue-bg:rgba(77,154,255,0.1);--amber-bg:rgba(255,184,77,0.1);--green-bg:rgba(54,179,126,0.1);--red-bg:rgba(255,107,107,0.1);--purple-bg:rgba(166,123,255,0.1);--teal-bg:rgba(34,211,238,0.1)}
+  [data-theme="light"]{--bg:#fafafa;--card:#fff;--text:#111;--mid:#444;--dim:#999;--mute:#ccc;--border:#eee;--border2:#e0e0e0;--blue:#0066FF;--amber:#E68A00;--green:#00875A;--red:#CC3333;--purple:#7B3FE4;--teal:#0891B2;--blue-bg:#EBF3FF;--amber-bg:#FFF5E0;--green-bg:#E6F6F0;--red-bg:#FFEBEB;--purple-bg:#F3EEFF;--teal-bg:#E0F7FA}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:56px 24px 40px;-webkit-font-smoothing:antialiased;line-height:1.7;font-size:14px}
+  .c{max-width:920px;margin:0 auto}
+  .avg{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-0.5px}
+  .avg-sm{width:24px;height:24px;border-radius:6px;font-size:10px}
+
+  .hdr{margin-bottom:48px}
+  .hdr-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:8px}
+  .hdr-title{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.1}
+  .hdr-sub{font-size:16px;color:var(--dim);margin-top:12px;max-width:600px;line-height:1.7}
+  .hdr-meta{margin-top:14px;font-size:13px;color:var(--mute)}
+
+  .sec{margin-bottom:56px}
+  .sec-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:6px}
+  .sec-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px}
+  .sec-desc{font-size:14px;color:var(--dim);margin-bottom:20px;line-height:1.7}
+
+  .theme-btn{position:fixed;top:16px;right:16px;z-index:100;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;color:var(--text)}
+  .theme-btn:hover{border-color:var(--dim)}
+
+  /* Timeline */
+  .timeline{position:relative;padding:0 0 0 40px}
+  .timeline::before{content:'';position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:var(--border2)}
+  .tl-item{position:relative;padding:0 0 28px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-dot{position:absolute;left:-33px;top:4px;width:14px;height:14px;border-radius:50%;border:3px solid var(--blue);background:var(--bg);z-index:1}
+  .tl-dot.major{width:18px;height:18px;left:-35px;top:2px;border-width:4px;border-color:var(--green)}
+  .tl-month{font-size:12px;font-weight:800;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+  .tl-events{display:flex;flex-wrap:wrap;gap:6px}
+  .tl-tag{display:inline-block;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;background:var(--card);border:1px solid var(--border2);color:var(--mid);line-height:1.4}
+  .tl-tag.highlight{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+  .tl-tag.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+  .tl-tag.amber{border-color:var(--amber);background:var(--amber-bg);color:var(--amber)}
+  .tl-tag.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+  .tl-tag.purple{border-color:var(--purple);background:var(--purple-bg);color:var(--purple)}
+
+  /* Trend cards */
+  .trend-list{display:flex;flex-direction:column;gap:16px}
+  .trend-card{padding:24px;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);position:relative;overflow:hidden}
+  .trend-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .trend-num{font-size:11px;font-weight:800;color:#fff;width:28px;height:28px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .trend-title{font-size:17px;font-weight:800;margin-bottom:8px}
+  .trend-body{font-size:13px;color:var(--mid);line-height:1.8}
+  .trend-body strong{color:var(--text)}
+  .trend-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+
+  /* Deploy strategy cards */
+  .deploy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border-radius:var(--r);overflow:hidden}
+  .deploy-card{background:var(--card);padding:24px 18px}
+  .deploy-name{font-size:16px;font-weight:800;margin-bottom:6px}
+  .deploy-desc{font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6}
+  .deploy-pros{display:flex;flex-direction:column;gap:6px}
+  .deploy-pro{font-size:12px;color:var(--mid);line-height:1.5;padding-left:14px;position:relative}
+  .deploy-pro::before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--green)}
+  .deploy-pro.con::before{background:var(--red)}
+
+  /* Hardware table */
+  .hw-wrap{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card);margin-top:20px}
+  .hw-wrap table{width:100%;border-collapse:collapse}
+  .hw-wrap th,.hw-wrap td{padding:10px 12px;text-align:center;font-size:12px;white-space:normal;word-break:keep-all}
+  .hw-wrap th{font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.3px;border-bottom:2px solid var(--border)}
+  .hw-wrap td{border-bottom:1px solid var(--border)}
+  .hw-wrap th:first-child,.hw-wrap td:first-child{text-align:left;font-weight:700;color:var(--text);padding-left:14px}
+  .hw-wrap tr:last-child td{border-bottom:none}
+
+  /* License grid */
+  .lic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border-radius:var(--r);overflow:hidden}
+  .lic-card{background:var(--card);padding:20px 14px}
+  .lic-name{font-size:14px;font-weight:800;margin-bottom:4px}
+  .lic-badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-bottom:10px}
+  .lic-models{font-size:11px;color:var(--dim);margin-bottom:10px}
+  .lic-rows{display:flex;flex-direction:column;gap:4px}
+  .lic-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--border)}
+  .lic-row:last-child{border-bottom:none}
+  .lic-row-label{color:var(--dim)}
+  .lic-row-val{font-weight:700}
+
+  /* Compliance matrix */
+  .comp-wrap{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .comp-wrap table{width:100%;border-collapse:collapse}
+  .comp-wrap th,.comp-wrap td{padding:10px 12px;text-align:center;font-size:12px}
+  .comp-wrap th{font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.3px;border-bottom:2px solid var(--border)}
+  .comp-wrap td{border-bottom:1px solid var(--border)}
+  .comp-wrap th:first-child,.comp-wrap td:first-child{text-align:left;font-weight:700;color:var(--text);padding-left:14px}
+  .comp-wrap tr:last-child td{border-bottom:none}
+  .ck{color:var(--green);font-weight:700}
+  .xk{color:var(--red);font-weight:700}
+  .pk{color:var(--amber);font-weight:700}
+
+  /* Outlook cards */
+  .outlook-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .outlook-card{border:1px solid var(--border2);border-radius:var(--r);padding:22px;background:var(--card)}
+  .outlook-title{font-size:15px;font-weight:800;margin-bottom:8px}
+  .outlook-items{display:flex;flex-direction:column;gap:6px}
+  .outlook-item{font-size:13px;color:var(--mid);line-height:1.6;padding-left:14px;position:relative}
+  .outlook-item::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+  .footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--dim);line-height:1.8;text-align:center}
+
+  @media(max-width:768px){
+    .deploy-grid{grid-template-columns:1fr}
+    .lic-grid{grid-template-columns:1fr 1fr}
+    .outlook-grid{grid-template-columns:1fr}
+    body{padding:32px 16px;font-size:15px}
+    .hdr-title{font-size:32px}
+    .sec-title{font-size:22px}
+    .comp-wrap th:first-child,.comp-wrap td:first-child,.hw-wrap th:first-child,.hw-wrap td:first-child{position:sticky;left:0;z-index:1;background:var(--card)}
+  }
+</style>
+</head>
+<body>
+<div class="c">
+  <button class="theme-btn" onclick="toggleTheme()">Light / Dark</button>
+
+  <div class="hdr">
+    <div class="hdr-label">Consolidated Insights</div>
+    <div class="hdr-title">LLM 시장 인사이트 &<br>전략 가이드</div>
+    <div class="hdr-sub">2025년 모델 출시 타임라인, 핵심 트렌드, 배포 전략, 라이선스, 컴플라이언스를 하나의 페이지에서 확인</div>
+    <div class="hdr-meta">2025년 기준 &middot; 2026년 3월 27일 정리</div>
+  </div>
+
+  <!-- Nav -->
+  <div style="display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap">
+    <a href="../" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">Atom Research</a>
+    <a href="index.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">메인</a>
+    <a href="specs.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">모델 스펙</a>
+    <a href="usecase.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">용도별 비교</a>
+    <a href="deploy.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">배포 옵션</a>
+    <a href="summary.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">요약</a>
+  </div>
+
+  <!-- Section 1: 2025 Timeline -->
+  <div class="sec">
+    <div class="sec-label">2025 Timeline</div>
+    <div class="sec-title">2025 모델 출시 타임라인</div>
+    <div class="sec-desc">2025년 주요 LLM 출시와 업계 이벤트를 시간순으로 정리합니다.</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">Jan 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag highlight">DeepSeek R1</div>
+          <div class="tl-tag">MIT 라이선스 추론 모델 공개, 업계 충격</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Feb 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag purple">Grok 3</div>
+          <div class="tl-tag">xAI, Colossus 100K H100 클러스터 기반</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">Mar 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag blue">Gemini 2.5 Pro</div>
+          <div class="tl-tag highlight">MCP OpenAI 채택</div>
+          <div class="tl-tag">Anthropic MCP에 OpenAI 합류, 업계 표준화 시작</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Apr 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag amber">Llama 4 Scout/Maverick</div>
+          <div class="tl-tag red">o3 / o4-mini</div>
+          <div class="tl-tag">MoE 아키텍처 + 추론 모델 동시 진화</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">May 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag highlight">Claude Opus 4 / Sonnet 4</div>
+          <div class="tl-tag blue">MCP 표준화</div>
+          <div class="tl-tag">SWE-bench 72.7%, 에이전트 코딩 신기록</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Jun 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag red">o3-pro</div>
+          <div class="tl-tag blue">Gemini 2.5 GA</div>
+          <div class="tl-tag">추론 모델 고급화 + Google 정식 출시</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">Jul 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag purple">Grok 4 / Grok 4 Heavy</div>
+          <div class="tl-tag">ARC-AGI-2 25.2%, 추론 벤치마크 돌파</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">Aug 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag red">GPT-5</div>
+          <div class="tl-tag blue">Gemini Deep Think</div>
+          <div class="tl-tag">멀티모달 네이티브 + 딥 추론 경쟁</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Sep 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag">Qwen3-Next</div>
+          <div class="tl-tag purple">Grok 4 Fast</div>
+          <div class="tl-tag">아시아 오픈소스 + xAI 속도 최적화</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Oct 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag highlight">Claude Haiku 4.5</div>
+          <div class="tl-tag red">OpenAI PBC 전환</div>
+          <div class="tl-tag">경량 에이전트 모델 + OpenAI 거버넌스 변화</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot major"></div>
+        <div class="tl-month">Nov 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag purple">Grok 4.1 (Elo #1)</div>
+          <div class="tl-tag highlight">Claude Opus 4.5</div>
+          <div class="tl-tag">xAI Elo 1위 등극, Anthropic 최고 성능 모델</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Dec 2025</div>
+        <div class="tl-events">
+          <div class="tl-tag purple">Mistral 3</div>
+          <div class="tl-tag blue">Gemini 3.0 예고</div>
+          <div class="tl-tag highlight">MCP, AAIF(Linux Foundation) 기부</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Key Trends -->
+  <div class="sec">
+    <div class="sec-label">Key Trends</div>
+    <div class="sec-title">핵심 트렌드 분석</div>
+    <div class="sec-desc">2025년 LLM 시장을 정의하는 5가지 핵심 트렌드.</div>
+
+    <div class="trend-list">
+      <div class="trend-card" style="border-left:3px solid var(--blue)">
+        <div class="trend-num" style="background:var(--blue)">1</div>
+        <div class="trend-title">추론 모델의 부상</div>
+        <div class="trend-body">
+          DeepSeek R1(1월)이 MIT 라이선스로 추론 모델 시대를 열었고, o3(4월), GPT-5 thinking(8월), Grok 4.1(11월)까지 이어지며 <strong>"생각하는 AI"가 새로운 표준</strong>이 됐습니다.
+          핵심 기술은 RLVR(Reinforcement Learning with Verifiable Rewards) 기반 추론으로, 수학/과학에서 기존 대비 20~40pp 향상.
+          특히 <strong>코딩 디버깅에서 탁월</strong> -- SWE-bench에서 추론 모델이 비추론 모델 대비 평균 15pp 이상 높은 성능을 보였습니다.
+        </div>
+        <div class="trend-tags">
+          <div class="tl-tag highlight">DeepSeek R1</div>
+          <div class="tl-tag red">o3 / o4-mini</div>
+          <div class="tl-tag purple">Grok 4.1</div>
+          <div class="tl-tag">RLVR</div>
+        </div>
+      </div>
+
+      <div class="trend-card" style="border-left:3px solid var(--green)">
+        <div class="trend-num" style="background:var(--green)">2</div>
+        <div class="trend-title">에이전트 AI 폭발</div>
+        <div class="trend-body">
+          Gartner 기준 에이전트 AI 관련 문의가 <strong>1,445% 증가</strong>. 시장 규모는 $7.8B(2025) -> $52B(2030) 전망.
+          Claude Opus 4의 SWE-bench 72.7%, GPT-5의 멀티모달 에이전트, Grok 4의 자율 코딩 등 모든 주요 벤더가 에이전트 능력을 핵심 차별점으로 내세우고 있습니다.
+          <strong>MCP(Model Context Protocol)가 AAIF(Linux Foundation)에 기부</strong>되면서 에이전트 간 상호운용성의 공식 표준이 확립됐습니다.
+        </div>
+        <div class="trend-tags">
+          <div class="tl-tag highlight">Gartner 1,445%</div>
+          <div class="tl-tag blue">$7.8B -> $52B</div>
+          <div class="tl-tag">MCP + AAIF</div>
+        </div>
+      </div>
+
+      <div class="trend-card" style="border-left:3px solid var(--amber)">
+        <div class="trend-num" style="background:var(--amber)">3</div>
+        <div class="trend-title">MCP 표준화: 프로토콜에서 인프라로</div>
+        <div class="trend-body">
+          <strong>2024.11</strong> Anthropic이 MCP 발표 -> <strong>2025.03</strong> OpenAI가 채택 -> <strong>2025.05</strong> 업계 표준화 -> <strong>2025.12</strong> Linux Foundation(AAIF)에 기부.
+          npm 다운로드 기준 <strong>100K -> 800만 (80배 성장)</strong>. 에이전트가 외부 도구/데이터소스에 접근하는 방식이 표준화되면서, LLM 에코시스템의 "USB-C"로 자리잡았습니다.
+          모든 주요 IDE(VS Code, JetBrains, Cursor)와 클라우드(AWS, Azure, GCP)가 MCP를 지원합니다.
+        </div>
+        <div class="trend-tags">
+          <div class="tl-tag">2024.11 Anthropic 발표</div>
+          <div class="tl-tag red">2025.03 OpenAI 채택</div>
+          <div class="tl-tag highlight">2025.12 Linux Foundation 기부</div>
+          <div class="tl-tag blue">다운로드 80x</div>
+        </div>
+      </div>
+
+      <div class="trend-card" style="border-left:3px solid var(--purple)">
+        <div class="trend-num" style="background:var(--purple)">4</div>
+        <div class="trend-title">오픈소스 vs 프로프라이어터리</div>
+        <div class="trend-body">
+          오픈소스/오픈웨이트 모델이 전체 LLM 사용의 <strong>62.8%를 점유</strong>. DeepSeek-V3(MIT), Mistral Large 3(Apache 2.0), Llama 4(Community License) 등이 주도.
+          하지만 <strong>최고 성능은 여전히 프로프라이어터리</strong> -- SWE-bench 상위 5개 중 4개가 폐쇄형(Claude Opus 4, o3, GPT-5, Grok 4.1).
+          실무적으로는 "오픈소스로 80% 커버, 나머지 20%는 API"라는 <strong>하이브리드 전략</strong>이 확산 중입니다.
+        </div>
+        <div class="trend-tags">
+          <div class="tl-tag highlight">오픈소스 62.8% 점유</div>
+          <div class="tl-tag red">Top 성능은 Proprietary</div>
+          <div class="tl-tag">하이브리드 전략 확산</div>
+        </div>
+      </div>
+
+      <div class="trend-card" style="border-left:3px solid var(--teal)">
+        <div class="trend-num" style="background:var(--teal)">5</div>
+        <div class="trend-title">가격 붕괴: GPT-4 수준이 1달러 미만</div>
+        <div class="trend-body">
+          2023년 GPT-4 수준 성능의 API 비용: <strong>$30/1M tokens -> 2025년 $1 미만</strong> (30배 이상 하락).
+          Gemini 2.5 Flash($0.15/$0.60), DeepSeek-V3($0.27/$1.10)가 GPT-4를 능가하면서 초저가.
+          이 가격 붕괴로 <strong>"Good Enough" 모델 + 대량 처리</strong> 패턴이 주류가 됐고, Frontier 모델은 고난도 추론/에이전트에만 사용하는 티어링 전략이 보편화됐습니다.
+        </div>
+        <div class="trend-tags">
+          <div class="tl-tag highlight">$30 -> $1 미만</div>
+          <div class="tl-tag blue">30x 하락</div>
+          <div class="tl-tag">티어링 전략 보편화</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Deploy Strategy -->
+  <div class="sec">
+    <div class="sec-label">Deployment Strategy</div>
+    <div class="sec-title">배포 전략 가이드</div>
+    <div class="sec-desc">프로젝트 요구사항에 따른 3가지 배포 경로와 셀프호스팅 하드웨어 요구사항.</div>
+
+    <div class="deploy-grid">
+      <div class="deploy-card">
+        <div style="font-size:28px;margin-bottom:8px">&#9729;</div>
+        <div class="deploy-name">Cloud API</div>
+        <div class="deploy-desc">OpenAI, Anthropic, Google, Mistral 등 프로바이더 API를 직접 호출</div>
+        <div class="deploy-pros">
+          <div class="deploy-pro">빠른 시작 -- 가입 후 즉시 사용</div>
+          <div class="deploy-pro">인프라 관리 불필요</div>
+          <div class="deploy-pro">종량제로 초기 비용 없음</div>
+          <div class="deploy-pro">최신 모델 즉시 접근</div>
+          <div class="deploy-pro con">벤더 종속 리스크</div>
+          <div class="deploy-pro con">대량 사용 시 비용 급증</div>
+          <div class="deploy-pro con">데이터가 외부로 전송됨</div>
+        </div>
+      </div>
+      <div class="deploy-card">
+        <div style="font-size:28px;margin-bottom:8px">&#9881;</div>
+        <div class="deploy-name">Self-hosted</div>
+        <div class="deploy-desc">오픈웨이트 모델(Llama 4, Mistral, DeepSeek)을 자체 GPU에서 운영</div>
+        <div class="deploy-pros">
+          <div class="deploy-pro">완전한 데이터 통제</div>
+          <div class="deploy-pro">예측 가능한 고정 비용</div>
+          <div class="deploy-pro">모델 커스터마이징 자유</div>
+          <div class="deploy-pro">벤더 종속 없음</div>
+          <div class="deploy-pro con">고가 GPU 인프라 필요</div>
+          <div class="deploy-pro con">운영/유지보수 인력 필요</div>
+          <div class="deploy-pro con">모델 업데이트 직접 관리</div>
+        </div>
+      </div>
+      <div class="deploy-card">
+        <div style="font-size:28px;margin-bottom:8px">&#8703;</div>
+        <div class="deploy-name">Hybrid</div>
+        <div class="deploy-desc">민감 데이터는 자체 인프라, 일반 워크로드는 Cloud API 활용</div>
+        <div class="deploy-pros">
+          <div class="deploy-pro">민감 데이터 보호 + API 편의성</div>
+          <div class="deploy-pro">워크로드별 최적 비용</div>
+          <div class="deploy-pro">벤더 종속 완화</div>
+          <div class="deploy-pro">점진적 마이그레이션 가능</div>
+          <div class="deploy-pro con">아키텍처 복잡도 증가</div>
+          <div class="deploy-pro con">두 환경 모두 관리 필요</div>
+          <div class="deploy-pro con">라우팅 로직 개발 필요</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hardware Requirements -->
+    <div class="hw-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>파라미터</th>
+            <th>최소 GPU</th>
+            <th>권장 GPU</th>
+            <th>VRAM</th>
+            <th>비용 (AWS/월)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Llama 4 Scout</td>
+            <td>109B (17B 활성)</td>
+            <td>1x H100 80GB</td>
+            <td>2x H100</td>
+            <td>~80GB (INT8)</td>
+            <td>~$2,900</td>
+          </tr>
+          <tr>
+            <td>Llama 4 Maverick</td>
+            <td>400B (17B 활성)</td>
+            <td>4x H100 80GB</td>
+            <td>8x H100</td>
+            <td>~250GB (INT8)</td>
+            <td>~$11,500</td>
+          </tr>
+          <tr>
+            <td>DeepSeek-V3</td>
+            <td>671B (37B 활성)</td>
+            <td>8x H100 80GB</td>
+            <td>8x H100</td>
+            <td>~400GB (FP8)</td>
+            <td>~$23,000</td>
+          </tr>
+          <tr>
+            <td>DeepSeek-R1</td>
+            <td>671B (37B 활성)</td>
+            <td>8x H100 80GB</td>
+            <td>8x H100</td>
+            <td>~400GB (FP8)</td>
+            <td>~$23,000</td>
+          </tr>
+          <tr>
+            <td>Mistral Large 3</td>
+            <td>123B Dense</td>
+            <td>2x H100 80GB</td>
+            <td>4x H100</td>
+            <td>~130GB (INT8)</td>
+            <td>~$5,800</td>
+          </tr>
+          <tr>
+            <td>Qwen3 235B</td>
+            <td>235B (22B 활성)</td>
+            <td>2x H100 80GB</td>
+            <td>4x H100</td>
+            <td>~150GB (INT8)</td>
+            <td>~$5,800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:var(--dim)">* AWS on-demand H100 기준 ($3.99/hr). Reserved Instance 시 ~40% 할인 가능. 실제 비용은 인스턴스 타입, 리전, 네트워크/스토리지에 따라 변동.</div>
+  </div>
+
+  <!-- Section 4: License Comparison -->
+  <div class="sec">
+    <div class="sec-label">License Comparison</div>
+    <div class="sec-title">라이선스 비교</div>
+    <div class="sec-desc">오픈 웨이트 모델 및 프로프라이어터리 서비스의 라이선스 조건. 상업적 사용 시 반드시 확인.</div>
+
+    <div class="lic-grid">
+      <div class="lic-card">
+        <div class="lic-name">MIT</div>
+        <div class="lic-badge" style="background:var(--green-bg);color:var(--green)">Most Permissive</div>
+        <div class="lic-models">DeepSeek-V3, DeepSeek-R1</div>
+        <div class="lic-rows">
+          <div class="lic-row"><div class="lic-row-label">상업적 사용</div><div class="lic-row-val" style="color:var(--green)">무제한</div></div>
+          <div class="lic-row"><div class="lic-row-label">수정/재배포</div><div class="lic-row-val" style="color:var(--green)">무제한</div></div>
+          <div class="lic-row"><div class="lic-row-label">사용자 수 제한</div><div class="lic-row-val" style="color:var(--green)">없음</div></div>
+          <div class="lic-row"><div class="lic-row-label">지역 제한</div><div class="lic-row-val" style="color:var(--green)">없음</div></div>
+          <div class="lic-row"><div class="lic-row-label">특허 보호</div><div class="lic-row-val" style="color:var(--dim)">묵시적</div></div>
+        </div>
+      </div>
+      <div class="lic-card">
+        <div class="lic-name">Apache 2.0</div>
+        <div class="lic-badge" style="background:var(--green-bg);color:var(--green)">Very Permissive</div>
+        <div class="lic-models">Mistral Large 3, Mistral Medium 3</div>
+        <div class="lic-rows">
+          <div class="lic-row"><div class="lic-row-label">상업적 사용</div><div class="lic-row-val" style="color:var(--green)">무제한</div></div>
+          <div class="lic-row"><div class="lic-row-label">수정/재배포</div><div class="lic-row-val" style="color:var(--green)">무제한</div></div>
+          <div class="lic-row"><div class="lic-row-label">사용자 수 제한</div><div class="lic-row-val" style="color:var(--green)">없음</div></div>
+          <div class="lic-row"><div class="lic-row-label">지역 제한</div><div class="lic-row-val" style="color:var(--green)">없음</div></div>
+          <div class="lic-row"><div class="lic-row-label">특허 보호</div><div class="lic-row-val" style="color:var(--green)">명시적 부여</div></div>
+        </div>
+      </div>
+      <div class="lic-card">
+        <div class="lic-name">Llama License</div>
+        <div class="lic-badge" style="background:var(--amber-bg);color:var(--amber)">Restricted</div>
+        <div class="lic-models">Llama 4 Maverick, Llama 4 Scout</div>
+        <div class="lic-rows">
+          <div class="lic-row"><div class="lic-row-label">상업적 사용</div><div class="lic-row-val" style="color:var(--amber)">조건부</div></div>
+          <div class="lic-row"><div class="lic-row-label">수정/재배포</div><div class="lic-row-val" style="color:var(--green)">가능</div></div>
+          <div class="lic-row"><div class="lic-row-label">MAU 제한</div><div class="lic-row-val" style="color:var(--red)">7억 초과 시 별도</div></div>
+          <div class="lic-row"><div class="lic-row-label">지역 제한</div><div class="lic-row-val" style="color:var(--red)">EU 제한 조항</div></div>
+          <div class="lic-row"><div class="lic-row-label">OSI 인증</div><div class="lic-row-val" style="color:var(--red)">미인정</div></div>
+        </div>
+      </div>
+      <div class="lic-card">
+        <div class="lic-name">Proprietary</div>
+        <div class="lic-badge" style="background:var(--red-bg);color:var(--red)">Closed</div>
+        <div class="lic-models">GPT-5, Claude Opus 4, Gemini 2.5 Pro</div>
+        <div class="lic-rows">
+          <div class="lic-row"><div class="lic-row-label">상업적 사용</div><div class="lic-row-val" style="color:var(--amber)">API 이용약관</div></div>
+          <div class="lic-row"><div class="lic-row-label">수정/재배포</div><div class="lic-row-val" style="color:var(--red)">불가</div></div>
+          <div class="lic-row"><div class="lic-row-label">셀프호스팅</div><div class="lic-row-val" style="color:var(--red)">불가</div></div>
+          <div class="lic-row"><div class="lic-row-label">파인튜닝</div><div class="lic-row-val" style="color:var(--amber)">제한적 (API FT)</div></div>
+          <div class="lic-row"><div class="lic-row-label">데이터 통제</div><div class="lic-row-val" style="color:var(--amber)">ZDR 옵션</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Compliance Matrix -->
+  <div class="sec">
+    <div class="sec-label">Compliance Matrix</div>
+    <div class="sec-title">데이터 프라이버시 & 컴플라이언스 매트릭스</div>
+    <div class="sec-desc">주요 프로바이더의 보안 인증 및 데이터 보호 현황.</div>
+
+    <div class="comp-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>프로바이더</th>
+            <th>SOC 2</th>
+            <th>HIPAA</th>
+            <th>GDPR</th>
+            <th>ZDR</th>
+            <th>데이터 저장</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenAI</td>
+            <td class="ck">Type II</td>
+            <td class="ck">BAA 가능</td>
+            <td class="ck">DPA 제공</td>
+            <td class="ck">API 기본 ZDR</td>
+            <td>API: 0일 / ChatGPT: 30일</td>
+            <td>Azure 경유 시 추가 인증</td>
+          </tr>
+          <tr>
+            <td>Anthropic</td>
+            <td class="ck">Type II</td>
+            <td class="ck">BAA 가능</td>
+            <td class="ck">DPA 제공</td>
+            <td class="ck">API 기본 ZDR</td>
+            <td>API: 0일 / Console: 30일</td>
+            <td>가장 보수적 안전 정책</td>
+          </tr>
+          <tr>
+            <td>Google (Vertex)</td>
+            <td class="ck">Type II</td>
+            <td class="ck">BAA 가능</td>
+            <td class="ck">DPA 제공</td>
+            <td class="ck">Vertex 기본 ZDR</td>
+            <td>Vertex: 0일 / AI Studio: 저장</td>
+            <td>Vertex AI 사용 시 완전 준수</td>
+          </tr>
+          <tr>
+            <td>Mistral</td>
+            <td class="ck">Type II</td>
+            <td class="xk">미인증</td>
+            <td class="ck">EU 기반</td>
+            <td class="ck">API 기본 ZDR</td>
+            <td>0일 (EU 호스팅)</td>
+            <td>EU 데이터 주권, HIPAA 미지원</td>
+          </tr>
+          <tr>
+            <td>xAI (Grok)</td>
+            <td class="pk">미확인</td>
+            <td class="xk">미인증</td>
+            <td class="pk">미확인</td>
+            <td class="xk">미확인</td>
+            <td>미공개</td>
+            <td>엔터프라이즈 인증 부족</td>
+          </tr>
+          <tr>
+            <td>DeepSeek</td>
+            <td class="xk">없음</td>
+            <td class="xk">없음</td>
+            <td class="xk">미준수</td>
+            <td class="xk">없음</td>
+            <td>중국 서버, 기간 미공개</td>
+            <td>셀프호스팅으로 리스크 해소</td>
+          </tr>
+          <tr>
+            <td>셀프호스팅</td>
+            <td class="pk">자체 취득</td>
+            <td class="pk">자체 취득</td>
+            <td class="pk">자체 구현</td>
+            <td class="ck">기본 보장</td>
+            <td>완전 통제</td>
+            <td>인증은 자체 책임</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap">
+      <span><span class="ck">&#9679;</span> 인증/준수</span>
+      <span><span class="pk">&#9679;</span> 부분/자체</span>
+      <span><span class="xk">&#9679;</span> 미인증/미준수</span>
+      <span style="margin-left:8px">ZDR = Zero Data Retention (학습에 데이터 미사용)</span>
+    </div>
+  </div>
+
+  <!-- Section 6: Outlook -->
+  <div class="sec">
+    <div class="sec-label">Outlook 2026+</div>
+    <div class="sec-title">향후 전망 (2026~)</div>
+    <div class="sec-desc">확인된 출시와 업계 방향성.</div>
+
+    <div class="outlook-grid">
+      <div class="outlook-card">
+        <div class="outlook-title" style="color:var(--green)">출시 완료 (2026 Q1)</div>
+        <div class="outlook-items">
+          <div class="outlook-item"><strong>Claude Opus 4.6 / Sonnet 4.6</strong> -- 1M 컨텍스트, 에이전트 성능 대폭 향상</div>
+          <div class="outlook-item"><strong>GPT-5.4</strong> -- 멀티모달 네이티브, 추론 통합 모델</div>
+          <div class="outlook-item"><strong>Gemini 3.1 Pro</strong> -- 2M 컨텍스트, 비전+추론 통합</div>
+          <div class="outlook-item"><strong>Grok 4.5</strong> -- xAI 지속적 Elo 경쟁</div>
+        </div>
+      </div>
+      <div class="outlook-card">
+        <div class="outlook-title" style="color:var(--blue)">핵심 방향성</div>
+        <div class="outlook-items">
+          <div class="outlook-item"><strong>에이전틱 AI</strong> -- 단일 모델 -> 에이전트 시스템으로 진화. MCP 기반 도구 사용이 기본</div>
+          <div class="outlook-item"><strong>추론 능력 경쟁</strong> -- 모든 벤더가 "thinking" 모드 탑재. 추론 시간 스케일링이 새로운 성능 축</div>
+          <div class="outlook-item"><strong>소형 모델 + 엣지</strong> -- Haiku 4.5, Gemini Flash, o4-mini 등 경량 모델로 엣지/모바일 배포 확대</div>
+          <div class="outlook-item"><strong>멀티모달 네이티브</strong> -- 텍스트/이미지/오디오/비디오 통합 처리가 기본 사양화</div>
+          <div class="outlook-item"><strong>가격 경쟁 심화</strong> -- Flash/Mini 모델의 초저가 경쟁 지속, Frontier 모델도 점진적 가격 인하</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: Data Sources -->
+  <div class="sec">
+    <div class="sec-label">Data Sources</div>
+    <div class="sec-title">참고 자료 및 출처</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1px solid var(--border2);border-radius:var(--r);padding:20px;background:var(--card)">
+        <div style="font-size:13px;font-weight:800;margin-bottom:10px;color:var(--text)">벤치마크 & 리더보드</div>
+        <div style="font-size:12px;color:var(--mid);line-height:2">
+          <a href="https://www.swebench.com/" style="color:var(--blue)">SWE-bench Leaderboard</a><br>
+          <a href="https://vellum.ai/llm-leaderboard" style="color:var(--blue)">Vellum LLM Leaderboard</a><br>
+          <a href="https://artificialanalysis.ai/leaderboards/models" style="color:var(--blue)">Artificial Analysis LLM Leaderboard</a><br>
+          <a href="https://lmcouncil.ai/benchmarks" style="color:var(--blue)">LM Council Benchmarks</a><br>
+          <a href="https://mmmu-benchmark.github.io/" style="color:var(--blue)">MMMU Benchmark</a><br>
+          <a href="https://mmluprox.github.io/" style="color:var(--blue)">MMLU-ProX Multilingual Benchmark</a><br>
+          <a href="https://research.trychroma.com/context-rot" style="color:var(--blue)">Chroma Research - Context Rot</a>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:var(--r);padding:20px;background:var(--card)">
+        <div style="font-size:13px;font-weight:800;margin-bottom:10px;color:var(--text)">모델 공식 발표</div>
+        <div style="font-size:12px;color:var(--mid);line-height:2">
+          <a href="https://arxiv.org/html/2501.12948v1" style="color:var(--blue)">DeepSeek-R1 Paper</a><br>
+          <a href="https://openai.com/index/gpt-4-1/" style="color:var(--blue)">OpenAI GPT-4.1 Technical Report</a><br>
+          <a href="https://openai.com/index/introducing-o3-and-o4-mini/" style="color:var(--blue)">OpenAI o3 & o4-mini Announcement</a><br>
+          <a href="https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/" style="color:var(--blue)">Google Gemini 2.5 Announcement</a><br>
+          <a href="https://www.llama.com/models/llama-4/" style="color:var(--blue)">Meta Llama 4 Models</a><br>
+          <a href="https://mistral.ai/news/mistral-large-2407" style="color:var(--blue)">Mistral Large Technical Report</a>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:var(--r);padding:20px;background:var(--card)">
+        <div style="font-size:13px;font-weight:800;margin-bottom:10px;color:var(--text)">시장 분석 & 가격</div>
+        <div style="font-size:12px;color:var(--mid);line-height:2">
+          <a href="https://intuitionlabs.ai/articles/llm-api-pricing-comparison-2025" style="color:var(--blue)">IntuitionLabs LLM API Pricing 2025</a><br>
+          <a href="https://www.klavis.ai/blog/function-calling-and-agentic-ai-in-2025-what-the-latest-benchmarks-tell-us-about-model-performance" style="color:var(--blue)">Klavis AI - Function Calling Benchmarks</a><br>
+          <a href="https://artificialanalysis.ai/models/multilingual/korean" style="color:var(--blue)">Artificial Analysis Korean Benchmark</a><br>
+          <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" style="color:var(--blue)">DeepSeek-R1-0528 Model Card</a>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:var(--r);padding:20px;background:var(--card)">
+        <div style="font-size:13px;font-weight:800;margin-bottom:10px;color:var(--text)">배포 & 컴플라이언스</div>
+        <div style="font-size:12px;color:var(--mid);line-height:2">
+          <a href="https://openai.com/security" style="color:var(--blue)">OpenAI Security & Compliance</a><br>
+          <a href="https://trust.anthropic.com/" style="color:var(--blue)">Anthropic Trust Center</a><br>
+          <a href="https://cloud.google.com/vertex-ai/docs/general/compliance" style="color:var(--blue)">Google Vertex AI Compliance</a><br>
+          <a href="https://mistral.ai/trust/" style="color:var(--blue)">Mistral Trust & Security</a><br>
+          <a href="https://modelcontextprotocol.io/" style="color:var(--blue)">Model Context Protocol (MCP)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    가격 및 벤치마크는 2025년 공식 발표 기준 &middot; 2026년 변동 가능<br>
+    컴플라이언스 현황은 각 프로바이더 공식 문서 기준 &middot; 실제 적용 시 별도 법률 검토 권장<br>
+    Atom Research &middot; 2026.03.27
+  </div>
+</div>
+
+<script>
+(function(){
+  const saved = localStorage.getItem('theme');
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+function toggleTheme(){
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>
+</body>
+</html>

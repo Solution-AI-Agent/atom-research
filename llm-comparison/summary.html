@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM 모델 비교 — Executive Summary (2026.03)</title>
+<meta name="description" content="LLM 모델 비교 통합 요약 — 모델 스펙, 시나리오별 추천, 배포 옵션, 리스크 분석">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --bg:#fafafa; --card:#fff; --text:#111; --mid:#444; --dim:#999; --mute:#ccc;
+    --border:#eee; --border2:#e0e0e0;
+    --blue:#0066FF; --amber:#E68A00; --green:#00875A; --red:#CC3333; --purple:#7B3FE4;
+    --blue-bg:#EBF3FF; --amber-bg:#FFF5E0; --green-bg:#E6F6F0; --red-bg:#FFEBEB; --purple-bg:#F3EEFF;
+    --r:12px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#111; --card:#1a1a1a; --text:#eee; --mid:#bbb; --dim:#777; --mute:#444;
+    --border:#222; --border2:#333;
+    --blue:#4D9AFF; --amber:#FFB84D; --green:#36B37E; --red:#FF6B6B; --purple:#A67BFF;
+    --blue-bg:rgba(77,154,255,0.1); --amber-bg:rgba(255,184,77,0.1); --green-bg:rgba(54,179,126,0.1); --red-bg:rgba(255,107,107,0.1); --purple-bg:rgba(166,123,255,0.1);
+  }}
+  [data-theme="dark"]{
+    --bg:#111; --card:#1a1a1a; --text:#eee; --mid:#bbb; --dim:#777; --mute:#444;
+    --border:#222; --border2:#333;
+    --blue:#4D9AFF; --amber:#FFB84D; --green:#36B37E; --red:#FF6B6B; --purple:#A67BFF;
+    --blue-bg:rgba(77,154,255,0.1); --amber-bg:rgba(255,184,77,0.1); --green-bg:rgba(54,179,126,0.1); --red-bg:rgba(255,107,107,0.1); --purple-bg:rgba(166,123,255,0.1);
+  }
+  [data-theme="light"]{
+    --bg:#fafafa; --card:#fff; --text:#111; --mid:#444; --dim:#999; --mute:#ccc;
+    --border:#eee; --border2:#e0e0e0;
+    --blue:#0066FF; --amber:#E68A00; --green:#00875A; --red:#CC3333; --purple:#7B3FE4;
+    --blue-bg:#EBF3FF; --amber-bg:#FFF5E0; --green-bg:#E6F6F0; --red-bg:#FFEBEB; --purple-bg:#F3EEFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:56px 24px 40px;-webkit-font-smoothing:antialiased;line-height:1.7;font-size:14px}
+  .c{max-width:920px;margin:0 auto}
+
+  /* Avatar */
+  .avg{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-0.5px}
+  .avg-sm{width:32px;height:32px;border-radius:8px;font-size:13px}
+  .avg-xs{width:24px;height:24px;border-radius:6px;font-size:10px}
+
+  /* Header */
+  .hdr{margin-bottom:48px}
+  .hdr-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:8px}
+  .hdr-title{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--text)}
+  .hdr-sub{font-size:16px;color:var(--dim);margin-top:12px;max-width:600px;line-height:1.7}
+  .hdr-meta{margin-top:14px;font-size:13px;color:var(--mute);font-weight:500}
+
+  /* Section */
+  .sec{margin-bottom:56px}
+  .sec-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:6px}
+  .sec-title{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:20px}
+
+  /* Summary table */
+  .tbl-wrap{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .tbl-inner{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tbl-wrap table{width:100%;border-collapse:collapse}
+  .tbl-wrap th,.tbl-wrap td{padding:12px 10px;text-align:center;font-size:12px;white-space:normal;word-break:keep-all}
+  .tbl-wrap th{font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.3px;border-bottom:2px solid var(--border)}
+  .tbl-wrap td{border-bottom:1px solid var(--border)}
+  .tbl-wrap th:first-child,.tbl-wrap td:first-child{text-align:left;font-weight:700;color:var(--text);padding-left:14px;min-width:120px}
+  .tbl-wrap tr:last-child td{border-bottom:none}
+
+  /* Takeaway */
+  .take{border:2px solid var(--text);border-radius:var(--r);padding:28px;margin-top:32px}
+  .take-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:18px}
+  .take-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .take-item{display:flex;gap:14px;align-items:flex-start}
+  .take-text{font-size:14px;color:var(--mid);line-height:1.7}
+  .take-text strong{color:var(--text)}
+
+  /* Ranked list */
+  .rank-list{display:flex;flex-direction:column;gap:12px}
+  .rank-item{display:flex;align-items:flex-start;gap:14px;padding:20px;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
+  .rank-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+  .rank-body{flex:1}
+  .rank-name{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
+  .rank-desc{font-size:14px;color:var(--mid);line-height:1.7}
+
+  /* Scenario cards */
+  .scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .scenario{padding:22px;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
+  .scenario:hover{border-color:var(--dim)}
+  .scenario-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
+  .scenario-models{display:flex;flex-direction:column;gap:6px}
+  .scenario-model{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mid);line-height:1.6}
+  .scenario-model strong{color:var(--text)}
+
+  /* Deploy matrix */
+  .matrix-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);border-radius:var(--r);overflow:hidden}
+  .matrix-cell{background:var(--card);padding:24px}
+  .matrix-label{font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px}
+  .matrix-list{list-style:none;padding:0}
+  .matrix-list li{font-size:13px;color:var(--mid);line-height:1.8;padding-left:16px;position:relative}
+  .matrix-list li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%}
+  .matrix-list.pro li::before{background:var(--green)}
+  .matrix-list.con li::before{background:var(--red)}
+
+  /* Warning */
+  .warn-card{padding:22px;border:2px solid var(--red);border-radius:var(--r);background:var(--red-bg)}
+  .warn-title{font-size:16px;font-weight:800;color:var(--red);margin-bottom:8px}
+  .warn-desc{font-size:14px;color:var(--mid);line-height:1.7}
+
+  /* Tag */
+  .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;display:inline-block}
+
+  /* Footer */
+  .bottom{margin-top:56px;display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border2);flex-wrap:wrap;gap:12px}
+  .bottom-left{font-size:12px;color:var(--dim);line-height:1.8}
+
+  .theme-btn{position:fixed;top:16px;right:16px;z-index:100;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all 0.15s;color:var(--text);font-family:inherit;font-weight:600;font-size:13px}
+  .theme-btn:hover{border-color:var(--dim)}
+
+  /* Mobile */
+  @media(max-width:768px){
+    .take-grid,.scenario-grid,.matrix-grid{grid-template-columns:1fr}
+    body{padding:32px 16px;font-size:15px}
+    .hdr-title{font-size:32px}
+    .sec-title{font-size:22px}
+    .bottom{flex-direction:column;text-align:center}
+    .take{padding:20px}
+    .take-item{flex-direction:column;gap:8px}
+    .take-item .avg-sm{align-self:flex-start}
+    .tbl-wrap th:first-child,.tbl-wrap td:first-child{position:sticky;left:0;z-index:1;background:var(--card)}
+  }
+</style>
+</head>
+<body>
+<div class="c">
+  <button class="theme-btn" onclick="toggleTheme()">Light / Dark</button>
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-label">Executive Summary</div>
+    <div class="hdr-title">LLM 모델 비교</div>
+    <div class="hdr-sub">모델 스펙, 시나리오별 추천, 배포 옵션, 리스크를 한 페이지에 정리한 의사결정 요약</div>
+    <div class="hdr-meta">2025년 벤치마크 기준 &middot; 2026년 3월 27일 정리</div>
+  </div>
+
+  <!-- Nav -->
+  <div style="display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap">
+    <a href="../" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">Atom Research</a>
+    <a href="specs.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">모델 스펙</a>
+    <a href="usecase.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">용도별 비교</a>
+    <a href="deploy.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">배포 옵션</a>
+  </div>
+
+  <!-- 1. At a Glance Table -->
+  <div class="sec">
+    <div class="sec-label">At a Glance</div>
+    <div class="sec-title">한 눈에 보기</div>
+    <div class="tbl-wrap">
+      <div class="tbl-inner">
+        <table>
+          <thead>
+            <tr>
+              <th>모델</th>
+              <th>프로바이더</th>
+              <th>Best For</th>
+              <th>가격 티어</th>
+              <th>오픈소스</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Claude Opus 4.6</td>
+              <td>Anthropic</td>
+              <td>코딩, 에이전트, 추론</td>
+              <td><span class="tag" style="background:var(--red-bg);color:var(--red)">Premium</span><br><span style="font-size:10px;color:var(--dim)">$15/$75 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>Claude Opus 4</td>
+              <td>Anthropic</td>
+              <td>한국어, 창작, 에이전트</td>
+              <td><span class="tag" style="background:var(--red-bg);color:var(--red)">Premium</span><br><span style="font-size:10px;color:var(--dim)">$15/$75 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>Gemini 2.5 Pro</td>
+              <td>Google</td>
+              <td>RAG, 비전, 범용</td>
+              <td><span class="tag" style="background:var(--amber-bg);color:var(--amber)">Mid</span><br><span style="font-size:10px;color:var(--dim)">$1.25/$10 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>Gemini 2.5 Flash</td>
+              <td>Google</td>
+              <td>대량 처리, 비용 최적화</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Budget</span><br><span style="font-size:10px;color:var(--dim)">$0.15/$0.60 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>GPT-4.1</td>
+              <td>OpenAI</td>
+              <td>엔터프라이즈, 코딩, FT</td>
+              <td><span class="tag" style="background:var(--amber-bg);color:var(--amber)">Mid</span><br><span style="font-size:10px;color:var(--dim)">$2/$8 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>GPT-4o</td>
+              <td>OpenAI</td>
+              <td>멀티모달, 한국어</td>
+              <td><span class="tag" style="background:var(--amber-bg);color:var(--amber)">Mid</span><br><span style="font-size:10px;color:var(--dim)">$2.50/$10 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>o3</td>
+              <td>OpenAI</td>
+              <td>수학, 과학 추론</td>
+              <td><span class="tag" style="background:var(--red-bg);color:var(--red)">Premium</span><br><span style="font-size:10px;color:var(--dim)">$10/$40 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>o4-mini</td>
+              <td>OpenAI</td>
+              <td>추론 가성비, 코딩</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Budget</span><br><span style="font-size:10px;color:var(--dim)">$1.10/$4.40 MTok</span></td>
+              <td style="color:var(--dim)">No</td>
+            </tr>
+            <tr>
+              <td>DeepSeek-V3</td>
+              <td>DeepSeek</td>
+              <td>최저가 범용</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Budget</span><br><span style="font-size:10px;color:var(--dim)">$0.28/$0.42 MTok</span></td>
+              <td style="color:var(--green);font-weight:700">MIT</td>
+            </tr>
+            <tr>
+              <td>DeepSeek-R1</td>
+              <td>DeepSeek</td>
+              <td>추론/수학 (무료)</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Free~</span><br><span style="font-size:10px;color:var(--dim)">$0.55/$2.19 MTok</span></td>
+              <td style="color:var(--green);font-weight:700">MIT</td>
+            </tr>
+            <tr>
+              <td>Llama 4 Scout</td>
+              <td>Meta</td>
+              <td>셀프호스팅, 다국어</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Free</span><br><span style="font-size:10px;color:var(--dim)">오픈 웨이트</span></td>
+              <td style="color:var(--green);font-weight:700">Llama</td>
+            </tr>
+            <tr>
+              <td>Llama 4 Maverick</td>
+              <td>Meta</td>
+              <td>다국어, 멀티모달</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Free</span><br><span style="font-size:10px;color:var(--dim)">오픈 웨이트</span></td>
+              <td style="color:var(--green);font-weight:700">Llama</td>
+            </tr>
+            <tr>
+              <td>Mistral Large 3</td>
+              <td>Mistral</td>
+              <td>유럽 데이터 주권</td>
+              <td><span class="tag" style="background:var(--green-bg);color:var(--green)">Budget</span><br><span style="font-size:10px;color:var(--dim)">$0.50/$1.50 MTok</span></td>
+              <td style="color:var(--green);font-weight:700">Apache 2.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Top 3 Recommendations per Scenario -->
+  <div class="sec">
+    <div class="sec-label">Recommendations</div>
+    <div class="sec-title">시나리오별 Top 3 추천</div>
+    <div class="scenario-grid">
+
+      <div class="scenario">
+        <div class="scenario-title" style="color:var(--green)">스타트업 / 비용 최적화</div>
+        <div class="scenario-models">
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--green)">1</div><strong>DeepSeek-V3</strong> &mdash; $0.42/1M out, MIT, GPT-4o의 1/24 비용</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--blue)">2</div><strong>Gemini 2.5 Flash</strong> &mdash; $0.60/1M out, 1M 컨텍스트, 무료 티어</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--amber)">3</div><strong>o4-mini</strong> &mdash; $4.40/1M out, o3 성능의 90%를 1/10 비용</div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-title" style="color:var(--purple)">엔터프라이즈 / 코딩</div>
+        <div class="scenario-models">
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--purple)">1</div><strong>Claude Opus 4.6</strong> &mdash; SWE-bench 72.7% #1, 1M 컨텍스트</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--green)">2</div><strong>GPT-4.1</strong> &mdash; Azure 통합, DPO 파인튜닝, SOC2/HIPAA</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--blue)">3</div><strong>Gemini 2.5 Pro</strong> &mdash; 범용 최고, Vertex AI SFT, ISO 42001</div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-title" style="color:var(--blue)">한국어 서비스</div>
+        <div class="scenario-models">
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--purple)">1</div><strong>Claude Opus 4</strong> &mdash; Ko-LLM 리더보드 1위, 환각율 최저</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--blue)">2</div><strong>Gemini 2.5 Pro</strong> &mdash; 다국어 상위, LMArena #1</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--amber)">3</div><strong>GPT-4o</strong> &mdash; E2E 멀티모달, 성숙한 API 생태계</div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-title" style="color:var(--amber)">오픈소스 / 온프레미스</div>
+        <div class="scenario-models">
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--amber)">1</div><strong>Llama 4 Scout</strong> &mdash; H100 1대 가능, 3대 클라우드 서버리스</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--green)">2</div><strong>DeepSeek-V3</strong> &mdash; MIT, 최저가, 셀프호스팅 시 프라이버시 해소</div>
+          <div class="scenario-model"><div class="avg avg-xs" style="background:var(--blue)">3</div><strong>Mistral Large 3</strong> &mdash; Apache 2.0, EU 호스팅, 벤더 종속 제로</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. Deployment Decision Matrix -->
+  <div class="sec">
+    <div class="sec-label">Deployment</div>
+    <div class="sec-title">배포 의사결정 매트릭스</div>
+    <div class="matrix-grid">
+      <div class="matrix-cell">
+        <div class="matrix-label" style="color:var(--blue)">Cloud API</div>
+        <ul class="matrix-list pro">
+          <li>즉시 사용 가능, 인프라 투자 불필요</li>
+          <li>SOC2/HIPAA/GDPR 인증 완비 (OpenAI, Anthropic, Google)</li>
+          <li>자동 스케일링, 99.9% SLA</li>
+          <li>최신 모델 즉시 접근</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="matrix-label" style="color:var(--blue)">Cloud API 단점</div>
+        <ul class="matrix-list con">
+          <li>대량 사용 시 비용 급증 (o3: $40/1M output)</li>
+          <li>데이터가 외부 서버를 경유</li>
+          <li>벤더 종속, 가격 변동 리스크</li>
+          <li>파인튜닝 옵션 제한 (Claude: FT 미지원)</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="matrix-label" style="color:var(--green)">Self-hosted</div>
+        <ul class="matrix-list pro">
+          <li>완전한 데이터 주권, 규제 환경 적합</li>
+          <li>대량 처리 시 한계 비용 감소</li>
+          <li>자유로운 파인튜닝 (LoRA/QLoRA)</li>
+          <li>MIT/Apache 2.0 라이선스 = 제한 없음</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="matrix-label" style="color:var(--green)">Self-hosted 단점</div>
+        <ul class="matrix-list con">
+          <li>H100 GPU 필요 (Scout 1대, V3/R1 8대 이상)</li>
+          <li>초기 인프라 비용 및 운영 인력 필요</li>
+          <li>모델 업데이트를 직접 관리</li>
+          <li>SLA/모니터링 자체 구축 필요</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Key Risk: DeepSeek -->
+  <div class="sec">
+    <div class="sec-label">Risk Advisory</div>
+    <div class="sec-title">핵심 리스크</div>
+    <div class="warn-card">
+      <div class="warn-title">DeepSeek API 데이터 프라이버시</div>
+      <div class="warn-desc">
+        <strong>중국 서버 저장:</strong> 모든 데이터가 PRC 서버에 저장, 중국 국가정보법에 따라 정부 접근 가능.<br>
+        <strong>SOC2/HIPAA 미인증:</strong> Zero Data Retention 미제공. 데이터 보존 기간 "가능한 오래" 명시.<br>
+        <strong>보안 사건:</strong> 2025년 1월 공개 DB에 100만 건 이상 채팅 기록/API 키 노출.<br>
+        <strong>GDPR 조사 중:</strong> 이탈리아, 아일랜드, 벨기에 등 5개국에서 조사 진행. 한국 개인정보위 무단 해외 이전 확인.<br>
+        <strong style="color:var(--green)">권장:</strong> DeepSeek 모델 사용이 필요한 경우 반드시 <strong>셀프호스팅(MIT 라이선스)</strong>으로 데이터 유출 리스크 해소.
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Key Takeaways -->
+  <div class="take">
+    <div class="take-title">핵심 판단 기준</div>
+    <div class="take-grid">
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--purple)">CO</div>
+        <div class="take-text"><strong>코딩/에이전트 &rarr; Claude Opus 4.6</strong><br>SWE-bench 72.7% #1, TAU-bench 81.4%. 보안 최고 수준 (7일 보존, ZDR)</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--blue)">G</div>
+        <div class="take-text"><strong>범용/RAG &rarr; Gemini 2.5 Pro</strong><br>1M 토큰 99.7% 리콜, MMMU 84%. 가격 대비 성능 최고. ISO 42001</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--green)">o4</div>
+        <div class="take-text"><strong>추론 가성비 &rarr; o4-mini</strong><br>AIME 92.7% #1, $4.40/1M out. o3 성능의 90%를 1/10 비용</div>
+      </div>
+      <div class="take-item">
+        <div class="avg avg-sm" style="background:var(--amber)">OS</div>
+        <div class="take-text"><strong>자체 운영 &rarr; Llama 4 Scout + Mistral Large 3</strong><br>H100 1대(Scout) 또는 Apache 2.0(Mistral). 완전한 데이터 주권</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Data Sources -->
+  <div class="sec" style="margin-top:56px">
+    <div class="sec-label">Sources</div>
+    <div class="sec-title">데이터 출처</div>
+    <div style="font-size:13px;color:var(--mid);line-height:2">
+      SWE-bench Verified, GPQA Diamond, AIME 2024/2025, MATH-500, TAU-bench, BFCL v3,<br>
+      ML-MMLU, Ko-LLM Leaderboard, MMMU / MMMU Pro, NIAH, LMArena,<br>
+      각 프로바이더 공식 가격표 및 컴플라이언스 문서 (2025년 공개 기준)
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="bottom">
+    <div class="bottom-left">
+      벤치마크: 2025년 공개 기준 &middot; 가격: 2025년 기준 (2026년 변동 가능)<br>
+      Atom Research &middot; 2026.03.27
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleTheme(){
+  const h=document.documentElement,c=h.getAttribute('data-theme');
+  const d=c==='dark'||(!c&&matchMedia('(prefers-color-scheme:dark)').matches);
+  const n=d?'light':'dark';
+  h.setAttribute('data-theme',n);localStorage.setItem('theme',n);
+}
+const s=localStorage.getItem('theme');
+if(s) document.documentElement.setAttribute('data-theme',s);
+</script>
+</body>
+</html>
