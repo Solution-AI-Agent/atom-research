@@ -8,158 +8,116 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
-  /* ── Color system ── */
+  /* ── Color system (unified with summary/insights) ── */
   :root {
-    --bg: #f4f6f9;
-    --card: #ffffff;
-    --border: #f1f5f9;
-    --border-strong: #e2e8f0;
-    --text: #1e293b;
-    --text-mid: #475569;
-    --text-dim: #94a3b8;
-    --accent: #0ea5e9;
-    --accent-light: #e0f2fe;
-    --green: #10b981;
-    --green-light: #d1fae5;
-    --amber: #f59e0b;
-    --amber-light: #fef3c7;
-    --red: #ef4444;
-    --red-light: #fee2e2;
-    --radius: 16px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-    --shadow-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+    --bg:#fafafa;--card:#fff;--text:#111;--mid:#444;--dim:#999;--mute:#ccc;
+    --border:#eee;--border2:#e0e0e0;
+    --accent:#0066FF;
+    --blue:#0066FF;--amber:#E68A00;--green:#00875A;--red:#CC3333;--purple:#7B3FE4;
+    --blue-bg:#EBF3FF;--amber-bg:#FFF5E0;--green-bg:#E6F6F0;--red-bg:#FFEBEB;
+    --accent-light:#EBF3FF;--amber-light:#FFF5E0;--green-light:#E6F6F0;--red-light:#FFEBEB;
+    --r:12px;
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --border: #334155;
-      --border-strong: #475569;
-      --text: #f1f5f9;
-      --text-mid: #cbd5e1;
-      --text-dim: #64748b;
-      --accent: #38bdf8;
-      --accent-light: rgba(56,189,248,0.1);
-      --green-light: rgba(16,185,129,0.1);
-      --amber-light: rgba(245,158,11,0.1);
-      --red-light: rgba(239,68,68,0.1);
-      --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
-      --shadow-hover: 0 2px 8px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.2);
-    }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#111;--card:#1a1a1a;--text:#eee;--mid:#bbb;--dim:#777;--mute:#444;
+    --border:#222;--border2:#333;
+    --accent:#4D9AFF;
+    --blue:#4D9AFF;--amber:#FFB84D;--green:#36B37E;--red:#FF6B6B;--purple:#A67BFF;
+    --blue-bg:rgba(77,154,255,0.1);--amber-bg:rgba(255,184,77,0.1);--green-bg:rgba(54,179,126,0.1);--red-bg:rgba(255,107,107,0.1);
+    --accent-light:rgba(77,154,255,0.1);--amber-light:rgba(255,184,77,0.1);--green-light:rgba(54,179,126,0.1);--red-light:rgba(255,107,107,0.1);
+  }}
+  [data-theme="dark"]{
+    --bg:#111;--card:#1a1a1a;--text:#eee;--mid:#bbb;--dim:#777;--mute:#444;
+    --border:#222;--border2:#333;
+    --accent:#4D9AFF;
+    --blue:#4D9AFF;--amber:#FFB84D;--green:#36B37E;--red:#FF6B6B;--purple:#A67BFF;
+    --blue-bg:rgba(77,154,255,0.1);--amber-bg:rgba(255,184,77,0.1);--green-bg:rgba(54,179,126,0.1);--red-bg:rgba(255,107,107,0.1);
+    --accent-light:rgba(77,154,255,0.1);--amber-light:rgba(255,184,77,0.1);--green-light:rgba(54,179,126,0.1);--red-light:rgba(255,107,107,0.1);
   }
-
-  [data-theme="dark"] {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --border: #334155;
-    --border-strong: #475569;
-    --text: #f1f5f9;
-    --text-mid: #cbd5e1;
-    --text-dim: #64748b;
-    --accent: #38bdf8;
-    --accent-light: rgba(56,189,248,0.1);
-    --green-light: rgba(16,185,129,0.1);
-    --amber-light: rgba(245,158,11,0.1);
-    --red-light: rgba(239,68,68,0.1);
-    --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
-    --shadow-hover: 0 2px 8px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.2);
-  }
-
-  [data-theme="light"] {
-    --bg: #f4f6f9;
-    --card: #ffffff;
-    --border: #f1f5f9;
-    --border-strong: #e2e8f0;
-    --text: #1e293b;
-    --text-mid: #475569;
-    --text-dim: #94a3b8;
-    --accent: #0ea5e9;
-    --accent-light: #e0f2fe;
-    --green-light: #d1fae5;
-    --amber-light: #fef3c7;
-    --red-light: #fee2e2;
-    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-    --shadow-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+  [data-theme="light"]{
+    --bg:#fafafa;--card:#fff;--text:#111;--mid:#444;--dim:#999;--mute:#ccc;
+    --border:#eee;--border2:#e0e0e0;
+    --accent:#0066FF;
+    --blue:#0066FF;--amber:#E68A00;--green:#00875A;--red:#CC3333;--purple:#7B3FE4;
+    --blue-bg:#EBF3FF;--amber-bg:#FFF5E0;--green-bg:#E6F6F0;--red-bg:#FFEBEB;
+    --accent-light:#EBF3FF;--amber-light:#FFF5E0;--green-light:#E6F6F0;--red-light:#FFEBEB;
   }
 
   /* ── Reset & base ── */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 48px 24px;
-    -webkit-font-smoothing: antialiased;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 56px 24px 40px;
+    -webkit-font-smoothing: antialiased; line-height: 1.7; font-size: 14px;
   }
 
   /* ── Container ── */
-  .container { max-width: 1120px; margin: 0 auto; }
+  .container { max-width: 920px; margin: 0 auto; }
 
   /* ── Header ── */
   .header { margin-bottom: 32px; }
   .header-label {
-    font-size: 11px; font-weight: 700; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
+    font-size: 12px; font-weight: 700; color: var(--dim);
+    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px;
   }
   .header-title {
-    font-size: 32px; font-weight: 800; color: var(--text);
-    letter-spacing: -0.8px; line-height: 1.2;
+    font-size: 40px; font-weight: 800; color: var(--text);
+    letter-spacing: -1.5px; line-height: 1.1;
   }
   .header-sub {
-    font-size: 14px; color: var(--text-dim); margin-top: 8px; line-height: 1.6;
+    font-size: 16px; color: var(--dim); margin-top: 10px; line-height: 1.7;
   }
 
   /* ── Main tabs ── */
   .main-tabs {
     display: flex; gap: 4px; background: var(--card); border-radius: 14px;
-    padding: 4px; box-shadow: var(--shadow); margin-bottom: 32px; width: fit-content;
+    padding: 4px; border: 1px solid var(--border2); margin-bottom: 32px; width: fit-content;
   }
   .main-tab {
     padding: 10px 24px; border-radius: 10px; font-size: 14px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s; color: var(--text-dim); background: transparent;
+    cursor: pointer; transition: all 0.2s; color: var(--dim); background: transparent;
     border: none; font-family: inherit;
   }
-  .main-tab:hover { color: var(--text-mid); }
-  .main-tab.active { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(14,165,233,0.3); }
+  .main-tab:hover { color: var(--mid); }
+  .main-tab.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
   /* ── Sections ── */
-  .section { margin-bottom: 48px; }
+  .section { margin-bottom: 56px; }
   .section-label {
-    font-size: 11px; font-weight: 700; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
+    font-size: 12px; font-weight: 700; color: var(--dim);
+    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px;
   }
   .section-title {
-    font-size: 20px; font-weight: 800; color: var(--text);
-    letter-spacing: -0.3px; margin-bottom: 6px;
+    font-size: 24px; font-weight: 800; color: var(--text);
+    letter-spacing: -0.5px; margin-bottom: 20px;
   }
   .section-desc {
-    font-size: 13px; color: var(--text-dim); margin-bottom: 24px; line-height: 1.6;
+    font-size: 14px; color: var(--dim); margin-bottom: 24px; line-height: 1.7;
   }
 
   /* ── Insight cards ── */
   .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .insight-card {
-    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    background: var(--card); border-radius: var(--r); border: 1px solid var(--border2);
     padding: 24px; display: flex; gap: 16px; align-items: flex-start;
     transition: all 0.25s;
   }
-  .insight-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .insight-card:hover { border-color: var(--dim); }
   .insight-icon {
     font-size: 24px; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
   }
   .insight-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  .insight-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .insight-text { font-size: 12px; color: var(--mid); line-height: 1.6; }
 
   /* ── Billing cards ── */
   .billing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .billing-card {
-    background: var(--card); border-radius: var(--radius); padding: 28px 24px;
-    box-shadow: var(--shadow); position: relative; overflow: hidden; transition: all 0.25s;
+    background: var(--card); border-radius: var(--r); padding: 28px 24px;
+    border: 1px solid var(--border2); position: relative; overflow: hidden; transition: all 0.25s;
   }
-  .billing-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .billing-card:hover { border-color: var(--dim); }
   .billing-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .billing-head {
     display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;
@@ -169,8 +127,8 @@
     display: flex; align-items: center; justify-content: center; font-size: 22px;
   }
   .billing-name { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
-  .billing-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 16px; }
-  .billing-strength { font-size: 12px; color: var(--text-mid); margin-bottom: 12px; line-height: 1.5; }
+  .billing-sub { font-size: 11px; color: var(--dim); margin-bottom: 16px; }
+  .billing-strength { font-size: 12px; color: var(--mid); margin-bottom: 12px; line-height: 1.5; }
   .billing-model {
     display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
     border-radius: 8px; font-size: 11px; font-weight: 700; margin-bottom: 16px;
@@ -182,7 +140,7 @@
     padding: 8px 12px; border-radius: 10px; background: var(--border); font-size: 12px;
   }
   .billing-tier.rec { background: var(--accent-light); }
-  .tier-name { font-weight: 600; color: var(--text-mid); }
+  .tier-name { font-weight: 600; color: var(--mid); }
   .tier-rec { font-size: 9px; font-weight: 700; color: var(--accent); margin-left: 4px; text-transform: uppercase; }
   .tier-price { font-weight: 800; color: var(--text); }
   .billing-price-main { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
@@ -190,7 +148,7 @@
   .pc-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
   .pc-list { list-style: none; margin-bottom: 12px; }
   .pc-list li {
-    font-size: 12px; line-height: 1.6; color: var(--text-mid);
+    font-size: 12px; line-height: 1.6; color: var(--mid);
     padding-left: 16px; position: relative;
   }
   .pc-list li::before { position: absolute; left: 0; font-size: 11px; }
@@ -199,8 +157,8 @@
 
   /* ── Table ── */
   .table-wrap {
-    background: var(--card); border-radius: var(--radius);
-    box-shadow: var(--shadow); overflow: hidden;
+    background: var(--card); border-radius: var(--r);
+    border: 1px solid var(--border2); overflow: hidden;
   }
   .table-header {
     padding: 20px 24px 12px; display: flex; justify-content: space-between;
@@ -210,7 +168,7 @@
   table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   th, td { padding: 6px 4px; text-align: center; font-size: 11px; white-space: normal; word-break: keep-all; }
   th {
-    font-size: 9px; font-weight: 700; color: var(--text-dim);
+    font-size: 9px; font-weight: 700; color: var(--dim);
     text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 2px solid var(--border);
   }
   td { border-bottom: 1px solid var(--border); }
@@ -223,22 +181,22 @@
 
   .cat-row td {
     font-size: 10px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1.5px; color: var(--text-dim); background: var(--border); text-align: left;
+    letter-spacing: 1.5px; color: var(--dim); background: var(--border); text-align: left;
     padding: 8px 24px;
   }
   .check { color: var(--accent); font-size: 18px; font-weight: 700; }
-  .cross { color: var(--text-dim); font-size: 14px; }
+  .cross { color: var(--dim); font-size: 14px; }
   .col-head { display: flex; flex-direction: column; align-items: center; gap: 1px; }
   .col-dot { width: 6px; height: 6px; border-radius: 50%; }
   .col-name { font-size: 9px; font-weight: 700; }
-  .col-tier { font-size: 8px; color: var(--text-dim); }
+  .col-tier { font-size: 8px; color: var(--dim); }
   .col-price { font-size: 10px; font-weight: 800; color: var(--text); margin-top: 1px; }
   .col-rec {
     font-size: 8px; font-weight: 700; color: var(--accent);
     background: var(--accent-light); padding: 2px 6px; border-radius: 4px; margin-top: 2px;
   }
   .limit-row td {
-    font-size: 10px; color: var(--text-mid);
+    font-size: 10px; color: var(--mid);
     background: color-mix(in srgb, var(--accent-light) 30%, var(--card));
   }
   .limit-val { font-weight: 700; color: var(--text); font-size: 10px; }
@@ -247,16 +205,16 @@
   .filters { display: flex; gap: 4px; flex-wrap: wrap; }
   .pill {
     padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
-    background: transparent; color: var(--text-dim); border: none; cursor: pointer;
+    background: transparent; color: var(--dim); border: none; cursor: pointer;
     font-family: inherit; transition: all 0.15s;
   }
-  .pill:hover { background: var(--border); color: var(--text-mid); }
+  .pill:hover { background: var(--border); color: var(--mid); }
   .pill.active { background: var(--accent); color: #fff; }
 
   /* ── Footer ── */
   .footer {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
-    font-size: 12px; color: var(--text-dim); line-height: 1.8; text-align: center;
+    font-size: 12px; color: var(--dim); line-height: 1.8; text-align: center;
   }
 
   /* ── Agent Category Map ── */
@@ -264,18 +222,18 @@
   .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
   .cat-header-icon { font-size: 18px; }
   .cat-header-title { font-size: 15px; font-weight: 800; color: var(--text); }
-  .cat-header-desc { font-size: 11px; color: var(--text-dim); margin-bottom: 14px; }
+  .cat-header-desc { font-size: 11px; color: var(--dim); margin-bottom: 14px; }
 
   .agent-row { display: flex; gap: 14px; }
   .agent-card {
-    flex: 1; background: var(--card); border-radius: var(--radius); padding: 18px;
-    box-shadow: var(--shadow); position: relative; overflow: hidden;
+    flex: 1; background: var(--card); border-radius: var(--r); padding: 18px;
+    border: 1px solid var(--border2); position: relative; overflow: hidden;
     transition: all 0.2s;
   }
-  .agent-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .agent-card:hover { border-color: var(--dim); }
   .agent-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .agent-name-label { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 1px; }
-  .agent-provider { font-size: 9px; color: var(--text-dim); margin-bottom: 8px; }
+  .agent-provider { font-size: 9px; color: var(--dim); margin-bottom: 8px; }
   .agent-env-tag {
     display: inline-block; padding: 2px 7px; border-radius: 5px;
     font-size: 9px; font-weight: 700; margin-bottom: 8px;
@@ -283,29 +241,29 @@
   .tag-local { background: var(--green-light); color: #059669; }
   .tag-cloud { background: var(--accent-light); color: #0284c7; }
   .tag-hybrid { background: var(--amber-light); color: #d97706; }
-  .agent-desc { font-size: 10px; color: var(--text-mid); line-height: 1.6; }
+  .agent-desc { font-size: 10px; color: var(--mid); line-height: 1.6; }
   .agent-desc strong { color: var(--text); }
   .agent-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
   .agent-chip {
     font-size: 8px; padding: 2px 6px; border-radius: 4px;
-    background: var(--border); color: var(--text-dim); font-weight: 600;
+    background: var(--border); color: var(--dim); font-weight: 600;
   }
 
-  .arch-matrix { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-top: 24px; }
+  .arch-matrix { background: var(--card); border-radius: var(--r); border: 1px solid var(--border2); overflow: hidden; margin-top: 24px; }
   .arch-matrix table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   .arch-matrix th, .arch-matrix td { padding: 8px 10px; font-size: 10px; text-align: left; border-bottom: 1px solid var(--border); }
-  .arch-matrix th { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; }
+  .arch-matrix th { font-size: 9px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 0.3px; }
   .arch-matrix td:first-child { font-weight: 600; color: var(--text); width: 120px; }
   .arch-matrix tr:last-child td { border-bottom: none; }
   .av { color: var(--green); font-weight: 700; }
-  .ax { color: var(--text-dim); }
+  .ax { color: var(--dim); }
 
   .overlap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
-  .overlap-card { background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .overlap-card { background: var(--card); border-radius: var(--r); padding: 18px; border: 1px solid var(--border2); }
   .overlap-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-  .overlap-sub { font-size: 9px; color: var(--text-dim); margin-bottom: 10px; }
+  .overlap-sub { font-size: 9px; color: var(--dim); margin-bottom: 10px; }
   .overlap-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .overlap-item { font-size: 10px; color: var(--text-mid); line-height: 1.5; padding-left: 12px; position: relative; margin-bottom: 3px; }
+  .overlap-item { font-size: 10px; color: var(--mid); line-height: 1.5; padding-left: 12px; position: relative; margin-bottom: 3px; }
   .overlap-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 5px; height: 5px; border-radius: 50%; }
   .overlap-item.common::before { background: var(--green); }
   .overlap-item.diff::before { background: var(--amber); }
@@ -318,51 +276,28 @@
   /* ── Theme toggle ── */
   .theme-toggle {
     position: fixed; top: 16px; right: 16px; z-index: 100;
-    background: var(--card); box-shadow: var(--shadow);
-    border-radius: 12px; padding: 8px 12px; cursor: pointer;
-    font-size: 16px; transition: all 0.2s; border: none;
+    background: var(--card); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 8px 12px; cursor: pointer;
+    font-family: inherit; font-weight: 600; font-size: 13px;
+    color: var(--text); transition: all 0.15s;
   }
-  .theme-toggle:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+  .theme-toggle:hover { border-color: var(--dim); }
 
   /* ── Responsive ── */
-  @media (max-width: 960px) {
-    .billing-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 768px) {
+    .billing-grid { grid-template-columns: 1fr; }
+    .insight-grid { grid-template-columns: 1fr; }
     .agent-row { flex-direction: column; }
     .overlap-grid { grid-template-columns: 1fr; }
+    body { padding: 32px 16px; font-size: 15px; }
+    .header-title { font-size: 32px; }
+    .section-title { font-size: 22px; }
     th:first-child, td:first-child {
       position: sticky; left: 0; z-index: 1; background: var(--card);
     }
     th:first-child { z-index: 3; }
     table { table-layout: auto; }
   }
-  @media (max-width: 600px) {
-    .billing-grid, .insight-grid { grid-template-columns: 1fr; }
-    body { padding: 24px 12px; font-size: 15px; }
-    .header-title { font-size: 28px; }
-    .section-title { font-size: 20px; }
-    .section-label { font-size: 12px; }
-    .billing-card { padding: 20px 16px; }
-    .billing-name { font-size: 17px; }
-    .billing-sub { font-size: 12px; }
-    .billing-model { font-size: 12px; }
-    .billing-tier { font-size: 13px; padding: 10px 12px; }
-    .pc-list li { font-size: 13px; line-height: 1.7; }
-    .pc-label { font-size: 11px; }
-    .insight-card { padding: 18px; flex-direction: column; }
-    .insight-title { font-size: 15px; }
-    .insight-text { font-size: 13px; }
-    .main-tab { font-size: 14px; padding: 10px 20px; }
-    .pill { font-size: 13px; padding: 8px 14px; }
-    th, td { padding: 8px 6px; font-size: 12px; }
-    .cat-header-title { font-size: 17px; }
-    .cat-header-desc { font-size: 13px; }
-    .agent-card { padding: 16px; }
-    .agent-name-label { font-size: 15px; }
-    .agent-desc { font-size: 12px; }
-    .arch-matrix th, .arch-matrix td { font-size: 11px; padding: 8px; }
-    .overlap-title { font-size: 15px; }
-    .overlap-item { font-size: 12px; }
-    .footer { font-size: 13px; }
   }
 </style>
 </head>
@@ -373,7 +308,7 @@
 const DATA = {
   services: [
     {
-      name: "Perplexity", sub: "Computer", color: "#0ea5e9", icon: "🔍",
+      name: "Perplexity", sub: "Computer", color: "var(--blue)", icon: "🔍",
       strength: "19개 모델 자동 오케스트레이션 · 클라우드 격리 실행",
       billingModel: "크레딧 소진형",
       pros: ["19개 모델 자동 오케스트레이션", "클라우드 격리 실행", "신규 가입 시 35,000 크레딧 보너스"],
@@ -389,7 +324,7 @@ const DATA = {
       ]
     },
     {
-      name: "Claude", sub: "Cowork / Code", color: "#f59e0b", icon: "🤖",
+      name: "Claude", sub: "Cowork / Code", color: "var(--amber)", icon: "🤖",
       strength: "롤링 5hr 윈도우 정액제 · $20에 Code + Cowork + 데스크톱",
       billingModel: "시간 윈도우 정액제",
       pros: ["5hr 윈도우 리셋, 지속 사용", "$20에 Code + Cowork + 데스크톱", "Opus 4.6이 Sonnet 대비 48~76% 토큰 절약"],
@@ -407,7 +342,7 @@ const DATA = {
       ]
     },
     {
-      name: "OpenAI", sub: "Codex", color: "#10b981", icon: "⚡",
+      name: "OpenAI", sub: "Codex", color: "var(--green)", icon: "⚡",
       strength: "Codex + Sora 통합 · Web+CLI+App 3채널",
       billingModel: "메시지 카운트제",
       pros: ["Codex + Sora 통합", "Web+CLI+App 3채널", "Pro $200이면 무제한"],
@@ -424,7 +359,7 @@ const DATA = {
       ]
     },
     {
-      name: "OpenClaw", sub: "오픈소스 에이전트", color: "#ef4444", icon: "🦞",
+      name: "OpenClaw", sub: "오픈소스 에이전트", color: "var(--red)", icon: "🦞",
       strength: "완전 무료 오픈소스 · BYO API Key · 모델 자유 선택",
       billingModel: "API 종량제",
       pros: ["소프트웨어 완전 무료", "모델 자유 선택", "소량 $0.45~$6/월 가능"],
@@ -483,10 +418,10 @@ const AGENT_CATS = [
   {
     icon: "🤝", title: "협업 에이전트 (Cowork)", desc: "사용자의 환경에서 자율적으로 멀티스텝 작업을 수행하는 AI 동료",
     agents: [
-      { name: "Claude Cowork", provider: "Anthropic · macOS/Windows", color: "#f59e0b", env: "local", envLabel: "로컬 데스크톱",
+      { name: "Claude Cowork", provider: "Anthropic · macOS/Windows", color: "var(--amber)", env: "local", envLabel: "로컬 데스크톱",
         desc: '사용자의 <strong>실제 데스크톱</strong>에서 실행. 로컬 파일, 앱, 브라우저 접근. 고위험 작업 전 <strong>명시적 권한 요청</strong>. Computer Use 기술 기반.',
         chips: ["로컬 파일 접근","앱 제어","브라우저","권한 기반 자율"] },
-      { name: "Perplexity Computer", provider: "Perplexity · Cloud (Firecracker VM)", color: "#0ea5e9", env: "cloud", envLabel: "클라우드 샌드박스",
+      { name: "Perplexity Computer", provider: "Perplexity · Cloud (Firecracker VM)", color: "var(--blue)", env: "cloud", envLabel: "클라우드 샌드박스",
         desc: '<strong>격리된 클라우드 VM</strong>에서 실행. 19개 모델 자동 오케스트레이션. 사용자 로컬 머신에 <strong>접근 불가</strong>. 수개월 연속 실행 가능.',
         chips: ["19개 모델","샌드박스 격리","수개월 실행","완전 자율"] },
     ]
@@ -494,13 +429,13 @@ const AGENT_CATS = [
   {
     icon: "🖥️", title: "데스크톱 자동화 (Computer Use)", desc: "실제 데스크톱을 마우스/키보드로 직접 제어하는 에이전트",
     agents: [
-      { name: "Claude Computer Use", provider: "Anthropic · macOS (API 기반 기술)", color: "#f59e0b", env: "hybrid", envLabel: "하이브리드",
+      { name: "Claude Computer Use", provider: "Anthropic · macOS (API 기반 기술)", color: "var(--amber)", env: "hybrid", envLabel: "하이브리드",
         desc: 'Cowork의 <strong>기반 기술</strong>. 화면 캡처→해석→마우스/키보드 제어. 로컬/클라우드/SSH 3가지 모드. 안전 분류기 내장.',
         chips: ["스크린 캡처","마우스/키보드","안전 분류기"] },
-      { name: "OpenClaw Desktop", provider: "OpenClaw · 로컬 (오픈소스)", color: "#ef4444", env: "local", envLabel: "로컬 자체호스팅",
+      { name: "OpenClaw Desktop", provider: "OpenClaw · 로컬 (오픈소스)", color: "var(--red)", env: "local", envLabel: "로컬 자체호스팅",
         desc: '<strong>WhatsApp/Telegram/Discord</strong>로 PC 원격 제어. 100+ AgentSkills. 13,700+ 써드파티 Skills. <strong>제로 텔레메트리</strong>.',
         chips: ["채팅 제어","오픈소스","제로 텔레메트리","13,700+ Skills"] },
-      { name: "Perplexity Personal Computer", provider: "Perplexity · Mac mini (로컬 하드웨어)", color: "#8b5cf6", env: "local", envLabel: "로컬 하드웨어",
+      { name: "Perplexity Personal Computer", provider: "Perplexity · Mac mini (로컬 하드웨어)", color: "var(--purple)", env: "local", envLabel: "로컬 하드웨어",
         desc: '<strong>Mac mini 전용 로컬 에이전트</strong>. 클라우드 Computer와 별도 제품. 오프라인에서도 세션 유지. 민감 데이터가 <strong>기기 밖으로 나가지 않음</strong>.',
         chips: ["Mac mini 전용","항시 온","오프라인 가능","로컬 프라이버시"] },
     ]
@@ -508,13 +443,13 @@ const AGENT_CATS = [
   {
     icon: "💻", title: "코딩 에이전트", desc: "코드 작성, 리팩토링, 디버깅에 특화된 개발자 도구",
     agents: [
-      { name: "Claude Code", provider: "Anthropic · 터미널 (로컬)", color: "#f59e0b", env: "hybrid", envLabel: "하이브리드",
+      { name: "Claude Code", provider: "Anthropic · 터미널 (로컬)", color: "var(--amber)", env: "hybrid", envLabel: "하이브리드",
         desc: '터미널 기반. 로컬 파일 직접 접근. SWE-bench <strong>72.7%</strong>. 단계별 협업 방식.',
         chips: ["터미널","72.7% SWE","단계별 협업"] },
-      { name: "OpenAI Codex", provider: "OpenAI · 클라우드 컨테이너", color: "#10b981", env: "cloud", envLabel: "클라우드",
+      { name: "OpenAI Codex", provider: "OpenAI · 클라우드 컨테이너", color: "var(--green)", env: "cloud", envLabel: "클라우드",
         desc: '클라우드 컨테이너에서 실행. SWE-bench <strong>69.1%</strong>. 빠른 코드 생성. Web+CLI+App 3채널.',
         chips: ["클라우드","69.1% SWE","빠른 생성"] },
-      { name: "OpenClaw Code", provider: "OpenClaw · 로컬 (오픈소스)", color: "#ef4444", env: "local", envLabel: "로컬",
+      { name: "OpenClaw Code", provider: "OpenClaw · 로컬 (오픈소스)", color: "var(--red)", env: "local", envLabel: "로컬",
         desc: '로컬 자체호스팅. 자율 코드 작성 + GitHub PR 리뷰 자동화. 모델 자유 선택.',
         chips: ["자체호스팅","GitHub 연동","DevOps"] },
     ]
@@ -604,11 +539,6 @@ function render() {
     grouped.push({ type: 'feat', feat });
   });
 
-  // ── Theme icon ──
-  const themeAttr = document.documentElement.getAttribute('data-theme');
-  const isDark = themeAttr === 'dark' || (!themeAttr && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  const themeIcon = isDark ? '☀️' : '🌙';
-
   // ── Section labels ──
   const tbl = SECTION_LABELS.featureTable;
 
@@ -616,7 +546,7 @@ function render() {
 
   // ── Header ──
   html += `
-  <button class="theme-toggle theme-btn" onclick="toggleTheme()">${themeIcon}</button>
+  <button class="theme-toggle" onclick="toggleTheme()">Light / Dark</button>
   <div class="header">
     <div class="header-label">AI Agent Service Comparison · 2026.03</div>
     <div class="header-title">구독 요금 &amp; 과금 모델 비교</div>
@@ -626,8 +556,8 @@ function render() {
   // ── Nav links ──
   html += `
   <div style="display:flex;gap:8px;margin-bottom:20px">
-    <a href="summary.html" style="padding:8px 16px;border-radius:8px;background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow);transition:all 0.15s">Executive Summary</a>
-    <a href="insights.html" style="padding:8px 16px;border-radius:8px;background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--shadow);transition:all 0.15s">TCO 분석 &amp; 인사이트</a>
+    <a href="summary.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none;transition:opacity 0.2s">Executive Summary</a>
+    <a href="insights.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none;transition:opacity 0.2s">TCO 분석 &amp; 인사이트</a>
   </div>`;
 
   // ── Tabs ──
@@ -759,7 +689,7 @@ function render() {
   <div class="section">
     <div class="section-label">Agent Architecture</div>
     <div class="section-title">에이전트 카테고리 & 동작 방식</div>
-    <div class="section-desc" style="font-size:12px;color:var(--text-dim);margin-bottom:24px">같은 "에이전트"라도 실행 환경, 자율성, 접근 범위가 근본적으로 다릅니다.</div>
+    <div class="section-desc" style="font-size:12px;color:var(--dim);margin-bottom:24px">같은 "에이전트"라도 실행 환경, 자율성, 접근 범위가 근본적으로 다릅니다.</div>
     ${AGENT_CATS.map(cat => `
       <div class="cat-section">
         <div class="cat-header"><span class="cat-header-icon">${cat.icon}</span><span class="cat-header-title">${cat.title}</span></div>
