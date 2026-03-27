@@ -1,0 +1,130 @@
+---
+import Research from '../../layouts/Research.astro';
+
+const navLinks = [
+  { href: './', label: '메인' },
+  { href: 'specs', label: '모델 스펙' },
+  { href: 'usecase', label: '용도별 비교' },
+  { href: 'deploy', label: '배포 옵션' },
+  { href: 'insights', label: '인사이트' },
+];
+---
+<Research
+  title="LLM 모델 비교"
+  label="Executive Summary"
+  sub="13개 모델의 스펙, 가격, 시나리오별 추천, 배포 옵션, 리스크를 한 페이지에 정리했습니다."
+  meta="2025년 벤치마크 기준 · 2026년 3월 27일 정리"
+  description="LLM 모델 비교 통합 요약 — 모델 스펙, 시나리오별 추천, 배포 옵션, 리스크 분석"
+  navLinks={navLinks}
+>
+  <!-- Hero Cards -->
+  <div class="sec">
+    <div class="sec-label">Overview</div>
+    <div class="sec-title">주요 모델 요약</div>
+    <div class="hero-grid">
+      <div class="hero"><div class="avg" style="background:var(--purple)">CO</div><div class="hero-name">Claude Opus 4.6</div><div class="hero-billing">Anthropic · Premium</div><div class="hero-price" style="color:var(--purple)">$15<span>/1M in</span></div><div class="hero-note">$75/1M out · 1M 컨텍스트</div><div class="hero-sep"></div><div class="hero-strength">SWE-bench 72.7% #1<br>코딩 · 에이전트 · 추론</div></div>
+      <div class="hero"><div class="avg" style="background:var(--blue)">G</div><div class="hero-name">Gemini 2.5 Pro</div><div class="hero-billing">Google · Mid</div><div class="hero-price" style="color:var(--blue)">$1.25<span>/1M in</span></div><div class="hero-note">$10/1M out · 1M 컨텍스트</div><div class="hero-sep"></div><div class="hero-strength">LMArena #1 · MMMU 84%<br>RAG · 비전 · 범용</div></div>
+      <div class="hero"><div class="avg" style="background:var(--green)">o4</div><div class="hero-name">o4-mini</div><div class="hero-billing">OpenAI · Budget</div><div class="hero-price" style="color:var(--green)">$1.10<span>/1M in</span></div><div class="hero-note">$4.40/1M out · 추론 특화</div><div class="hero-sep"></div><div class="hero-strength">AIME 92.7% #1<br>o3 성능 90%를 1/10 비용</div></div>
+      <div class="hero"><div class="avg" style="background:var(--amber)">DS</div><div class="hero-name">DeepSeek-V3</div><div class="hero-billing">DeepSeek · MIT</div><div class="hero-price" style="color:var(--amber)">$0.28<span>/1M in</span></div><div class="hero-note">$0.42/1M out · 오픈소스</div><div class="hero-sep"></div><div class="hero-strength">GPT-4o의 1/24 비용<br>최저가 범용 · 셀프호스팅</div></div>
+    </div>
+  </div>
+
+  <!-- Pricing Tier -->
+  <div class="sec">
+    <div class="sec-label">Pricing Tier</div>
+    <div class="sec-title">가격 티어가 핵심입니다</div>
+    <div class="bill-grid">
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--red)">P</div><div class="bill-model">Premium</div></div><div class="bill-desc">Claude Opus 4/4.6, o3<br>$10~$75/1M out</div><div class="bill-tag" style="background:var(--red-bg);color:var(--red)">최고 성능 · 비용 주의</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--amber)">M</div><div class="bill-model">Mid</div></div><div class="bill-desc">GPT-4.1, GPT-4o, Gemini Pro<br>$8~$10/1M out</div><div class="bill-tag" style="background:var(--amber-bg);color:var(--amber)">엔터프라이즈 범용 구간</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--green)">B</div><div class="bill-model">Budget</div></div><div class="bill-desc">o4-mini, Flash, Mistral, DS-V3<br>$0.42~$4.40/1M out</div><div class="bill-tag" style="background:var(--green-bg);color:var(--green)">대량 처리 · 스타트업 최적</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--blue)">F</div><div class="bill-model">Free / OSS</div></div><div class="bill-desc">Llama 4, DeepSeek-R1<br>오픈 웨이트 · 셀프호스팅</div><div class="bill-tag" style="background:var(--blue-bg);color:var(--blue)">데이터 주권 · 제한 없음</div></div>
+    </div>
+  </div>
+
+  <!-- Benchmark -->
+  <div class="sec">
+    <div class="sec-label">At a Glance</div>
+    <div class="sec-title">주요 모델 스펙 비교</div>
+    <div class="bench">
+      <table>
+        <thead><tr><th>모델</th><th>프로바이더</th><th>Best For</th><th>가격 (In/Out)</th><th>오픈소스</th></tr></thead>
+        <tbody>
+          <tr><td>Claude Opus 4.6</td><td>Anthropic</td><td>코딩, 에이전트, 추론</td><td><span class="bench-val" style="color:var(--purple)">$15/$75</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>Claude Opus 4</td><td>Anthropic</td><td>한국어, 창작, 에이전트</td><td><span class="bench-val" style="color:var(--purple)">$15/$75</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>Gemini 2.5 Pro</td><td>Google</td><td>RAG, 비전, 범용</td><td><span class="bench-val" style="color:var(--blue)">$1.25/$10</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>Gemini 2.5 Flash</td><td>Google</td><td>대량 처리, 비용 최적화</td><td><span class="bench-val bench-good">$0.15/$0.60</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>GPT-4.1</td><td>OpenAI</td><td>엔터프라이즈, 코딩, FT</td><td><span class="bench-val" style="color:var(--amber)">$2/$8</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>GPT-4o</td><td>OpenAI</td><td>멀티모달, 한국어</td><td><span class="bench-val" style="color:var(--amber)">$2.50/$10</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>o3</td><td>OpenAI</td><td>수학, 과학 추론</td><td><span class="bench-val bench-warn">$10/$40</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>o4-mini</td><td>OpenAI</td><td>추론 가성비, 코딩</td><td><span class="bench-val bench-good">$1.10/$4.40</span></td><td style="color:var(--dim)">No</td></tr>
+          <tr><td>DeepSeek-V3</td><td>DeepSeek</td><td>최저가 범용</td><td><span class="bench-val bench-good">$0.28/$0.42</span></td><td style="color:var(--green);font-weight:700">MIT</td></tr>
+          <tr><td>DeepSeek-R1</td><td>DeepSeek</td><td>추론/수학 (무료)</td><td><span class="bench-val bench-good">$0.55/$2.19</span></td><td style="color:var(--green);font-weight:700">MIT</td></tr>
+          <tr><td>Llama 4 Scout</td><td>Meta</td><td>셀프호스팅, 다국어</td><td><span class="bench-val bench-good">Free</span></td><td style="color:var(--green);font-weight:700">Llama</td></tr>
+          <tr><td>Llama 4 Maverick</td><td>Meta</td><td>다국어, 멀티모달</td><td><span class="bench-val bench-good">Free</span></td><td style="color:var(--green);font-weight:700">Llama</td></tr>
+          <tr><td>Mistral Large 3</td><td>Mistral</td><td>유럽 데이터 주권</td><td><span class="bench-val bench-good">$0.50/$1.50</span></td><td style="color:var(--green);font-weight:700">Apache 2.0</td></tr>
+        </tbody>
+      </table>
+      <div class="bench-cards">
+        <div class="bench-card"><div class="bench-card-title">Claude Opus 4.6</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>Anthropic</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>코딩, 에이전트, 추론</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val" style="color:var(--purple)">$15/$75</span></div></div>
+        <div class="bench-card"><div class="bench-card-title">Gemini 2.5 Pro</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>Google</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>RAG, 비전, 범용</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val" style="color:var(--blue)">$1.25/$10</span></div></div>
+        <div class="bench-card"><div class="bench-card-title">GPT-4.1</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>OpenAI</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>엔터프라이즈, 코딩, FT</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val" style="color:var(--amber)">$2/$8</span></div></div>
+        <div class="bench-card"><div class="bench-card-title">o4-mini</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>OpenAI</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>추론 가성비, 코딩</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val bench-good">$1.10/$4.40</span></div></div>
+        <div class="bench-card"><div class="bench-card-title">DeepSeek-V3</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>DeepSeek</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>최저가 범용</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val bench-good">$0.28/$0.42</span></div></div>
+        <div class="bench-card"><div class="bench-card-title">Llama 4 Scout</div><div class="bench-card-row"><span class="bench-card-label">프로바이더</span><span>Meta</span></div><div class="bench-card-row"><span class="bench-card-label">Best For</span><span>셀프호스팅, 다국어</span></div><div class="bench-card-row"><span class="bench-card-label">가격</span><span class="bench-val bench-good">Free</span></div></div>
+      </div>
+      <div class="bench-note"><strong>가격은 1M 토큰당 USD (Input/Output).</strong> Premium 모델은 Budget 대비 50~180배 비용. 용도에 맞는 티어 선택이 핵심.<br>출처: 각 프로바이더 공식 가격표 (2025년 공개 기준)</div>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card"><div class="usage-head"><div class="avg avg-sm" style="background:var(--purple)">CO</div><div class="usage-title">Claude Opus 4.6 실측</div></div><div class="usage-rows"><div class="usage-row"><span class="usage-row-label">SWE-bench</span><span class="usage-row-val" style="color:var(--green)">72.7% #1</span></div><div class="usage-row"><span class="usage-row-label">TAU-bench</span><span class="usage-row-val">81.4%</span></div><div class="usage-row"><span class="usage-row-label">GPQA</span><span class="usage-row-val">74.8%</span></div><div class="usage-row"><span class="usage-row-label">컨텍스트</span><span class="usage-row-val">1M 토큰</span></div><div class="usage-row"><span class="usage-row-label">보안</span><span class="usage-row-val">ZDR · 7일 보존</span></div></div><div class="usage-bottom" style="background:var(--blue-bg);color:var(--blue)">코딩/에이전트 1위 · 보안 최고 수준</div></div>
+      <div class="usage-card"><div class="usage-head"><div class="avg avg-sm" style="background:var(--green)">o4</div><div class="usage-title">o4-mini 실측</div></div><div class="usage-rows"><div class="usage-row"><span class="usage-row-label">AIME 2025</span><span class="usage-row-val" style="color:var(--green)">92.7% #1</span></div><div class="usage-row"><span class="usage-row-label">MATH-500</span><span class="usage-row-val">97.3%</span></div><div class="usage-row"><span class="usage-row-label">GPQA</span><span class="usage-row-val">81.4%</span></div><div class="usage-row"><span class="usage-row-label">대비 모델</span><span class="usage-row-val">o3의 90%</span></div><div class="usage-row"><span class="usage-row-label">비용 대비</span><span class="usage-row-val" style="color:var(--green)">o3의 1/10</span></div></div><div class="usage-bottom" style="background:var(--green-bg);color:var(--green)">추론 가성비 1위 · 수학/과학 특화</div></div>
+    </div>
+  </div>
+
+  <!-- Scenario Recommendations -->
+  <div class="sec">
+    <div class="sec-label">Recommendations</div>
+    <div class="sec-title">시나리오별 Top 3 추천</div>
+    <div class="arch-grid">
+      <div class="arch"><div class="arch-cat">Cost Optimization</div><div class="arch-title" style="color:var(--green)">스타트업 / 비용 최적화</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--green)">1</div><strong>DeepSeek-V3</strong><span class="arch-env env-l">MIT</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">$0.42/1M out · GPT-4o의 1/24 비용</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--blue)">2</div><strong>Gemini 2.5 Flash</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">$0.60/1M out · 1M 컨텍스트 · 무료 티어</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--amber)">3</div><strong>o4-mini</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">$4.40/1M out · o3 성능 90%를 1/10 비용</div></div>
+      <div class="arch"><div class="arch-cat">Enterprise / Coding</div><div class="arch-title" style="color:var(--purple)">엔터프라이즈 / 코딩</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--purple)">1</div><strong>Claude Opus 4.6</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">SWE-bench 72.7% #1 · 1M 컨텍스트</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--green)">2</div><strong>GPT-4.1</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">Azure 통합 · DPO 파인튜닝 · SOC2/HIPAA</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--blue)">3</div><strong>Gemini 2.5 Pro</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">범용 최고 · Vertex AI SFT · ISO 42001</div></div>
+      <div class="arch"><div class="arch-cat">Korean Language</div><div class="arch-title" style="color:var(--blue)">한국어 서비스</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--purple)">1</div><strong>Claude Opus 4</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">Ko-LLM 리더보드 1위 · 환각율 최저</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--blue)">2</div><strong>Gemini 2.5 Pro</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 8px 28px">다국어 상위 · LMArena #1</div><div class="arch-item"><div class="avg avg-xs" style="background:var(--amber)">3</div><strong>GPT-4o</strong><span class="arch-env env-c">Cloud</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">E2E 멀티모달 · 성숙한 API 생태계</div></div>
+    </div>
+    <div class="arch-grid" style="margin-top:16px">
+      <div class="arch" style="grid-column:1/-1"><div class="arch-cat">Open Source / On-premise</div><div class="arch-title" style="color:var(--amber)">오픈소스 / 온프레미스</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><div><div class="arch-item"><div class="avg avg-xs" style="background:var(--amber)">1</div><strong>Llama 4 Scout</strong><span class="arch-env env-l">Self</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">H100 1대 가능 · 3대 클라우드 서버리스</div></div><div><div class="arch-item"><div class="avg avg-xs" style="background:var(--green)">2</div><strong>DeepSeek-V3</strong><span class="arch-env env-l">MIT</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">MIT · 최저가 · 셀프호스팅 시 프라이버시 해소</div></div><div><div class="arch-item"><div class="avg avg-xs" style="background:var(--blue)">3</div><strong>Mistral Large 3</strong><span class="arch-env env-l">Apache</span></div><div style="font-size:11px;color:var(--dim);padding:4px 0 0 28px">Apache 2.0 · EU 호스팅 · 벤더 종속 제로</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- Deployment Decision Matrix -->
+  <div class="sec">
+    <div class="sec-label">Deployment</div>
+    <div class="sec-title">배포 의사결정 매트릭스</div>
+    <div class="bill-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--blue)">C</div><div class="bill-model">Cloud API 장점</div></div><div class="bill-desc" style="line-height:1.8">즉시 사용 · 인프라 투자 불필요<br>SOC2/HIPAA/GDPR 인증 완비<br>자동 스케일링 · 99.9% SLA<br>최신 모델 즉시 접근</div><div class="bill-tag" style="background:var(--blue-bg);color:var(--blue)">빠른 시작 · 관리 부담 제로</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--red)">C</div><div class="bill-model">Cloud API 단점</div></div><div class="bill-desc" style="line-height:1.8">대량 시 비용 급증 (o3: $40/1M out)<br>데이터가 외부 서버 경유<br>벤더 종속 · 가격 변동 리스크<br>파인튜닝 옵션 제한</div><div class="bill-tag" style="background:var(--red-bg);color:var(--red)">비용 통제 · 데이터 주권 한계</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--green)">S</div><div class="bill-model">Self-hosted 장점</div></div><div class="bill-desc" style="line-height:1.8">완전한 데이터 주권 · 규제 적합<br>대량 처리 시 한계 비용 감소<br>자유로운 파인튜닝 (LoRA/QLoRA)<br>MIT/Apache 2.0 = 제한 없음</div><div class="bill-tag" style="background:var(--green-bg);color:var(--green)">프라이버시 · 장기 비용 절감</div></div>
+      <div class="bill"><div class="bill-head"><div class="avg avg-sm" style="background:var(--amber)">S</div><div class="bill-model">Self-hosted 단점</div></div><div class="bill-desc" style="line-height:1.8">H100 GPU 필요 (Scout 1대, V3 8대+)<br>초기 인프라 · 운영 인력 필요<br>모델 업데이트 직접 관리<br>SLA/모니터링 자체 구축</div><div class="bill-tag" style="background:var(--amber-bg);color:var(--amber)">높은 초기 비용 · 운영 오버헤드</div></div>
+    </div>
+  </div>
+
+  <!-- Risk Advisory -->
+  <div class="sec">
+    <div class="sec-label">Risk Advisory</div>
+    <div class="sec-title">핵심 리스크</div>
+    <div class="warn-card">
+      <div class="warn-title">DeepSeek API 데이터 프라이버시</div>
+      <div class="warn-desc"><strong>중국 서버 저장:</strong> 모든 데이터가 PRC 서버에 저장, 중국 국가정보법에 따라 정부 접근 가능.<br><strong>SOC2/HIPAA 미인증:</strong> Zero Data Retention 미제공. 데이터 보존 기간 "가능한 오래" 명시.<br><strong>보안 사건:</strong> 2025년 1월 공개 DB에 100만 건 이상 채팅 기록/API 키 노출.<br><strong>GDPR 조사 중:</strong> 이탈리아, 아일랜드, 벨기에 등 5개국에서 조사 진행. 한국 개인정보위 무단 해외 이전 확인.<br><strong style="color:var(--green)">권장:</strong> DeepSeek 모델 사용이 필요한 경우 반드시 <strong>셀프호스팅(MIT 라이선스)</strong>으로 데이터 유출 리스크 해소.</div>
+    </div>
+  </div>
+
+  <!-- Takeaway -->
+  <div class="take">
+    <div class="take-title">핵심 판단 기준</div>
+    <div class="take-grid">
+      <div class="take-item"><div class="avg avg-sm" style="background:var(--purple)">CO</div><div class="take-text"><strong>코딩/에이전트 → Claude Opus 4.6</strong><br>SWE-bench 72.7% #1, TAU-bench 81.4%. 보안 최고 수준 (7일 보존, ZDR)</div></div>
+      <div class="take-item"><div class="avg avg-sm" style="background:var(--blue)">G</div><div class="take-text"><strong>범용/RAG → Gemini 2.5 Pro</strong><br>1M 토큰 99.7% 리콜, MMMU 84%. 가격 대비 성능 최고. ISO 42001</div></div>
+      <div class="take-item"><div class="avg avg-sm" style="background:var(--green)">o4</div><div class="take-text"><strong>추론 가성비 → o4-mini</strong><br>AIME 92.7% #1, $4.40/1M out. o3 성능의 90%를 1/10 비용</div></div>
+      <div class="take-item"><div class="avg avg-sm" style="background:var(--amber)">OS</div><div class="take-text"><strong>자체 운영 → Llama 4 Scout + Mistral Large 3</strong><br>H100 1대(Scout) 또는 Apache 2.0(Mistral). 완전한 데이터 주권</div></div>
+    </div>
+  </div>
+</Research>
