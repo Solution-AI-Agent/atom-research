@@ -41,16 +41,16 @@
   body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:56px 24px 40px;-webkit-font-smoothing:antialiased;line-height:1.7;font-size:14px}
   .c{max-width:920px;margin:0 auto}
 
-  /* Nav */
-  .nav{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
-  .nav a{font-size:13px;font-weight:600;color:var(--dim);text-decoration:none;padding:5px 14px;border:1px solid var(--border2);border-radius:8px;transition:all 0.15s}
-  .nav a:hover{border-color:var(--dim);color:var(--text)}
+  /* Avatar */
+  .avg{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-0.5px}
+  .avg-sm{width:32px;height:32px;border-radius:8px;font-size:13px}
+  .avg-xs{width:24px;height:24px;border-radius:6px;font-size:10px}
 
   /* Header */
   .hdr{margin-bottom:48px}
   .hdr-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:8px}
   .hdr-title{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--text)}
-  .hdr-sub{font-size:16px;color:var(--dim);margin-top:12px;max-width:700px;line-height:1.7}
+  .hdr-sub{font-size:16px;color:var(--dim);margin-top:12px;max-width:600px;line-height:1.7}
   .hdr-meta{margin-top:14px;font-size:13px;color:var(--mute);font-weight:500}
 
   /* Section */
@@ -58,18 +58,24 @@
   .sec-label{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:6px}
   .sec-title{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:20px}
 
-  /* Theme toggle */
-  .theme-btn{position:fixed;top:16px;right:16px;z-index:100;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all 0.15s;color:var(--text);font-family:inherit;font-weight:600;font-size:13px}
-  .theme-btn:hover{border-color:var(--dim)}
+  /* Benchmark table */
+  .bench{border-radius:var(--r);overflow:hidden;border:1px solid var(--border2)}
+  .bench table{width:100%;border-collapse:collapse;background:var(--card)}
+  .bench th,.bench td{padding:14px 16px;font-size:14px;text-align:left;border-bottom:1px solid var(--border)}
+  .bench th{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.5px;background:var(--card)}
+  .bench td:first-child{font-weight:700;color:var(--text)}
+  .bench tr:last-child td{border-bottom:none}
+  .bench-val{font-weight:800;font-size:16px}
+  .bench-good{color:var(--green)}
+  .bench-warn{color:var(--red)}
+  .bench-note{padding:18px;background:var(--border);font-size:14px;color:var(--mid);line-height:1.7}
+  .bench-note strong{color:var(--text)}
 
-  /* Table */
-  .tbl-wrap{overflow-x:auto;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
-  table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
-  thead{background:var(--border)}
-  th{text-align:left;padding:12px 14px;font-weight:700;color:var(--mid);font-size:12px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid var(--border2);position:sticky;top:0;background:var(--border)}
-  td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
-  tr:last-child td{border-bottom:none}
-  tr:hover td{background:var(--blue-bg)}
+  /* Scrollable table wrapper (for wide tables) */
+  .bench-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .bench-scroll table{white-space:nowrap}
+
+  /* Table data styles */
   .model-name{font-weight:800;color:var(--text);letter-spacing:-0.3px}
   .vendor{font-size:11px;font-weight:600;color:var(--dim)}
   .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:3px}
@@ -84,15 +90,20 @@
   .top{font-weight:800;color:var(--green)}
   td.num{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
 
+  /* Legend */
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+  .legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--dim);font-weight:600}
+  .legend-dot{width:10px;height:10px;border-radius:3px}
+
   /* Bar chart */
   .bar-chart{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card);padding:24px}
   .bar-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:16px;letter-spacing:-0.3px}
   .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .bar-row:last-child{margin-bottom:0}
-  .bar-label{width:170px;flex-shrink:0;font-size:12px;font-weight:600;color:var(--text);text-align:right;overflow:hidden;text-overflow:ellipsis}
-  .bar-track{flex:1;height:22px;background:var(--border);border-radius:5px;overflow:hidden}
-  .bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:10px;font-weight:700;color:#fff;min-width:30px;transition:width 0.6s ease}
-  .bar-val{font-size:11px;font-weight:700;color:var(--dim);width:50px;flex-shrink:0;text-align:left}
+  .bar-label{width:170px;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text);text-align:right;overflow:hidden;text-overflow:ellipsis}
+  .bar-track{flex:1;height:28px;background:var(--border);border-radius:5px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:#fff;min-width:30px;transition:width 0.6s ease}
+  .bar-val{font-size:12px;font-weight:700;color:var(--dim);width:50px;flex-shrink:0;text-align:left}
 
   /* Note cards */
   .note{border:1px solid var(--border2);border-radius:var(--r);background:var(--card);padding:20px 24px;margin-bottom:16px}
@@ -100,27 +111,28 @@
   .note p{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:6px}
   .note p:last-child{margin-bottom:0}
 
-  /* Legend */
-  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
-  .legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--dim);font-weight:600}
-  .legend-dot{width:10px;height:10px;border-radius:3px}
-
   /* Sources */
-  .sources{margin-top:40px;padding-top:24px;border-top:1px solid var(--border2)}
+  .sources{margin-top:16px;padding:20px 24px;border:1px solid var(--border2);border-radius:var(--r);background:var(--card)}
   .sources h3{font-size:14px;font-weight:800;margin-bottom:12px}
   .sources ul{list-style:none;padding:0}
   .sources li{font-size:12px;color:var(--dim);margin-bottom:6px;line-height:1.6}
   .sources a{color:var(--blue);text-decoration:none}
   .sources a:hover{text-decoration:underline}
 
-  .footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--border2);font-size:12px;color:var(--dim);text-align:center}
+  /* Footer */
+  .bottom{margin-top:56px;display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border2);flex-wrap:wrap;gap:12px}
+  .bottom-left{font-size:12px;color:var(--dim)}
 
+  .theme-btn{position:fixed;top:16px;right:16px;z-index:100;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all 0.15s;color:var(--text);font-family:inherit;font-weight:600;font-size:13px}
+  .theme-btn:hover{border-color:var(--dim)}
+
+  /* Mobile */
   @media(max-width:768px){
-    body{padding:32px 12px;font-size:15px}
+    body{padding:32px 16px;font-size:15px}
     .hdr-title{font-size:32px}
+    .sec-title{font-size:22px}
     .bar-label{width:100px;font-size:11px}
-    table{font-size:12px}
-    th,td{padding:8px 10px}
+    .bottom{flex-direction:column;text-align:center}
   }
 </style>
 </head>
@@ -128,20 +140,22 @@
 <div class="c">
   <button class="theme-btn" onclick="toggleTheme()">Light / Dark</button>
 
-  <div class="nav">
-    <a href="../">Atom Research</a>
-    <a href="index.html">메인</a>
-    <a href="usecase.html">용도별 비교</a>
-    <a href="deploy.html">배포 옵션</a>
-    <a href="summary.html">요약</a>
-    <a href="insights.html">인사이트</a>
-  </div>
-
+  <!-- Header -->
   <div class="hdr">
     <div class="hdr-label">LLM Research</div>
-    <div class="hdr-title">LLM 모델 스펙 & 벤치마크 비교</div>
+    <div class="hdr-title">LLM 모델 스펙 &<br>벤치마크 비교</div>
     <div class="hdr-sub">2025년 주요 프론티어 LLM 모델의 파라미터, 컨텍스트 윈도우, 벤치마크 성능, Arena ELO 등급 종합 비교</div>
     <div class="hdr-meta">2026년 3월 기준 &middot; 20+ 모델 &middot; 7개 벤더</div>
+  </div>
+
+  <!-- Nav -->
+  <div style="display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap">
+    <a href="../" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">Atom Research</a>
+    <a href="index.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">메인</a>
+    <a href="usecase.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">용도별 비교</a>
+    <a href="deploy.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">배포 옵션</a>
+    <a href="summary.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">요약</a>
+    <a href="insights.html" style="padding:10px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-weight:700;text-decoration:none">인사이트</a>
   </div>
 
   <!-- ===== SECTION 1: Model Specifications ===== -->
@@ -156,183 +170,185 @@
       <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Open Source</div>
       <div class="legend-item"><span class="unverified">*</span> = 미확인</div>
     </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>모델</th>
-            <th>벤더</th>
-            <th>출시일</th>
-            <th>파라미터</th>
-            <th>Context</th>
-            <th>학습 데이터 기준</th>
-            <th>모달리티</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- OpenAI -->
-          <tr>
-            <td class="model-name">GPT-4o</td>
-            <td class="vendor">OpenAI</td>
-            <td>2024.05</td>
-            <td class="na">비공개</td>
-            <td>128K</td>
-            <td>2023.10</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">GPT-4.1</td>
-            <td class="vendor">OpenAI</td>
-            <td>2025.04</td>
-            <td class="na">비공개</td>
-            <td>1M</td>
-            <td>2024.06</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">o3</td>
-            <td class="vendor">OpenAI</td>
-            <td>2025.04</td>
-            <td class="na">비공개</td>
-            <td>200K</td>
-            <td>2024.06</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">o4-mini</td>
-            <td class="vendor">OpenAI</td>
-            <td>2025.04</td>
-            <td class="na">비공개</td>
-            <td>200K</td>
-            <td>2024.06</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <!-- Anthropic -->
-          <tr>
-            <td class="model-name">Claude Opus 4.6</td>
-            <td class="vendor">Anthropic</td>
-            <td>2026.02</td>
-            <td class="na">비공개</td>
-            <td>1M</td>
-            <td>2025.08</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">Claude Sonnet 4.6</td>
-            <td class="vendor">Anthropic</td>
-            <td>2026.02</td>
-            <td class="na">비공개</td>
-            <td>1M</td>
-            <td>2025.08</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">Claude Haiku 4.5</td>
-            <td class="vendor">Anthropic</td>
-            <td>2025.10</td>
-            <td class="na">비공개</td>
-            <td>200K</td>
-            <td>2025.07</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
-          </tr>
-          <!-- Google -->
-          <tr>
-            <td class="model-name">Gemini 2.5 Pro</td>
-            <td class="vendor">Google</td>
-            <td>2025.03</td>
-            <td class="na">비공개</td>
-            <td>1M</td>
-            <td>2025.01</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">Gemini 2.5 Flash</td>
-            <td class="vendor">Google</td>
-            <td>2025.05</td>
-            <td class="na">비공개</td>
-            <td>1M</td>
-            <td>2025.01</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <!-- Meta -->
-          <tr>
-            <td class="model-name">Llama 4 Maverick</td>
-            <td class="vendor">Meta</td>
-            <td>2025.04</td>
-            <td>400B (17B active) / 128 experts</td>
-            <td>1M</td>
-            <td class="na">미확인 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">Llama 4 Scout</td>
-            <td class="vendor">Meta</td>
-            <td>2025.04</td>
-            <td>109B (17B active) / 16 experts</td>
-            <td>10M</td>
-            <td class="na">미확인 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-          <!-- Mistral -->
-          <tr>
-            <td class="model-name">Mistral Large 3</td>
-            <td class="vendor">Mistral</td>
-            <td>2025.12</td>
-            <td>675B (41B active) MoE</td>
-            <td>256K</td>
-            <td class="na">미확인 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">Mistral Medium 3</td>
-            <td class="vendor">Mistral</td>
-            <td>2025.05</td>
-            <td class="na">비공개</td>
-            <td>128K</td>
-            <td class="na">미확인 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
-          </tr>
-          <!-- DeepSeek -->
-          <tr>
-            <td class="model-name">DeepSeek-V3</td>
-            <td class="vendor">DeepSeek</td>
-            <td>2024.12</td>
-            <td>671B (37B active) MoE</td>
-            <td>128K</td>
-            <td>2024.12 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-          <tr>
-            <td class="model-name">DeepSeek-R1</td>
-            <td class="vendor">DeepSeek</td>
-            <td>2025.01</td>
-            <td>671B (37B active) MoE</td>
-            <td>130K</td>
-            <td>2024.12 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-reason">Reasoning</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-          <!-- xAI -->
-          <tr>
-            <td class="model-name">Grok 3</td>
-            <td class="vendor">xAI</td>
-            <td>2025.02</td>
-            <td>~3T (MoE) <span class="unverified">*</span></td>
-            <td>1M</td>
-            <td>2024.11</td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
-          </tr>
-          <!-- Alibaba -->
-          <tr>
-            <td class="model-name">Qwen3-235B</td>
-            <td class="vendor">Alibaba</td>
-            <td>2025.04</td>
-            <td>235B (22B active) MoE</td>
-            <td>128K</td>
-            <td class="na">미확인 <span class="unverified">*</span></td>
-            <td><span class="tag tag-text">Text</span><span class="tag tag-reason">Reasoning</span><span class="tag tag-oss">OSS</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="bench">
+      <div class="bench-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>모델</th>
+              <th>벤더</th>
+              <th>출시일</th>
+              <th>파라미터</th>
+              <th>Context</th>
+              <th>학습 데이터 기준</th>
+              <th>모달리티</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- OpenAI -->
+            <tr>
+              <td class="model-name">GPT-4o</td>
+              <td class="vendor">OpenAI</td>
+              <td>2024.05</td>
+              <td class="na">비공개</td>
+              <td>128K</td>
+              <td>2023.10</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">GPT-4.1</td>
+              <td class="vendor">OpenAI</td>
+              <td>2025.04</td>
+              <td class="na">비공개</td>
+              <td>1M</td>
+              <td>2024.06</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">o3</td>
+              <td class="vendor">OpenAI</td>
+              <td>2025.04</td>
+              <td class="na">비공개</td>
+              <td>200K</td>
+              <td>2024.06</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">o4-mini</td>
+              <td class="vendor">OpenAI</td>
+              <td>2025.04</td>
+              <td class="na">비공개</td>
+              <td>200K</td>
+              <td>2024.06</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <!-- Anthropic -->
+            <tr>
+              <td class="model-name">Claude Opus 4.6</td>
+              <td class="vendor">Anthropic</td>
+              <td>2026.02</td>
+              <td class="na">비공개</td>
+              <td>1M</td>
+              <td>2025.08</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude Sonnet 4.6</td>
+              <td class="vendor">Anthropic</td>
+              <td>2026.02</td>
+              <td class="na">비공개</td>
+              <td>1M</td>
+              <td>2025.08</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude Haiku 4.5</td>
+              <td class="vendor">Anthropic</td>
+              <td>2025.10</td>
+              <td class="na">비공개</td>
+              <td>200K</td>
+              <td>2025.07</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
+            </tr>
+            <!-- Google -->
+            <tr>
+              <td class="model-name">Gemini 2.5 Pro</td>
+              <td class="vendor">Google</td>
+              <td>2025.03</td>
+              <td class="na">비공개</td>
+              <td>1M</td>
+              <td>2025.01</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">Gemini 2.5 Flash</td>
+              <td class="vendor">Google</td>
+              <td>2025.05</td>
+              <td class="na">비공개</td>
+              <td>1M</td>
+              <td>2025.01</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-audio">Audio</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <!-- Meta -->
+            <tr>
+              <td class="model-name">Llama 4 Maverick</td>
+              <td class="vendor">Meta</td>
+              <td>2025.04</td>
+              <td>400B (17B active) / 128 experts</td>
+              <td>1M</td>
+              <td class="na">미확인 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">Llama 4 Scout</td>
+              <td class="vendor">Meta</td>
+              <td>2025.04</td>
+              <td>109B (17B active) / 16 experts</td>
+              <td>10M</td>
+              <td class="na">미확인 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+            <!-- Mistral -->
+            <tr>
+              <td class="model-name">Mistral Large 3</td>
+              <td class="vendor">Mistral</td>
+              <td>2025.12</td>
+              <td>675B (41B active) MoE</td>
+              <td>256K</td>
+              <td class="na">미확인 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">Mistral Medium 3</td>
+              <td class="vendor">Mistral</td>
+              <td>2025.05</td>
+              <td class="na">비공개</td>
+              <td>128K</td>
+              <td class="na">미확인 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span></td>
+            </tr>
+            <!-- DeepSeek -->
+            <tr>
+              <td class="model-name">DeepSeek-V3</td>
+              <td class="vendor">DeepSeek</td>
+              <td>2024.12</td>
+              <td>671B (37B active) MoE</td>
+              <td>128K</td>
+              <td>2024.12 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+            <tr>
+              <td class="model-name">DeepSeek-R1</td>
+              <td class="vendor">DeepSeek</td>
+              <td>2025.01</td>
+              <td>671B (37B active) MoE</td>
+              <td>130K</td>
+              <td>2024.12 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-reason">Reasoning</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+            <!-- xAI -->
+            <tr>
+              <td class="model-name">Grok 3</td>
+              <td class="vendor">xAI</td>
+              <td>2025.02</td>
+              <td>~3T (MoE) <span class="unverified">*</span></td>
+              <td>1M</td>
+              <td>2024.11</td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-vision">Vision</span><span class="tag tag-reason">Reasoning</span></td>
+            </tr>
+            <!-- Alibaba -->
+            <tr>
+              <td class="model-name">Qwen3-235B</td>
+              <td class="vendor">Alibaba</td>
+              <td>2025.04</td>
+              <td>235B (22B active) MoE</td>
+              <td>128K</td>
+              <td class="na">미확인 <span class="unverified">*</span></td>
+              <td><span class="tag tag-text">Text</span><span class="tag tag-reason">Reasoning</span><span class="tag tag-oss">OSS</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -340,197 +356,197 @@
   <div class="sec">
     <div class="sec-label">Benchmarks</div>
     <div class="sec-title">핵심 벤치마크 성능 비교</div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>모델</th>
-            <th>MMLU</th>
-            <th>GPQA Diamond</th>
-            <th>MATH / AIME'25</th>
-            <th>HumanEval</th>
-            <th>SWE-bench Verified</th>
-            <th>ARC-AGI-2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- OpenAI -->
-          <tr>
-            <td class="model-name">GPT-4o</td>
-            <td class="num">88.7%</td>
-            <td class="num">53.6%</td>
-            <td class="num">76.6%</td>
-            <td class="num">90.2%</td>
-            <td class="num">33.2% <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">GPT-4.1</td>
-            <td class="num">90.2%</td>
-            <td class="num">66.3%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num">54.6%</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">o3</td>
-            <td class="num">92.9%</td>
-            <td class="num hi">82.8%</td>
-            <td class="num top">88.9% (AIME)</td>
-            <td class="num">87.4%</td>
-            <td class="num">69.1%</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">o4-mini</td>
-            <td class="num">90.0%</td>
-            <td class="num">77.6%</td>
-            <td class="num top">92.7% (AIME)</td>
-            <td class="num top">99.3%</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- Anthropic -->
-          <tr>
-            <td class="model-name">Claude Opus 4.6</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num top">91.3%</td>
-            <td class="num na">--</td>
-            <td class="num">90.4%</td>
-            <td class="num top">80.8%</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">Claude Sonnet 4.6</td>
-            <td class="num">89.3%</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num hi">89.0%</td>
-            <td class="num">92.1%</td>
-            <td class="num hi">79.6%</td>
-            <td class="num hi">58.3%</td>
-          </tr>
-          <tr>
-            <td class="model-name">Claude Haiku 4.5</td>
-            <td class="num">90.8%</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-            <td class="num">85.2%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- Google -->
-          <tr>
-            <td class="model-name">Gemini 2.5 Pro</td>
-            <td class="num">86.0% <small>(Pro)</small></td>
-            <td class="num hi">84.0%</td>
-            <td class="num hi">86.7% (AIME)</td>
-            <td class="num na">--</td>
-            <td class="num">63.8%</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">Gemini 2.5 Flash</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- Meta -->
-          <tr>
-            <td class="model-name">Llama 4 Maverick</td>
-            <td class="num">80.5% <small>(Pro)</small></td>
-            <td class="num">69.8%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">Llama 4 Scout</td>
-            <td class="num">74.3% <small>(Pro)</small></td>
-            <td class="num">57.2%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- Mistral -->
-          <tr>
-            <td class="model-name">Mistral Large 3</td>
-            <td class="num">85.5%</td>
-            <td class="num">43.9%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">Mistral Medium 3</td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">-- <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- DeepSeek -->
-          <tr>
-            <td class="model-name">DeepSeek-V3</td>
-            <td class="num">88.5%</td>
-            <td class="num">59.1%</td>
-            <td class="num na">--</td>
-            <td class="num">65.2% <span class="unverified">*</span></td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">DeepSeek-R1</td>
-            <td class="num">90.8%</td>
-            <td class="num">71.5%</td>
-            <td class="num hi">97.3% <small>(MATH-500)</small></td>
-            <td class="num na">--</td>
-            <td class="num">57.6% <small>(0528)</small></td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- xAI -->
-          <tr>
-            <td class="model-name">Grok 3</td>
-            <td class="num">92.7%</td>
-            <td class="num">75.4%</td>
-            <td class="num na">--</td>
-            <td class="num">86.5%</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <tr>
-            <td class="model-name">Grok 3 Think</td>
-            <td class="num na">--</td>
-            <td class="num hi">84.6%</td>
-            <td class="num hi">93.3% <small>(cons@64)</small></td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-            <td class="num na">--</td>
-          </tr>
-          <!-- Alibaba -->
-          <tr>
-            <td class="model-name">Qwen3-235B</td>
-            <td class="num">84.4% <small>(Pro)</small></td>
-            <td class="num">81.1%</td>
-            <td class="num hi">92.3% (AIME)</td>
-            <td class="num na">--</td>
-            <td class="num">61.7%</td>
-            <td class="num na">--</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note" style="margin-top:16px">
-      <div class="note-title">벤치마크 참고 사항</div>
-      <p>MMLU: Massive Multitask Language Understanding (일부 모델은 MMLU-Pro 점수). GPQA Diamond: 대학원 수준 과학 문제 (물리, 화학, 생물). MATH/AIME: 수학 추론 (AIME = 미국 수학 올림피아드 예선). HumanEval: Python 코드 생성. SWE-bench Verified: 실제 소프트웨어 엔지니어링 버그 수정. ARC-AGI-2: 추상 추론 (시각 패턴 추론).</p>
-      <p>벤치마크 점수는 측정 방식(pass@1, cons@64, 도구 사용 여부 등)에 따라 편차가 있을 수 있습니다. <span class="unverified">*</span> = 미확인 또는 출처 불확실.</p>
+    <div class="bench">
+      <div class="bench-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>모델</th>
+              <th>MMLU</th>
+              <th>GPQA Diamond</th>
+              <th>MATH / AIME'25</th>
+              <th>HumanEval</th>
+              <th>SWE-bench Verified</th>
+              <th>ARC-AGI-2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- OpenAI -->
+            <tr>
+              <td class="model-name">GPT-4o</td>
+              <td class="num">88.7%</td>
+              <td class="num">53.6%</td>
+              <td class="num">76.6%</td>
+              <td class="num">90.2%</td>
+              <td class="num">33.2% <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">GPT-4.1</td>
+              <td class="num">90.2%</td>
+              <td class="num">66.3%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num">54.6%</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">o3</td>
+              <td class="num">92.9%</td>
+              <td class="num hi">82.8%</td>
+              <td class="num top">88.9% (AIME)</td>
+              <td class="num">87.4%</td>
+              <td class="num">69.1%</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">o4-mini</td>
+              <td class="num">90.0%</td>
+              <td class="num">77.6%</td>
+              <td class="num top">92.7% (AIME)</td>
+              <td class="num top">99.3%</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- Anthropic -->
+            <tr>
+              <td class="model-name">Claude Opus 4.6</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num top">91.3%</td>
+              <td class="num na">--</td>
+              <td class="num">90.4%</td>
+              <td class="num top">80.8%</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude Sonnet 4.6</td>
+              <td class="num">89.3%</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num hi">89.0%</td>
+              <td class="num">92.1%</td>
+              <td class="num hi">79.6%</td>
+              <td class="num hi">58.3%</td>
+            </tr>
+            <tr>
+              <td class="model-name">Claude Haiku 4.5</td>
+              <td class="num">90.8%</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+              <td class="num">85.2%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- Google -->
+            <tr>
+              <td class="model-name">Gemini 2.5 Pro</td>
+              <td class="num">86.0% <small>(Pro)</small></td>
+              <td class="num hi">84.0%</td>
+              <td class="num hi">86.7% (AIME)</td>
+              <td class="num na">--</td>
+              <td class="num">63.8%</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">Gemini 2.5 Flash</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- Meta -->
+            <tr>
+              <td class="model-name">Llama 4 Maverick</td>
+              <td class="num">80.5% <small>(Pro)</small></td>
+              <td class="num">69.8%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">Llama 4 Scout</td>
+              <td class="num">74.3% <small>(Pro)</small></td>
+              <td class="num">57.2%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- Mistral -->
+            <tr>
+              <td class="model-name">Mistral Large 3</td>
+              <td class="num">85.5%</td>
+              <td class="num">43.9%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">Mistral Medium 3</td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">-- <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- DeepSeek -->
+            <tr>
+              <td class="model-name">DeepSeek-V3</td>
+              <td class="num">88.5%</td>
+              <td class="num">59.1%</td>
+              <td class="num na">--</td>
+              <td class="num">65.2% <span class="unverified">*</span></td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">DeepSeek-R1</td>
+              <td class="num">90.8%</td>
+              <td class="num">71.5%</td>
+              <td class="num hi">97.3% <small>(MATH-500)</small></td>
+              <td class="num na">--</td>
+              <td class="num">57.6% <small>(0528)</small></td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- xAI -->
+            <tr>
+              <td class="model-name">Grok 3</td>
+              <td class="num">92.7%</td>
+              <td class="num">75.4%</td>
+              <td class="num na">--</td>
+              <td class="num">86.5%</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <tr>
+              <td class="model-name">Grok 3 Think</td>
+              <td class="num na">--</td>
+              <td class="num hi">84.6%</td>
+              <td class="num hi">93.3% <small>(cons@64)</small></td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+              <td class="num na">--</td>
+            </tr>
+            <!-- Alibaba -->
+            <tr>
+              <td class="model-name">Qwen3-235B</td>
+              <td class="num">84.4% <small>(Pro)</small></td>
+              <td class="num">81.1%</td>
+              <td class="num hi">92.3% (AIME)</td>
+              <td class="num na">--</td>
+              <td class="num">61.7%</td>
+              <td class="num na">--</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bench-note">
+        <strong>벤치마크 참고 사항:</strong> MMLU (일부 MMLU-Pro). GPQA Diamond: 대학원 수준 과학. MATH/AIME: 수학 추론. HumanEval: Python 코드 생성. SWE-bench Verified: 실제 버그 수정. ARC-AGI-2: 추상 추론. 측정 방식(pass@1, cons@64, 도구 사용 여부)에 따라 편차 있음. <span class="unverified">*</span> = 미확인.
+      </div>
     </div>
   </div>
 
@@ -587,80 +603,82 @@
   <div class="sec">
     <div class="sec-label">Arena</div>
     <div class="sec-title">LM Arena (Chatbot Arena) ELO 등급</div>
-    <div class="note">
+    <div class="note" style="margin-bottom:16px">
       <div class="note-title">LM Arena (LMSYS) 순위 참고</div>
       <p>LM Arena는 600만+ 사용자 투표 기반의 크라우드소싱 ELO 평가 시스템입니다. 순위가 실시간으로 변동하므로, 아래 수치는 2026년 2월 기준 스냅샷입니다.</p>
     </div>
-    <div class="tbl-wrap" style="margin-top:16px">
-      <table>
-        <thead>
-          <tr>
-            <th>등급</th>
-            <th>모델</th>
-            <th>Arena ELO (추정)</th>
-            <th>비고</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="font-weight:800">1500+</td>
-            <td class="model-name">Claude Opus 4.6</td>
-            <td class="num top">~1505</td>
-            <td>코딩 Arena 1561 (1위)</td>
-          </tr>
-          <tr>
-            <td style="font-weight:800">1490+</td>
-            <td class="model-name">Gemini 2.5 Pro</td>
-            <td class="num hi">~1490 <span class="unverified">*</span></td>
-            <td>종합 텍스트 Arena 상위권</td>
-          </tr>
-          <tr>
-            <td style="font-weight:800">1480+</td>
-            <td class="model-name">o3</td>
-            <td class="num hi">~1480 <span class="unverified">*</span></td>
-            <td>추론 특화 상위</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">Claude Sonnet 4.6</td>
-            <td class="num">~1470 <span class="unverified">*</span></td>
-            <td>Opus 대비 근접한 성능</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">Grok 3</td>
-            <td class="num">~1460 <span class="unverified">*</span></td>
-            <td>Think 모드 포함</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">GPT-4.1</td>
-            <td class="num">~1440 <span class="unverified">*</span></td>
-            <td>코딩/지시 수행 강점</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">DeepSeek-R1</td>
-            <td class="num">~1430 <span class="unverified">*</span></td>
-            <td>추론 특화 오픈소스</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">Qwen3-235B</td>
-            <td class="num">~1420 <span class="unverified">*</span></td>
-            <td>오픈소스 최상위</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="model-name">GPT-4o</td>
-            <td class="num">~1400 <span class="unverified">*</span></td>
-            <td>2024 기준 최상위, 현재 중상위</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note" style="margin-top:16px">
-      <p>Arena ELO 값의 상당수는 실시간 변동 및 다수의 제3자 보고를 기반으로 추정한 것입니다. <span class="unverified">*</span> 표시는 정확한 수치가 공식 확인되지 않은 경우입니다. 최신 실시간 순위는 <a href="https://lmarena.ai/" style="color:var(--blue)">lmarena.ai</a>에서 확인하세요.</p>
+    <div class="bench">
+      <div class="bench-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>모델</th>
+              <th>Arena ELO (추정)</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:800">1500+</td>
+              <td class="model-name">Claude Opus 4.6</td>
+              <td class="num top">~1505</td>
+              <td>코딩 Arena 1561 (1위)</td>
+            </tr>
+            <tr>
+              <td style="font-weight:800">1490+</td>
+              <td class="model-name">Gemini 2.5 Pro</td>
+              <td class="num hi">~1490 <span class="unverified">*</span></td>
+              <td>종합 텍스트 Arena 상위권</td>
+            </tr>
+            <tr>
+              <td style="font-weight:800">1480+</td>
+              <td class="model-name">o3</td>
+              <td class="num hi">~1480 <span class="unverified">*</span></td>
+              <td>추론 특화 상위</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">Claude Sonnet 4.6</td>
+              <td class="num">~1470 <span class="unverified">*</span></td>
+              <td>Opus 대비 근접한 성능</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">Grok 3</td>
+              <td class="num">~1460 <span class="unverified">*</span></td>
+              <td>Think 모드 포함</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">GPT-4.1</td>
+              <td class="num">~1440 <span class="unverified">*</span></td>
+              <td>코딩/지시 수행 강점</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">DeepSeek-R1</td>
+              <td class="num">~1430 <span class="unverified">*</span></td>
+              <td>추론 특화 오픈소스</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">Qwen3-235B</td>
+              <td class="num">~1420 <span class="unverified">*</span></td>
+              <td>오픈소스 최상위</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="model-name">GPT-4o</td>
+              <td class="num">~1400 <span class="unverified">*</span></td>
+              <td>2024 기준 최상위, 현재 중상위</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bench-note">
+        Arena ELO 값의 상당수는 실시간 변동 및 다수의 제3자 보고를 기반으로 추정한 것입니다. <span class="unverified">*</span> = 공식 미확인. 최신 순위: <a href="https://lmarena.ai/" style="color:var(--blue)">lmarena.ai</a>
+      </div>
     </div>
   </div>
 
@@ -728,14 +746,18 @@
     </ul>
   </div>
 
-  <div class="footer">Atom Research &middot; LLM 모델 비교 분석</div>
+  <!-- Footer -->
+  <div class="bottom">
+    <div class="bottom-left">Atom Research &middot; LLM 모델 비교 분석</div>
+  </div>
 </div>
 
 <script>
 function toggleTheme(){
   const h=document.documentElement,c=h.getAttribute('data-theme');
   const d=c==='dark'||(!c&&matchMedia('(prefers-color-scheme:dark)').matches);
-  h.setAttribute('data-theme',d?'light':'dark');localStorage.setItem('theme',d?'light':'dark');
+  const n=d?'light':'dark';
+  h.setAttribute('data-theme',n);localStorage.setItem('theme',n);
 }
 const s=localStorage.getItem('theme');
 if(s) document.documentElement.setAttribute('data-theme',s);
