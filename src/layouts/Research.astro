@@ -1,0 +1,29 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title: string;
+  label: string;
+  sub: string;
+  meta?: string;
+  description?: string;
+  navLinks: { href: string; label: string }[];
+}
+const { title, label, sub, meta, description, navLinks } = Astro.props;
+---
+<Base title={title} description={description}>
+  <div class="c">
+    <div class="hdr">
+      <div class="hdr-label">{label}</div>
+      <div class="hdr-title" set:html={title} />
+      <div class="hdr-sub">{sub}</div>
+      {meta && <div class="hdr-meta">{meta}</div>}
+    </div>
+    <Nav links={navLinks} />
+    <slot />
+    <div class="bottom">
+      <div class="bottom-left">Atom Research</div>
+    </div>
+  </div>
+</Base>
