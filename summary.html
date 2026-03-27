@@ -79,6 +79,28 @@
   .env-c{background:var(--accent-light);color:#0284c7}
   .env-h{background:var(--amber-light);color:#d97706}
 
+  /* Benchmark */
+  .bench{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .bench table{width:100%;border-collapse:collapse}
+  .bench th,.bench td{padding:10px 14px;font-size:12px;text-align:left;border-bottom:1px solid var(--border)}
+  .bench th{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.5px}
+  .bench td:first-child{font-weight:600;color:var(--text)}
+  .bench tr:last-child td{border-bottom:none}
+  .bench-cost{font-weight:800;font-size:13px}
+  .bench-win{color:var(--green);font-weight:700}
+  .bench-lose{color:var(--dim)}
+  .bench-note{padding:14px;background:var(--border);font-size:11px;color:var(--mid);line-height:1.6}
+  .bench-note strong{color:var(--text)}
+
+  .usage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .usage-card{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+  .usage-title{font-size:13px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .usage-rows{display:flex;flex-direction:column;gap:6px}
+  .usage-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--mid);padding:6px 10px;border-radius:8px;background:var(--border)}
+  .usage-row-label{font-weight:600;color:var(--text)}
+  .usage-row-val{font-weight:800;font-size:12px}
+  .usage-summary{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:11px;font-weight:700;line-height:1.5}
+
   /* Key takeaway */
   .take{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);margin-top:32px}
   .take-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:14px}
@@ -182,6 +204,73 @@
         <div class="bill-model">API 종량</div>
         <div class="bill-desc">OpenClaw · 작업당 80K~150K 토큰<br>모델 라우팅으로 60~80% 절감</div>
         <div class="bill-highlight" style="background:var(--red-light);color:#dc2626">💡 소량이면 가장 저렴</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-World Cost Benchmark -->
+  <div class="sec">
+    <div class="sec-label">Real-World Benchmark</div>
+    <div class="sec-title">동일 작업 수행 시 실측 비용 비교</div>
+
+    <div class="bench">
+      <table>
+        <thead><tr><th>작업</th><th style="color:#0ea5e9">Perplexity Computer</th><th style="color:#f59e0b">Claude (Code/Cowork)</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>부동산 리서치 보고서</td>
+            <td><span class="bench-cost" style="color:#0ea5e9">$18</span> <span class="bench-win">← 품질 우수</span></td>
+            <td><span class="bench-cost bench-lose">—</span> <span class="bench-lose">조닝 오류</span></td>
+            <td style="font-size:10px;color:var(--dim)">Perplexity가 정확한 법적 데이터 검증</td>
+          </tr>
+          <tr>
+            <td>뉴스 브리핑 앱 개발</td>
+            <td><span class="bench-cost" style="color:#0ea5e9">~$7.92</span> <span class="bench-win">← 정보 정확</span></td>
+            <td><span class="bench-cost" style="color:#f59e0b">~$0.41</span> <span style="font-size:10px;color:var(--dim)">UI 우수</span></td>
+            <td style="font-size:10px;color:var(--dim)">Claude가 19배 저렴하나 날짜 할루시네이션</td>
+          </tr>
+          <tr>
+            <td>28만 줄 코드 스캔</td>
+            <td><span class="bench-cost" style="color:#ef4444">21,000 크레딧</span> <span style="font-size:10px;color:var(--red)">월 할당 210%</span></td>
+            <td><span class="bench-cost" style="color:#f59e0b">~$6.30</span> <span style="font-size:10px;color:var(--dim)">최악 세션</span></td>
+            <td style="font-size:10px;color:var(--dim)">대규모 코드 작업에서 비용 차이 극대화</td>
+          </tr>
+          <tr>
+            <td>단순 요약/ALT 텍스트</td>
+            <td><span class="bench-cost" style="color:#0ea5e9">31~37 크레딧</span></td>
+            <td><span class="bench-cost" style="color:#f59e0b">~$0.41</span> <span style="font-size:10px;color:var(--dim)">중앙값</span></td>
+            <td style="font-size:10px;color:var(--dim)">단순 작업은 양쪽 모두 저렴</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bench-note">
+        <strong>출처:</strong> Substack 실측 비교(aiblewmymind), 38 Claude Code 세션 분석(dev.to), Reddit 사용자 리포트, FindSkill.ai 분석<br>
+        <strong>핵심:</strong> 동일 작업 기준 Perplexity가 약 <strong>4배 비쌈</strong> (FindSkill.ai). 단, 리서치 품질은 Perplexity가 우위.
+      </div>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="usage-title"><span style="color:#0ea5e9">🔍</span> Perplexity Computer 크레딧 소모</div>
+        <div class="usage-rows">
+          <div class="usage-row"><span class="usage-row-label">단순 요약</span><span class="usage-row-val">31~37 크레딧</span></div>
+          <div class="usage-row"><span class="usage-row-label">리서치+브라우징</span><span class="usage-row-val">61 크레딧</span></div>
+          <div class="usage-row"><span class="usage-row-label">아이디에이션</span><span class="usage-row-val">44 크레딧</span></div>
+          <div class="usage-row"><span class="usage-row-label">코딩 세션</span><span class="usage-row-val" style="color:var(--red)">1,000~21,000</span></div>
+          <div class="usage-row"><span class="usage-row-label">웹사이트 빌드</span><span class="usage-row-val" style="color:var(--red)">~$200</span></div>
+        </div>
+        <div class="usage-summary" style="background:var(--accent-light);color:#0284c7">월 10K 크레딧 = 단순 작업 ~270건 또는 코딩 작업 5~10건</div>
+      </div>
+      <div class="usage-card">
+        <div class="usage-title"><span style="color:#f59e0b">🤖</span> Claude Code 토큰/비용 (38세션 실측)</div>
+        <div class="usage-rows">
+          <div class="usage-row"><span class="usage-row-label">세션 중앙값</span><span class="usage-row-val">$0.41</span></div>
+          <div class="usage-row"><span class="usage-row-label">세션 최악값</span><span class="usage-row-val">$6.30</span></div>
+          <div class="usage-row"><span class="usage-row-label">일 평균 (개발자)</span><span class="usage-row-val">~$6/일</span></div>
+          <div class="usage-row"><span class="usage-row-label">90% 사용자</span><span class="usage-row-val">&lt;$12/일</span></div>
+          <div class="usage-row"><span class="usage-row-label">코드 출력 비율</span><span class="usage-row-val">0.6%</span></div>
+        </div>
+        <div class="usage-summary" style="background:var(--amber-light);color:#d97706">Pro $20/월 정액 · 99.4%가 컨텍스트 재읽기 — /clear로 최적화</div>
       </div>
     </div>
   </div>
