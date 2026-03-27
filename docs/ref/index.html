@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 서비스 비교 · 구독 요금 & 기능 비교표 (2026.03)</title>
+<meta name="description" content="Perplexity Computer, Claude Cowork/Code, OpenAI Codex, OpenClaw 서비스별 구독 요금과 기능을 비교합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1b23;
+    --card-hover: #22232e;
+    --border: #2a2b36;
+    --text: #e4e4e7;
+    --text-dim: #71717a;
+    --text-bright: #fafafa;
+    --accent: #3b82f6;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f8f9fb;
+      --card: #ffffff;
+      --card-hover: #f3f4f6;
+      --border: #e5e7eb;
+      --text: #1f2937;
+      --text-dim: #6b7280;
+      --text-bright: #111827;
+      --accent: #2563eb;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1280px; margin: 0 auto; }
+
+  /* Header */
+  .header-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--text-dim); margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--text-bright); line-height: 1.3;
+  }
+  .header-sub { font-size: 13px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+
+  /* Summary Cards */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin: 24px 0 20px;
+  }
+  .summary-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; cursor: pointer;
+    transition: all 0.15s ease; position: relative; overflow: hidden;
+    border-left-width: 3px;
+  }
+  .summary-card:hover { background: var(--card-hover); transform: translateY(-1px); }
+  .summary-card.active { border-color: var(--accent); }
+  .summary-card.active::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .card-icon { font-size: 20px; margin-right: 6px; }
+  .card-name { font-size: 15px; font-weight: 800; color: var(--text-bright); }
+  .card-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .card-price { font-size: 16px; font-weight: 800; }
+  .card-price-label { font-size: 10px; color: var(--text-dim); }
+  .card-note { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+  .plan-tags { margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .plan-tag {
+    font-size: 9px; padding: 2px 6px; border-radius: 4px;
+    background: var(--border); color: var(--text-dim); font-weight: 500;
+  }
+  .plan-tag.hl { font-weight: 700; }
+
+  /* Filters */
+  .filters { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+  .filter-label { font-size: 11px; font-weight: 600; color: var(--text-dim); margin-right: 4px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px; border-radius: 999px; font-size: 11px;
+    font-weight: 600; cursor: pointer; border: 1.5px solid transparent;
+    transition: all 0.15s ease;
+    background: var(--card); color: var(--text-dim);
+    user-select: none;
+  }
+  .pill:hover { background: var(--card-hover); color: var(--text); }
+  .pill.active { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .pill-clear { font-size: 10px; margin-left: auto; }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--card);
+    -webkit-overflow-scrolling: touch;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    padding: 8px 10px; text-align: center;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px; white-space: nowrap;
+  }
+  th {
+    background: var(--card); position: sticky; top: 0; z-index: 2;
+  }
+  th:first-child, td:first-child {
+    text-align: left; position: sticky; left: 0; z-index: 1;
+    background: var(--card); min-width: 130px; white-space: normal;
+  }
+  th:first-child { z-index: 3; }
+  tr:last-child td { border-bottom: none; }
+
+  .service-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-bottom: 2px; }
+  .col-service { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .col-tier { font-size: 10px; font-weight: 500; color: var(--text-dim); }
+  .col-price { font-size: 14px; font-weight: 800; letter-spacing: -0.3px; color: var(--text-bright); margin-top: 2px; }
+
+  .note-row td { background: color-mix(in srgb, var(--accent) 3%, var(--card)) !important; }
+  .note-cell {
+    font-size: 10px; color: var(--text-dim); line-height: 1.3;
+    max-width: 110px; margin: 0 auto; white-space: normal;
+  }
+  .note-label { font-size: 10px; font-weight: 700; color: var(--text-dim); }
+
+  .cat-row td {
+    background: color-mix(in srgb, var(--border) 40%, var(--card)) !important;
+    font-weight: 700; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-dim); padding: 6px 10px;
+    text-align: left;
+  }
+  .feat-label { font-weight: 600; font-size: 12px; color: var(--text); }
+  .check { color: #22c55e; font-weight: 700; font-size: 16px; }
+  .cross { color: #52525b; font-size: 14px; }
+  .hl-cell { background: color-mix(in srgb, var(--accent) 5%, transparent) !important; }
+
+  /* Footer */
+  .footer {
+    margin-top: 16px; padding: 14px; background: var(--card);
+    border-radius: 10px; border: 1px solid var(--border);
+    font-size: 11px; color: var(--text-dim); line-height: 1.7;
+  }
+  .footer-title { font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .footer div { margin-bottom: 2px; }
+  .footer strong { color: var(--text); }
+  .footer-date { margin-top: 8px; font-style: italic; }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 10px; cursor: pointer;
+    font-size: 14px; transition: all 0.15s;
+  }
+  .theme-toggle:hover { background: var(--card-hover); }
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+const DATA = {
+  services: [
+    {
+      name: "Perplexity", sub: "Computer", color: "#1a73e8", icon: "🔍",
+      plans: [
+        { tier: "Free", price: "$0", f: [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0], note: "기본 검색만, 제한된 Pro Search" },
+        { tier: "Pro", price: "$20/월", f: [1,1,0,0,0,0,1,1,1,0,1,0,0,0,0,0], note: "Computer 미포함" },
+        { tier: "Max", price: "$200/월", f: [1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0], note: "Computer 포함, 19개 모델", hl: 1 },
+        { tier: "Ent. Pro", price: "$40/석/월", f: [1,1,0,0,0,0,1,1,1,0,1,1,0,1,0,1], note: "팀 협업, Spaces" },
+        { tier: "Ent. Max", price: "$325/석/월", f: [1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1], note: "전체 기능 + 엔터프라이즈 보안" },
+      ]
+    },
+    {
+      name: "Claude", sub: "Cowork / Code", color: "#d97706", icon: "🤖",
+      plans: [
+        { tier: "Free", price: "$0", f: [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0], note: "Chat만, Code/Cowork 불가" },
+        { tier: "Pro", price: "$20/월", f: [1,1,1,1,1,0,0,1,0,0,1,1,1,0,0,0], note: "Code + Cowork 포함", hl: 1 },
+        { tier: "Max 5x", price: "$100/월", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,0,0,0], note: "5배 사용량, Agent Teams" },
+        { tier: "Max 20x", price: "$200/월", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,0,0,0], note: "20배 사용량" },
+        { tier: "Team Std", price: "$25/석/월", f: [1,1,0,0,0,0,0,1,0,0,1,1,0,1,0,1], note: "Code/Cowork 미포함" },
+        { tier: "Team Prem", price: "$125/석/월", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,1,0,1], note: "Code + Cowork + 5배" },
+        { tier: "Enterprise", price: "$20/석+사용량", f: [1,1,1,1,1,1,0,1,0,0,1,1,1,1,1,1], note: "500K ctx, HIPAA, SCIM" },
+      ]
+    },
+    {
+      name: "OpenAI", sub: "Codex", color: "#10a37f", icon: "⚡",
+      plans: [
+        { tier: "Free", price: "$0", f: [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0], note: "GPT-5.3, 10msg/5hr, 광고(미국)" },
+        { tier: "Go", price: "$8/월", f: [1,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0], note: "GPT-5.2 Instant, 광고 포함" },
+        { tier: "Plus", price: "$20/월", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,0,0,0], note: "Codex + Sora, 160msg/3hr", hl: 1 },
+        { tier: "Pro", price: "$200/월", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,0,0,0], note: "무제한, GPT-5.3 Spark, 4K Sora" },
+        { tier: "Business", price: "$25/석/월", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,1,0,1], note: "팀 워크스페이스, SOC 2" },
+        { tier: "Enterprise", price: "커스텀", f: [1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1], note: "SCIM, EKM, 24/7 지원" },
+      ]
+    },
+    {
+      name: "OpenClaw", sub: "오픈소스 에이전트", color: "#dc2626", icon: "🦞",
+      plans: [
+        { tier: "오픈소스", price: "무료", f: [1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1], note: "BYO API Key, 로컬 실행, 145K+ ⭐", hl: 1 },
+      ]
+    },
+  ],
+  features: [
+    { key: 0, label: "AI 채팅", cat: "기본" },
+    { key: 1, label: "웹 검색", cat: "기본" },
+    { key: 2, label: "코딩 에이전트", cat: "에이전트" },
+    { key: 3, label: "데스크톱 자동화", cat: "에이전트" },
+    { key: 4, label: "브라우저 에이전트", cat: "에이전트" },
+    { key: 5, label: "멀티/병렬 에이전트", cat: "에이전트" },
+    { key: 6, label: "멀티모델 지원", cat: "모델" },
+    { key: 7, label: "딥 리서치", cat: "모델" },
+    { key: 8, label: "이미지 생성", cat: "생성" },
+    { key: 9, label: "비디오 생성", cat: "생성" },
+    { key: 10, label: "파일 시스템 접근", cat: "통합" },
+    { key: 11, label: "외부 앱 연동", cat: "통합" },
+    { key: 12, label: "모바일 원격 제어", cat: "통합" },
+    { key: 13, label: "SSO / 관리자 제어", cat: "보안" },
+    { key: 14, label: "감사 로그", cat: "보안" },
+    { key: 15, label: "데이터 학습 제외", cat: "보안" },
+  ],
+};
+
+const CATS = [...new Set(DATA.features.map(f => f.cat))];
+
+let state = { selectedService: null, filterCat: "전체" };
+
+function render() {
+  const { selectedService, filterCat } = state;
+  const visibleServices = selectedService
+    ? DATA.services.filter(s => s.name === selectedService)
+    : DATA.services;
+  const filteredFeatures = filterCat === "전체"
+    ? DATA.features
+    : DATA.features.filter(f => f.cat === filterCat);
+  const filteredCats = [...new Set(filteredFeatures.map(f => f.cat))];
+
+  let html = `
+    <div style="margin-bottom:24px">
+      <div class="header-label">AI Agent 서비스 비교 · 2026년 3월 기준</div>
+      <h1>구독 요금 & 기능 비교표</h1>
+      <p class="header-sub">Perplexity Computer · Claude Cowork/Code · OpenAI Codex · OpenClaw</p>
+    </div>
+
+    <div class="summary-grid">
+      ${DATA.services.map(s => {
+        const ap = s.plans.find(p => p.hl) || s.plans[0];
+        const isActive = selectedService === s.name;
+        return `
+          <div class="summary-card ${isActive ? 'active' : ''}" style="border-left-color:${s.color}" onclick="toggleService('${s.name}')">
+            ${isActive ? '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)"></div>' : ''}
+            <div class="card-top">
+              <div>
+                <span class="card-icon">${s.icon}</span>
+                <span class="card-name">${s.name}</span>
+                <div class="card-sub">${s.sub}</div>
+              </div>
+              <div style="text-align:right">
+                <div class="card-price" style="color:${s.color}">${ap.price}</div>
+                <div class="card-price-label">에이전트 접근 최소</div>
+              </div>
+            </div>
+            <div class="card-note">${ap.note}</div>
+            <div class="plan-tags">
+              ${s.plans.map(p => `<span class="plan-tag ${p.hl ? 'hl' : ''}" style="${p.hl ? `background:color-mix(in srgb, ${s.color} 15%, transparent);color:${s.color}` : ''}">${p.tier}</span>`).join('')}
+            </div>
+          </div>`;
+      }).join('')}
+    </div>
+
+    <div class="filters">
+      <span class="filter-label">필터:</span>
+      ${["전체", ...CATS].map(c => `<span class="pill ${filterCat === c ? 'active' : ''}" onclick="setFilter('${c}')">${c}</span>`).join('')}
+      <span style="flex:1"></span>
+      ${selectedService ? `<span class="pill active pill-clear" onclick="toggleService('${selectedService}')">✕ ${selectedService} 필터 해제</span>` : ''}
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="min-width:130px">기능</th>
+          ${visibleServices.flatMap(s => s.plans.map(p => `
+            <th style="min-width:80px">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                <span class="service-dot" style="background:${s.color}"></span>
+                <span class="col-service" style="color:${s.color}">${s.name}</span>
+                <span class="col-tier">${p.tier}</span>
+                <span class="col-price">${p.price}</span>
+              </div>
+            </th>`)).join('')}
+        </tr></thead>
+        <tbody>
+          <tr class="note-row">
+            <td class="note-label" style="background:color-mix(in srgb, var(--accent) 3%, var(--card)) !important">플랜 요약</td>
+            ${visibleServices.flatMap(s => s.plans.map(p => `<td><div class="note-cell">${p.note}</div></td>`)).join('')}
+          </tr>
+          ${filteredCats.map(cat => {
+            const feats = filteredFeatures.filter(f => f.cat === cat);
+            return `
+              <tr class="cat-row"><td colspan="${1 + visibleServices.reduce((a, s) => a + s.plans.length, 0)}">${cat}</td></tr>
+              ${feats.map(feat => `
+                <tr>
+                  <td class="feat-label">${feat.label}</td>
+                  ${visibleServices.flatMap(s => s.plans.map(p => `<td class="${p.hl ? 'hl-cell' : ''}">${p.f[feat.key] ? '<span class="check">✓</span>' : '<span class="cross">—</span>'}</td>`)).join('')}
+                </tr>`).join('')}`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <div class="footer-title">참고사항</div>
+      <div>• <strong>Perplexity Computer</strong> — $200/월 Max 필수. 19개 모델(Claude Opus 4.6, GPT-5.2, Gemini, Grok 등) 자동 오케스트레이션. 클라우드 격리 실행.</div>
+      <div>• <strong>Claude Cowork</strong> — macOS 전용. Pro($20)부터 접근 가능하나 사용량 제한. 롤링 5시간 윈도우 기반.</div>
+      <div>• <strong>Claude Code</strong> — 터미널 기반 코딩 에이전트. Pro($20)부터 접근. Sonnet 4.6 기본, Opus 4.6 지원.</div>
+      <div>• <strong>OpenAI Codex</strong> — ChatGPT Plus($20)부터 포함. Web(클라우드) + CLI(로컬) + App(macOS). GPT-5.2 Codex 모델.</div>
+      <div>• <strong>OpenClaw</strong> — 완전 무료 오픈소스(FOSS). API Key만 필요. 로컬 실행. 모델 비종속. 보안 주의 필요.</div>
+      <div class="footer-date">가격 정보는 2026년 3월 27일 기준이며, 세금 미포함. 서비스 카드 클릭 시 해당 서비스만 필터링.</div>
+    </div>
+  `;
+  document.getElementById('app').innerHTML = html;
+}
+
+function toggleService(name) {
+  state.selectedService = state.selectedService === name ? null : name;
+  render();
+}
+function setFilter(cat) {
+  state.filterCat = cat;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
