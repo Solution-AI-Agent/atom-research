@@ -534,6 +534,25 @@ function render() {
     </div>
   </div>`;
 
+  // ── Key Insights Section ──
+  const insKey = 'insights' + state.tab.charAt(0).toUpperCase() + state.tab.slice(1);
+  const ins = SECTION_LABELS[insKey];
+  const insights = INSIGHTS[state.tab];
+  html += `
+  <div class="section">
+    <span class="section-label">${ins.label}</span>
+    <h2 class="section-title">${ins.title}</h2>
+    <div class="insight-grid">
+      ${insights.map(c => `
+        <div class="insight-card">
+          <div class="insight-icon" style="background:var(--${c.bg})">${c.icon}</div>
+          <div class="insight-title">${c.title}</div>
+          <div class="insight-text">${c.text}</div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+
   app.innerHTML = html;
 }
 
