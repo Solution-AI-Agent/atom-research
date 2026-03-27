@@ -396,7 +396,151 @@ const CATS = [...new Set(DATA.features.map(f => f.cat))];
 
 let state = { tab: 'personal', filterCat: '전체' };
 
-function render() { /* to be implemented in next task */ }
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  render();
+}
+
+function switchTab(tab) {
+  state.tab = tab;
+  state.filterCat = '전체';
+  render();
+}
+
+function setFilter(cat) {
+  state.filterCat = cat;
+  render();
+}
+
+function render() {
+  const app = document.getElementById('app');
+  const tab = state.tab;
+
+  // ── Gather visible plans ──
+  const visiblePlans = [];
+  DATA.services.forEach(svc => {
+    svc.plans.forEach(plan => {
+      if ((tab === 'personal' && (plan.cat === 'personal' || plan.cat === 'both')) ||
+          (tab === 'enterprise' && (plan.cat === 'enterprise' || plan.cat === 'both'))) {
+        visiblePlans.push({ svc, plan });
+      }
+    });
+  });
+
+  // ── Filtered features ──
+  const filterCat = state.filterCat;
+  const filteredFeatures = filterCat === '전체'
+    ? DATA.features
+    : DATA.features.filter(f => f.cat === filterCat);
+
+  // ── Group features by category ──
+  const grouped = [];
+  let lastCat = null;
+  filteredFeatures.forEach(feat => {
+    if (feat.cat !== lastCat) {
+      grouped.push({ type: 'cat', cat: feat.cat });
+      lastCat = feat.cat;
+    }
+    grouped.push({ type: 'feat', feat });
+  });
+
+  // ── Theme icon ──
+  const themeAttr = document.documentElement.getAttribute('data-theme');
+  const isDark = themeAttr === 'dark' || (!themeAttr && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const themeIcon = isDark ? '☀️' : '🌙';
+
+  // ── Section labels ──
+  const tbl = SECTION_LABELS.featureTable;
+
+  let html = '';
+
+  // ── Header ──
+  html += `
+  <button class="theme-toggle theme-btn" onclick="toggleTheme()">${themeIcon}</button>
+  <div class="header">
+    <div class="header-label">AI Agent Service Comparison · 2026.03</div>
+    <div class="header-title">구독 요금 &amp; 과금 모델 비교</div>
+    <div class="header-sub">정액제 vs 크레딧제 — 같은 가격이라도 사용 패턴이 완전히 다릅니다</div>
+  </div>`;
+
+  // ── Tabs ──
+  html += `
+  <div class="main-tabs">
+    <button class="main-tab${tab === 'personal' ? ' active' : ''}" onclick="switchTab('personal')">개인용</button>
+    <button class="main-tab${tab === 'enterprise' ? ' active' : ''}" onclick="switchTab('enterprise')">기업용</button>
+  </div>`;
+
+  // ── Feature Table Section ──
+  html += `
+  <div class="section">
+    <div class="section-label">${tbl.label}</div>
+    <div class="section-title">${tbl.title}</div>
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="filters">
+          <button class="pill${filterCat === '전체' ? ' active' : ''}" onclick="setFilter('전체')">전체</button>
+          ${CATS.map(c => `<button class="pill${filterCat === c ? ' active' : ''}" onclick="setFilter('${c}')">${c}</button>`).join('')}
+        </div>
+      </div>
+      <div class="table-inner">
+        <table>
+          <thead><tr>
+            <th>기능</th>
+            ${visiblePlans.map(({ svc, plan }) => `<th>
+              <div class="col-head">
+                <span class="col-dot" style="background:${svc.color}"></span>
+                <span class="col-name">${svc.name}</span>
+                <span class="col-tier">${plan.tier}</span>
+                <span class="col-price">${plan.price}</span>
+                ${plan.rec === tab ? '<span class="col-rec">추천</span>' : ''}
+              </div>
+            </th>`).join('')}
+          </tr></thead>
+          <tbody>
+            <tr class="cat-row"><td colspan="${visiblePlans.length + 1}">사용량 제한</td></tr>
+            <tr class="limit-row">
+              <td>메시지/토큰 제한</td>
+              ${visiblePlans.map(({ plan }) => `<td><span class="limit-val">${plan.limit}</span></td>`).join('')}
+            </tr>
+            <tr class="limit-row">
+              <td>리셋 주기</td>
+              ${visiblePlans.map(({ plan }) => `<td><span class="limit-val">${plan.resetCycle}</span></td>`).join('')}
+            </tr>
+            <tr class="limit-row">
+              <td>소진 시</td>
+              ${visiblePlans.map(({ plan }) => `<td><span class="limit-val">${plan.onExhaust}</span></td>`).join('')}
+            </tr>
+            ${grouped.map(item => {
+              if (item.type === 'cat') {
+                return `<tr class="cat-row"><td colspan="${visiblePlans.length + 1}">${item.cat}</td></tr>`;
+              }
+              const feat = item.feat;
+              return `<tr>
+                <td>${feat.label}</td>
+                ${visiblePlans.map(({ plan }) => {
+                  const v = plan.f[feat.key];
+                  return `<td>${v ? '<span class="check">✓</span>' : '<span class="cross">—</span>'}</td>`;
+                }).join('')}
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+
+  app.innerHTML = html;
+}
+
+// ── Restore theme from localStorage ──
+const saved = localStorage.getItem('theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+
 render();
 </script>
 </body>
