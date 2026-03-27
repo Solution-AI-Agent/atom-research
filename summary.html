@@ -147,14 +147,39 @@
   <div class="hdr">
     <div class="hdr-label">Executive Summary</div>
     <div class="hdr-title">AI Agent<br>서비스 비교</div>
-    <div class="hdr-sub">4개 서비스의 가격, 과금 모델, 아키텍처 차이를 한 페이지에 정리했습니다.</div>
+    <div class="hdr-sub">현재 사용 중인 <strong style="color:var(--green)">OpenAI Codex Enterprise</strong>를 기준으로, 대안 서비스의 가격·과금·아키텍처 차이를 비교합니다.</div>
     <div class="hdr-meta">2026년 3월 27일 기준 · 세금 미포함</div>
+  </div>
+
+  <!-- Current Baseline -->
+  <div class="sec">
+    <div class="sec-label">Current Baseline</div>
+    <div class="sec-title">현재 사용 중: Codex Enterprise</div>
+    <div style="border:2px solid var(--green);border-radius:var(--r);padding:24px;background:var(--card);margin-bottom:24px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="avg" style="background:var(--green);width:40px;height:40px;font-size:14px">OA</div>
+        <div>
+          <div style="font-size:18px;font-weight:800">OpenAI Codex Enterprise</div>
+          <div style="font-size:12px;color:var(--dim)">커스텀 가격 · 150석 최소 · 연간 계약</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border-radius:8px;overflow:hidden;font-size:12px">
+        <div style="background:var(--card);padding:12px;text-align:center"><div style="color:var(--dim);font-size:10px;margin-bottom:2px">석당 비용</div><div style="font-weight:800;font-size:16px;color:var(--green)">~$60</div><div style="color:var(--dim);font-size:10px">/월 (협상)</div></div>
+        <div style="background:var(--card);padding:12px;text-align:center"><div style="color:var(--dim);font-size:10px;margin-bottom:2px">사용량</div><div style="font-weight:800;font-size:16px">무제한</div><div style="color:var(--dim);font-size:10px">GPT-5.2 메시지</div></div>
+        <div style="background:var(--card);padding:12px;text-align:center"><div style="color:var(--dim);font-size:10px;margin-bottom:2px">보안</div><div style="font-weight:800;font-size:16px">SOC 2</div><div style="color:var(--dim);font-size:10px">EKM · HIPAA · SCIM</div></div>
+        <div style="background:var(--card);padding:12px;text-align:center"><div style="color:var(--dim);font-size:10px;margin-bottom:2px">연간 최소</div><div style="font-weight:800;font-size:16px;color:var(--red)">$108K</div><div style="color:var(--dim);font-size:10px">150석 기준</div></div>
+      </div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:11px;color:var(--mid)">
+        <div><span style="font-weight:700;color:var(--text)">포함:</span> 무제한 GPT-5.2 · Codex · Code Interpreter · SCIM · RBAC · 워크스페이스 분석 · 24/7 SLA 지원 · API 크레딧 · 커스텀 데이터 보존</div>
+        <div><span style="font-weight:700;color:var(--text)">유의:</span> 연간 계약 필수 · 150석 최소 · 학습 데이터 제외 (기본) · ZDR(Zero Data Retention) 별도 협의 · 피드백 시 학습 opt-in 주의</div>
+      </div>
+    </div>
   </div>
 
   <!-- Hero Cards -->
   <div class="sec">
-    <div class="sec-label">Overview</div>
-    <div class="sec-title">서비스 요약</div>
+    <div class="sec-label">Alternatives Comparison</div>
+    <div class="sec-title">대안 서비스 비교</div>
     <div class="hero-grid">
       <div class="hero">
         <div class="avg" style="background:var(--blue)">Px</div>
@@ -342,23 +367,23 @@
 
   <!-- Takeaway -->
   <div class="take">
-    <div class="take-title">핵심 판단 기준</div>
+    <div class="take-title">Codex Enterprise 기준 전환/병행 판단</div>
     <div class="take-grid">
       <div class="take-item">
         <div class="avg avg-sm" style="background:var(--amber)">Cl</div>
-        <div class="take-text"><strong>비용 예측성 → Claude</strong><br>정액제 + 시간 리셋. 월 $20 고정.</div>
+        <div class="take-text"><strong>병행 도입 검토: Claude Enterprise</strong><br>$20/석+사용량. HIPAA/SCIM 지원. 코딩+데스크톱 자동화 강점. Codex와 보완적 활용 가능.</div>
       </div>
       <div class="take-item">
         <div class="avg avg-sm" style="background:var(--blue)">Px</div>
-        <div class="take-text"><strong>완전 자율 → Perplexity</strong><br>19개 모델. 크레딧 소모 주의.</div>
+        <div class="take-text"><strong>특수 목적 보완: Perplexity Max</strong><br>리서치 정확도 최고. 19개 모델. 단, 석당 $325 (Ent.Max) — Codex Enterprise 대비 5배+ 비용.</div>
       </div>
       <div class="take-item">
         <div class="avg avg-sm" style="background:var(--green)">OA</div>
-        <div class="take-text"><strong>코딩+생성AI → OpenAI</strong><br>Codex + Sora. 생태계 최대.</div>
+        <div class="take-text"><strong>현 상태 유지: Codex Enterprise</strong><br>무제한 사용, 생태계 최대, SOC 2/EKM. 150석 최소 계약이 부담이면 Business($25/석) 전환 검토.</div>
       </div>
       <div class="take-item">
         <div class="avg avg-sm" style="background:var(--red)">OC</div>
-        <div class="take-text"><strong>데이터 통제 → OpenClaw</strong><br>오픈소스, 로컬, 제로 텔레메트리.</div>
+        <div class="take-text"><strong>내부 프로젝트 보완: OpenClaw</strong><br>민감 데이터 처리용 로컬 에이전트. 무료+API. Enterprise에서 다루기 어려운 보안 요구에 대응.</div>
       </div>
     </div>
   </div>
