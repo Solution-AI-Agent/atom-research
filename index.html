@@ -777,7 +777,10 @@ function render() {
 
   // ── Footer ──
   html += `
-  <div class="footer">가격 정보는 2026년 3월 27일 기준 · 세금 미포함 · 엔터프라이즈 요금은 별도 문의</div>`;
+  <div class="footer">
+    <a href="summary.html" style="display:inline-block;margin-bottom:12px;padding:8px 20px;border-radius:10px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;text-decoration:none">📊 Executive Summary 보기</a><br>
+    가격 정보는 2026년 3월 27일 기준 · 세금 미포함 · 엔터프라이즈 요금은 별도 문의
+  </div>`;
 
   app.innerHTML = html;
 }

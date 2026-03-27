@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 서비스 비교 · Executive Summary (2026.03)</title>
+<meta name="description" content="C레벨 의사결정을 위한 AI Agent 서비스 비교 요약. Perplexity, Claude, OpenAI, OpenClaw.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --bg:#f4f6f9;--card:#fff;--shadow:0 1px 3px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.03);
+    --text:#1e293b;--mid:#475569;--dim:#94a3b8;--border:#f1f5f9;--accent:#0ea5e9;
+    --green:#10b981;--amber:#f59e0b;--red:#ef4444;
+    --accent-light:#e0f2fe;--amber-light:#fef3c7;--green-light:#d1fae5;--red-light:#fee2e2;
+    --r:16px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#0f172a;--card:#1e293b;--shadow:0 1px 3px rgba(0,0,0,0.2),0 4px 12px rgba(0,0,0,0.15);
+    --text:#f1f5f9;--mid:#cbd5e1;--dim:#64748b;--border:#334155;--accent:#38bdf8;
+    --accent-light:rgba(56,189,248,0.1);--amber-light:rgba(245,158,11,0.1);--green-light:rgba(16,185,129,0.1);--red-light:rgba(239,68,68,0.1);
+  }}
+  [data-theme="dark"]{
+    --bg:#0f172a;--card:#1e293b;--shadow:0 1px 3px rgba(0,0,0,0.2),0 4px 12px rgba(0,0,0,0.15);
+    --text:#f1f5f9;--mid:#cbd5e1;--dim:#64748b;--border:#334155;--accent:#38bdf8;
+    --accent-light:rgba(56,189,248,0.1);--amber-light:rgba(245,158,11,0.1);--green-light:rgba(16,185,129,0.1);--red-light:rgba(239,68,68,0.1);
+  }
+  [data-theme="light"]{
+    --bg:#f4f6f9;--card:#fff;--shadow:0 1px 3px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.03);
+    --text:#1e293b;--mid:#475569;--dim:#94a3b8;--border:#f1f5f9;--accent:#0ea5e9;
+    --accent-light:#e0f2fe;--amber-light:#fef3c7;--green-light:#d1fae5;--red-light:#fee2e2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:48px 24px;-webkit-font-smoothing:antialiased}
+  .c{max-width:960px;margin:0 auto}
+
+  /* Header */
+  .hdr-label{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+  .hdr-title{font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--text)}
+  .hdr-sub{font-size:14px;color:var(--dim);margin-top:8px;line-height:1.6}
+  .hdr-date{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:8px;background:var(--border);font-size:11px;font-weight:600;color:var(--dim)}
+
+  /* Section */
+  .sec{margin-top:48px}
+  .sec-label{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+  .sec-title{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:16px}
+
+  /* Hero cards */
+  .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+  .hero{background:var(--card);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;text-align:center}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+  .hero-icon{font-size:32px;margin-bottom:8px}
+  .hero-name{font-size:18px;font-weight:800}
+  .hero-tag{display:inline-block;margin-top:4px;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700}
+  .hero-price{font-size:28px;font-weight:800;margin-top:14px;letter-spacing:-1px}
+  .hero-price span{font-size:13px;font-weight:500;color:var(--dim)}
+  .hero-note{font-size:10px;color:var(--dim);margin-top:2px}
+  .hero-strength{font-size:12px;color:var(--mid);margin-top:12px;padding-top:12px;border-top:1px solid var(--border);line-height:1.5}
+
+  /* Billing strip */
+  .bill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .bill{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);text-align:center}
+  .bill-icon{font-size:28px;margin-bottom:6px}
+  .bill-model{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+  .bill-desc{font-size:11px;color:var(--dim);line-height:1.5}
+  .bill-highlight{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700;line-height:1.5}
+
+  /* Architecture strip */
+  .arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .arch{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+  .arch-cat{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:6px}
+  .arch-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px}
+  .arch-items{display:flex;flex-direction:column;gap:6px}
+  .arch-item{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mid)}
+  .arch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .arch-item strong{color:var(--text)}
+  .arch-env{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px}
+  .env-l{background:var(--green-light);color:#059669}
+  .env-c{background:var(--accent-light);color:#0284c7}
+  .env-h{background:var(--amber-light);color:#d97706}
+
+  /* Key takeaway */
+  .take{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);margin-top:32px}
+  .take-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:14px}
+  .take-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .take-item{display:flex;gap:10px}
+  .take-icon{font-size:20px;flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px}
+  .take-text{font-size:12px;color:var(--mid);line-height:1.6}
+  .take-text strong{color:var(--text)}
+
+  /* Bottom bar */
+  .bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border)}
+  .bottom-left{font-size:11px;color:var(--dim)}
+  .detail-link{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s}
+  .detail-link:hover{opacity:0.9;transform:translateY(-1px)}
+
+  .theme-btn{position:fixed;top:16px;right:16px;z-index:100;background:var(--card);box-shadow:var(--shadow);border-radius:12px;padding:8px 12px;cursor:pointer;font-size:16px;border:none;transition:all 0.2s}
+  .theme-btn:hover{transform:translateY(-1px)}
+
+  @media(max-width:768px){
+    .hero-grid,.bill-grid{grid-template-columns:repeat(2,1fr)}
+    .arch-grid,.take-grid{grid-template-columns:1fr}
+    body{padding:24px 16px}
+    .hdr-title{font-size:28px}
+  }
+  @media(max-width:480px){
+    .hero-grid,.bill-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="c">
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+
+  <!-- Header -->
+  <div class="hdr-label">Executive Summary</div>
+  <div class="hdr-title">AI Agent 서비스 비교</div>
+  <div class="hdr-sub">C레벨 의사결정을 위한 핵심 요약 — 4개 서비스의 가격, 과금 모델, 아키텍처 차이</div>
+  <div class="hdr-date">📅 2026년 3월 27일 기준</div>
+
+  <!-- Hero Cards -->
+  <div class="hero-grid">
+    <div class="hero" style="border-top:4px solid #0ea5e9">
+      <div class="hero-icon">🔍</div>
+      <div class="hero-name" style="color:#0ea5e9">Perplexity</div>
+      <div class="hero-tag" style="background:var(--accent-light);color:#0284c7">크레딧 소진형</div>
+      <div class="hero-price" style="color:#0ea5e9">$200<span>/월~</span></div>
+      <div class="hero-note">10,000 크레딧/월 · 헤비유저 $500+/월</div>
+      <div class="hero-strength">19개 모델 오케스트레이션<br>클라우드 격리 실행</div>
+    </div>
+    <div class="hero" style="border-top:4px solid #f59e0b">
+      <div class="hero-icon">🤖</div>
+      <div class="hero-name" style="color:#f59e0b">Claude</div>
+      <div class="hero-tag" style="background:var(--amber-light);color:#d97706">시간 윈도우 정액제</div>
+      <div class="hero-price" style="color:#f59e0b">$20<span>/월~</span></div>
+      <div class="hero-note">~44K 토큰/5hr · 리셋 후 지속 사용</div>
+      <div class="hero-strength">Code + Cowork + 데스크톱 자동화<br>예측 가능한 월 비용</div>
+    </div>
+    <div class="hero" style="border-top:4px solid #10b981">
+      <div class="hero-icon">⚡</div>
+      <div class="hero-name" style="color:#10b981">OpenAI</div>
+      <div class="hero-tag" style="background:var(--green-light);color:#059669">메시지 카운트제</div>
+      <div class="hero-price" style="color:#10b981">$20<span>/월~</span></div>
+      <div class="hero-note">160msg/3hr · ~25 Codex 작업/일</div>
+      <div class="hero-strength">Codex + Sora 통합<br>Web + CLI + App 3채널</div>
+    </div>
+    <div class="hero" style="border-top:4px solid #ef4444">
+      <div class="hero-icon">🦞</div>
+      <div class="hero-name" style="color:#ef4444">OpenClaw</div>
+      <div class="hero-tag" style="background:var(--red-light);color:#dc2626">API 종량제</div>
+      <div class="hero-price" style="color:#ef4444">무료<span>+API</span></div>
+      <div class="hero-note">소량 $6/월 · 대량 $100~$300+</div>
+      <div class="hero-strength">오픈소스 · 모델 자유 선택<br>제로 텔레메트리</div>
+    </div>
+  </div>
+
+  <!-- Billing Model -->
+  <div class="sec">
+    <div class="sec-label">Billing Model</div>
+    <div class="sec-title">과금 모델이 핵심입니다</div>
+    <div class="bill-grid">
+      <div class="bill">
+        <div class="bill-icon">💳</div>
+        <div class="bill-model">크레딧 소진</div>
+        <div class="bill-desc">Perplexity · 월 10K 크레딧<br>작업 복잡도에 따라 30~21,000 소모</div>
+        <div class="bill-highlight" style="background:var(--accent-light);color:#0284c7">⚠️ 헤비유저는 월 중반 소진</div>
+      </div>
+      <div class="bill">
+        <div class="bill-icon">⏱</div>
+        <div class="bill-model">시간 윈도우</div>
+        <div class="bill-desc">Claude · 5hr 롤링 리셋<br>Pro ~44K / Max 5x ~88K / 20x ~220K</div>
+        <div class="bill-highlight" style="background:var(--amber-light);color:#d97706">✅ 시간 지나면 자동 리셋</div>
+      </div>
+      <div class="bill">
+        <div class="bill-icon">📊</div>
+        <div class="bill-model">메시지 카운트</div>
+        <div class="bill-desc">OpenAI · 160msg/3hr<br>에이전트 1작업 = 5~50 메시지 소모</div>
+        <div class="bill-highlight" style="background:var(--green-light);color:#059669">ℹ️ 소진 시 mini 모델 전환</div>
+      </div>
+      <div class="bill">
+        <div class="bill-icon">🔓</div>
+        <div class="bill-model">API 종량</div>
+        <div class="bill-desc">OpenClaw · 작업당 80K~150K 토큰<br>모델 라우팅으로 60~80% 절감</div>
+        <div class="bill-highlight" style="background:var(--red-light);color:#dc2626">💡 소량이면 가장 저렴</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agent Architecture -->
+  <div class="sec">
+    <div class="sec-label">Agent Architecture</div>
+    <div class="sec-title">에이전트 아키텍처 한눈 비교</div>
+    <div class="arch-grid">
+      <div class="arch">
+        <div class="arch-cat">협업 에이전트</div>
+        <div class="arch-title">🤝 Cowork</div>
+        <div class="arch-items">
+          <div class="arch-item"><div class="arch-dot" style="background:#f59e0b"></div><strong>Claude Cowork</strong> <span class="arch-env env-l">로컬</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">내 데스크톱 파일/앱 직접 접근 · 권한 기반 자율</div>
+          <div class="arch-item"><div class="arch-dot" style="background:#0ea5e9"></div><strong>Perplexity Computer</strong> <span class="arch-env env-c">클라우드</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">격리 VM · 19개 모델 · 수개월 연속 실행</div>
+        </div>
+      </div>
+      <div class="arch">
+        <div class="arch-cat">데스크톱 자동화</div>
+        <div class="arch-title">🖥️ Computer Use</div>
+        <div class="arch-items">
+          <div class="arch-item"><div class="arch-dot" style="background:#f59e0b"></div><strong>Claude</strong> <span class="arch-env env-h">하이브리드</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">비전 기반 · 스크린→해석→조작 · macOS</div>
+          <div class="arch-item"><div class="arch-dot" style="background:#ef4444"></div><strong>OpenClaw</strong> <span class="arch-env env-l">로컬</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">채팅앱 원격 제어 · Win+Mac · 오픈소스</div>
+          <div class="arch-item"><div class="arch-dot" style="background:#8b5cf6"></div><strong>Perplexity Personal</strong> <span class="arch-env env-l">로컬</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">Mac mini 전용 · 오프라인 가능 · 클라우드 연동</div>
+        </div>
+      </div>
+      <div class="arch">
+        <div class="arch-cat">코딩 에이전트</div>
+        <div class="arch-title">💻 Coding</div>
+        <div class="arch-items">
+          <div class="arch-item"><div class="arch-dot" style="background:#f59e0b"></div><strong>Claude Code</strong> <span class="arch-env env-h">하이브리드</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">터미널 · SWE-bench 72.7% · 단계별 협업</div>
+          <div class="arch-item"><div class="arch-dot" style="background:#10b981"></div><strong>OpenAI Codex</strong> <span class="arch-env env-c">클라우드</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">클라우드 컨테이너 · 69.1% · 빠른 생성</div>
+          <div class="arch-item"><div class="arch-dot" style="background:#ef4444"></div><strong>OpenClaw Code</strong> <span class="arch-env env-l">로컬</span></div>
+          <div class="arch-item" style="padding-left:16px;font-size:10px">자체호스팅 · GitHub 자동화 · DevOps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="take">
+    <div class="take-title">💡 핵심 판단 기준</div>
+    <div class="take-grid">
+      <div class="take-item">
+        <div class="take-icon" style="background:var(--amber-light)">💰</div>
+        <div class="take-text"><strong>비용 예측성이 중요하면 → Claude</strong><br>정액제 + 시간 리셋으로 월 비용 고정. $20부터 시작.</div>
+      </div>
+      <div class="take-item">
+        <div class="take-icon" style="background:var(--accent-light)">🤖</div>
+        <div class="take-text"><strong>완전 자율 에이전트가 필요하면 → Perplexity</strong><br>19개 모델 오케스트레이션. 단, 크레딧 소모 주의.</div>
+      </div>
+      <div class="take-item">
+        <div class="take-icon" style="background:var(--green-light)">🎨</div>
+        <div class="take-text"><strong>코딩+생성AI 통합이 필요하면 → OpenAI</strong><br>Codex + Sora(이미지/비디오). 생태계 가장 넓음.</div>
+      </div>
+      <div class="take-item">
+        <div class="take-icon" style="background:var(--red-light)">🔒</div>
+        <div class="take-text"><strong>데이터 통제가 최우선이면 → OpenClaw</strong><br>오픈소스, 로컬 실행, 제로 텔레메트리. 기업 기능은 직접 구축.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div class="bottom-left">가격 정보는 2026년 3월 27일 기준 · 세금 미포함</div>
+    <a href="index.html" class="detail-link">상세 비교표 보기 →</a>
+  </div>
+</div>
+
+<script>
+function toggleTheme(){
+  const h=document.documentElement,c=h.getAttribute('data-theme');
+  const d=c==='dark'||(!c&&matchMedia('(prefers-color-scheme:dark)').matches);
+  const n=d?'light':'dark';
+  h.setAttribute('data-theme',n);localStorage.setItem('theme',n);
+  document.getElementById('themeBtn').textContent=n==='dark'?'☀️':'🌙';
+}
+const s=localStorage.getItem('theme');
+if(s){document.documentElement.setAttribute('data-theme',s);document.getElementById('themeBtn').textContent=s==='dark'?'☀️':'🌙';}
+</script>
+</body>
+</html>
