@@ -145,6 +145,46 @@
     </div>
 
     <div class="tco-grid" id="tcoGrid"></div>
+
+    <!-- Enterprise Credit Reference -->
+    <div style="margin-top:24px;border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;background:var(--card)">
+      <div style="padding:16px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px">
+        <div class="avg avg-sm" style="background:var(--green)">OA</div>
+        OpenAI Enterprise 크레딧 소모 기준 (실제 데이터)
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border2)">
+        <!-- Models -->
+        <div style="background:var(--card);padding:16px">
+          <div style="font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">모델</div>
+          <div style="font-size:13px;color:var(--mid);line-height:2">
+            <div style="display:flex;justify-content:space-between"><span>GPT 5.3 Instant</span><strong style="color:var(--green)">무제한</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>GPT-5.4 Thinking</span><strong>10 cr</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>GPT-5.4 Pro</span><strong>50 cr</strong></div>
+          </div>
+        </div>
+        <!-- Features -->
+        <div style="background:var(--card);padding:16px">
+          <div style="font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">기능</div>
+          <div style="font-size:13px;color:var(--mid);line-height:2">
+            <div style="display:flex;justify-content:space-between"><span>에이전트</span><strong>30 cr/msg</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>심층 리서치</span><strong>50 cr/건</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>ImageGen</span><strong>6 cr/msg</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>음성</span><strong>5 cr/분</strong></div>
+          </div>
+        </div>
+        <!-- Codex -->
+        <div style="background:var(--card);padding:16px">
+          <div style="font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Codex</div>
+          <div style="font-size:13px;color:var(--mid);line-height:2">
+            <div style="display:flex;justify-content:space-between"><span>Local (5.3)</span><strong>~5 cr</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>Local (5.4)</span><strong>~7 cr</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>Cloud (5.3)</span><strong>~25 cr</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>Cloud (5.4)</span><strong>~34 cr</strong></div>
+            <div style="display:flex;justify-content:space-between"><span>Local (mini)</span><strong style="color:var(--green)">~1 cr</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Radar Scores -->
@@ -203,10 +243,13 @@
           <div style="font-size:15px;font-weight:800">OpenAI Codex</div>
         </div>
         <div style="font-size:13px;color:var(--mid);line-height:1.8">
-          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>Plus 가격:</strong> $20/월, Pro $200/월 — 공식 가격표</div>
-          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>메시지 제한:</strong> 160msg/3hr (Plus) — OpenAI Help Center</div>
-          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>작업당 메시지:</strong> 5~50msg — CustomGPT 분석</div>
-          <div style="padding:6px 0"><strong>일 작업 한계:</strong> ~25건 — OpenAI Help Center (compute-based)</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>Plus 가격:</strong> $20/월, Pro $200/월, Enterprise ~$60/석/월 — 공식</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>GPT 5.3 Instant:</strong> 무제한 (크레딧 소모 없음) — Enterprise 실제 데이터</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>GPT-5.4 Thinking:</strong> 10cr/msg, <strong>Pro:</strong> 50cr/msg — Enterprise 실제 데이터</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>에이전트:</strong> 30cr/msg, <strong>심층 리서치:</strong> 50cr/작업 — Enterprise 실제 데이터</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>Codex Local:</strong> ~5cr (5.3) / ~7cr (5.4) / ~1cr (mini) — Enterprise 실제 데이터</div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>Codex Cloud:</strong> ~25cr (5.3) / ~34cr (5.4) — Enterprise 실제 데이터</div>
+          <div style="padding:6px 0"><strong>Code Review:</strong> ~25cr (5.3) / ~34cr (5.4) per PR — Enterprise 실제 데이터</div>
         </div>
       </div>
       <div style="border:1px solid var(--border2);border-radius:var(--r);padding:22px;background:var(--card)">
@@ -269,14 +312,24 @@ const SVC = [
     perTask: { simple: 0, medium: 0, heavy: 0 },
     overageFactor: 0,
     maxBase: { simple:20, medium:20, heavy:200 },
+    // Enterprise credit costs (actual data)
+    entBase: 60, // ~$60/seat/month
+    entCredits: {
+      codexLocal: { '5.3': 5, '5.4': 7, 'mini': 1 },
+      codexCloud: { '5.3': 25, '5.4': 34 },
+      codeReview: { '5.3': 25, '5.4': 34 },
+      agent: 30, deepResearch: 50, imageGen: 6, voice: 5,
+      gpt53: 0, gpt54thinking: 10, gpt54pro: 50
+    },
     scores: { cost:8, quality:7, autonomy:6, breadth:10, privacy:5, enterprise:7 },
-    summary: '생태계 최대. Codex+Sora 통합. Web+CLI+App 3채널. 메시지 소진이 빠를 수 있음.',
+    summary: '생태계 최대. Codex+Sora 통합. Enterprise: GPT 5.3 무제한 + 크레딧 풀. Codex Cloud ~25cr/작업.',
     risks: [
-      '에이전트 1작업 = 5~50 메시지 — 하루 ~25건이 실질 한계',
-      'Plus 소진 시 mini 모델로 자동 전환 — 품질 급락',
-      'Free/Go 플랜에 광고 포함 (미국)'
+      'Enterprise ~$60/석 + 크레딧 풀 — 150석 최소 (연 $108K+)',
+      'Codex Cloud 작업 25~34cr — 크레딧 풀 소진 속도 주의',
+      '에이전트 30cr/msg, 심층 리서치 50cr/작업 — 고급 기능 크레딧 소모 큼',
+      'Plus 소진 시 mini 모델 자동 전환 — 품질 급락'
     ],
-    oks: ['Pro $200이면 무제한 사용', '이미지/비디오 생성 포함 (Sora)'] },
+    oks: ['GPT 5.3 Instant 무제한 (크레딧 소모 없음)', 'Codex Local ~5cr (5.3) — 저렴한 로컬 작업', 'mini 모델 ~1cr — 단순 작업 최저 비용'] },
   { id:'oc', name:'OpenClaw', color:'var(--red)', bg:'var(--red-bg)',
     base: 0,
     perTask: { simple: 0.05, medium: 0.30, heavy: 2.00 },
