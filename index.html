@@ -259,6 +259,62 @@
     font-size: 12px; color: var(--text-dim); line-height: 1.8; text-align: center;
   }
 
+  /* ── Agent Category Map ── */
+  .cat-section { margin-bottom: 28px; }
+  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .cat-header-icon { font-size: 18px; }
+  .cat-header-title { font-size: 15px; font-weight: 800; color: var(--text); }
+  .cat-header-desc { font-size: 11px; color: var(--text-dim); margin-bottom: 14px; }
+
+  .agent-row { display: flex; gap: 14px; }
+  .agent-card {
+    flex: 1; background: var(--card); border-radius: var(--radius); padding: 18px;
+    box-shadow: var(--shadow); position: relative; overflow: hidden;
+    transition: all 0.2s;
+  }
+  .agent-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .agent-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .agent-name-label { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 1px; }
+  .agent-provider { font-size: 9px; color: var(--text-dim); margin-bottom: 8px; }
+  .agent-env-tag {
+    display: inline-block; padding: 2px 7px; border-radius: 5px;
+    font-size: 9px; font-weight: 700; margin-bottom: 8px;
+  }
+  .tag-local { background: var(--green-light); color: #059669; }
+  .tag-cloud { background: var(--accent-light); color: #0284c7; }
+  .tag-hybrid { background: var(--amber-light); color: #d97706; }
+  .agent-desc { font-size: 10px; color: var(--text-mid); line-height: 1.6; }
+  .agent-desc strong { color: var(--text); }
+  .agent-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+  .agent-chip {
+    font-size: 8px; padding: 2px 6px; border-radius: 4px;
+    background: var(--border); color: var(--text-dim); font-weight: 600;
+  }
+
+  .arch-matrix { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-top: 24px; }
+  .arch-matrix table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .arch-matrix th, .arch-matrix td { padding: 8px 10px; font-size: 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  .arch-matrix th { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; }
+  .arch-matrix td:first-child { font-weight: 600; color: var(--text); width: 120px; }
+  .arch-matrix tr:last-child td { border-bottom: none; }
+  .av { color: var(--green); font-weight: 700; }
+  .ax { color: var(--text-dim); }
+
+  .overlap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+  .overlap-card { background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .overlap-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .overlap-sub { font-size: 9px; color: var(--text-dim); margin-bottom: 10px; }
+  .overlap-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .overlap-item { font-size: 10px; color: var(--text-mid); line-height: 1.5; padding-left: 12px; position: relative; margin-bottom: 3px; }
+  .overlap-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 5px; height: 5px; border-radius: 50%; }
+  .overlap-item.common::before { background: var(--green); }
+  .overlap-item.diff::before { background: var(--amber); }
+
+  @media (max-width: 960px) {
+    .agent-row { flex-direction: column; }
+    .overlap-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── Theme toggle ── */
   .theme-toggle {
     position: fixed; top: 16px; right: 16px; z-index: 100;
@@ -395,6 +451,74 @@ const SECTION_LABELS = {
   cardsPersonal: { label: "Plans & Pricing", title: "개인용 플랜 & 장단점" },
   cardsEnterprise: { label: "Plans & Pricing", title: "기업용 플랜 & 장단점" },
 };
+
+const AGENT_CATS = [
+  {
+    icon: "🤝", title: "협업 에이전트 (Cowork)", desc: "사용자의 환경에서 자율적으로 멀티스텝 작업을 수행하는 AI 동료",
+    agents: [
+      { name: "Claude Cowork", provider: "Anthropic · macOS/Windows", color: "#f59e0b", env: "local", envLabel: "로컬 데스크톱",
+        desc: '사용자의 <strong>실제 데스크톱</strong>에서 실행. 로컬 파일, 앱, 브라우저 접근. 고위험 작업 전 <strong>명시적 권한 요청</strong>. Computer Use 기술 기반.',
+        chips: ["로컬 파일 접근","앱 제어","브라우저","권한 기반 자율"] },
+      { name: "Perplexity Computer", provider: "Perplexity · Cloud (Firecracker VM)", color: "#0ea5e9", env: "cloud", envLabel: "클라우드 샌드박스",
+        desc: '<strong>격리된 클라우드 VM</strong>에서 실행. 19개 모델 자동 오케스트레이션. 사용자 로컬 머신에 <strong>접근 불가</strong>. 수개월 연속 실행 가능.',
+        chips: ["19개 모델","샌드박스 격리","수개월 실행","완전 자율"] },
+    ]
+  },
+  {
+    icon: "🖥️", title: "데스크톱 자동화 (Computer Use)", desc: "실제 데스크톱을 마우스/키보드로 직접 제어하는 에이전트",
+    agents: [
+      { name: "Claude Computer Use", provider: "Anthropic · macOS (API 기반 기술)", color: "#f59e0b", env: "hybrid", envLabel: "하이브리드",
+        desc: 'Cowork의 <strong>기반 기술</strong>. 화면 캡처→해석→마우스/키보드 제어. 로컬/클라우드/SSH 3가지 모드. 안전 분류기 내장.',
+        chips: ["스크린 캡처","마우스/키보드","안전 분류기"] },
+      { name: "OpenClaw Desktop", provider: "OpenClaw · 로컬 (오픈소스)", color: "#ef4444", env: "local", envLabel: "로컬 자체호스팅",
+        desc: '<strong>WhatsApp/Telegram/Discord</strong>로 PC 원격 제어. 100+ AgentSkills. 13,700+ 써드파티 Skills. <strong>제로 텔레메트리</strong>.',
+        chips: ["채팅 제어","오픈소스","제로 텔레메트리","13,700+ Skills"] },
+      { name: "Perplexity Personal Computer", provider: "Perplexity · Mac mini (로컬 하드웨어)", color: "#8b5cf6", env: "local", envLabel: "로컬 하드웨어",
+        desc: '<strong>Mac mini 전용 로컬 에이전트</strong>. 클라우드 Computer와 별도 제품. 오프라인에서도 세션 유지. 민감 데이터가 <strong>기기 밖으로 나가지 않음</strong>.',
+        chips: ["Mac mini 전용","항시 온","오프라인 가능","로컬 프라이버시"] },
+    ]
+  },
+  {
+    icon: "💻", title: "코딩 에이전트", desc: "코드 작성, 리팩토링, 디버깅에 특화된 개발자 도구",
+    agents: [
+      { name: "Claude Code", provider: "Anthropic · 터미널 (로컬)", color: "#f59e0b", env: "hybrid", envLabel: "하이브리드",
+        desc: '터미널 기반. 로컬 파일 직접 접근. SWE-bench <strong>72.7%</strong>. 단계별 협업 방식.',
+        chips: ["터미널","72.7% SWE","단계별 협업"] },
+      { name: "OpenAI Codex", provider: "OpenAI · 클라우드 컨테이너", color: "#10b981", env: "cloud", envLabel: "클라우드",
+        desc: '클라우드 컨테이너에서 실행. SWE-bench <strong>69.1%</strong>. 빠른 코드 생성. Web+CLI+App 3채널.',
+        chips: ["클라우드","69.1% SWE","빠른 생성"] },
+      { name: "OpenClaw Code", provider: "OpenClaw · 로컬 (오픈소스)", color: "#ef4444", env: "local", envLabel: "로컬",
+        desc: '로컬 자체호스팅. 자율 코드 작성 + GitHub PR 리뷰 자동화. 모델 자유 선택.',
+        chips: ["자체호스팅","GitHub 연동","DevOps"] },
+    ]
+  }
+];
+
+const ARCH_MATRIX = [
+  { label: "실행 환경", vals: ["로컬 데스크톱","클라우드 VM","Mac mini (로컬)","로컬 자체호스팅"] },
+  { label: "로컬 파일 접근", vals: ["✓ 권한 요청 후","✗ 샌드박스만","✓ 항시 접근","✓ 직접 접근"], check: [1,0,1,1] },
+  { label: "마우스/키보드", vals: ["✓","✗ (VM 내부만)","✓","✓"], check: [1,0,1,1] },
+  { label: "자율성 수준", vals: ["권한 기반 자율","완전 자율 (수개월)","항시 온 에이전트","채팅 명령 기반"] },
+  { label: "멀티모델", vals: ["✗ Claude만","✓ 19개 모델","✓ (Computer 연동)","✓ 모델 자유 선택"], check: [0,1,1,1] },
+  { label: "오프라인 작업", vals: ["✗","✗","✓","✓ (로컬 모델 시)"], check: [0,0,1,1] },
+  { label: "데이터 프라이버시", vals: ["로컬 유지 (클라우드 추론)","샌드박스 격리 (학습 제외)","기기 밖 유출 없음","제로 텔레메트리"] },
+  { label: "비용", vals: ["Pro $20~/월","Max $200/월","Max $200/월 포함","무료 + API 비용"] },
+];
+
+const OVERLAPS = [
+  { title: "Claude Cowork vs Perplexity Computer", sub: '"협업 에이전트"라는 같은 카테고리, 근본적으로 다른 접근',
+    common: ["멀티스텝 작업 자율 수행","작업 전 계획 수립 → 실행 → 검증 사이클","고위험 작업 시 사용자 승인 요청 가능"],
+    diffs: ["<strong>Cowork</strong>: 내 데스크톱의 실제 파일/앱 접근 — <strong>Computer</strong>: 격리된 클라우드 샌드박스",
+            "<strong>Cowork</strong>: Claude 단일 모델 — <strong>Computer</strong>: 19개 모델 오케스트레이션",
+            "<strong>Cowork</strong>: 세션 단위 작업 — <strong>Computer</strong>: 수개월 연속 실행 가능",
+            "<strong>Cowork</strong>: $20/월부터 — <strong>Computer</strong>: $200/월 필수"] },
+  { title: "Computer Use: Claude vs OpenClaw vs Perplexity Personal", sub: "실제 데스크톱을 제어하는 3가지 방식",
+    common: ["실제 마우스/키보드 제어 가능","로컬 파일 시스템 접근","앱 실행 및 조작"],
+    diffs: ["<strong>Claude</strong>: 비전 기반 (스크린 캡처→해석→조작) — <strong>OpenClaw</strong>: 채팅앱으로 원격 명령",
+            "<strong>Claude</strong>: macOS 전용 — <strong>OpenClaw</strong>: Win+Mac — <strong>Personal</strong>: Mac mini 전용",
+            "<strong>Claude</strong>: 안전 분류기 내장 — <strong>OpenClaw</strong>: 사용자 책임 — <strong>Personal</strong>: 항시 온",
+            "<strong>Personal Computer</strong>는 클라우드 Computer와 연동 → 로컬+클라우드 하이브리드 구성 가능"] },
+];
 
 const CATS = [...new Set(DATA.features.map(f => f.cat))];
 
@@ -592,6 +716,62 @@ function render() {
           <ul class="pc-list cons">${cons.map(t => `<li>${t}</li>`).join('')}</ul>
         </div>`;
       }).join('')}
+    </div>
+  </div>`;
+
+  // ── Agent Category Map ──
+  const envTagClass = { local: 'tag-local', cloud: 'tag-cloud', hybrid: 'tag-hybrid' };
+  html += `
+  <div class="section">
+    <div class="section-label">Agent Architecture</div>
+    <div class="section-title">에이전트 카테고리 & 동작 방식</div>
+    <div class="section-desc" style="font-size:12px;color:var(--text-dim);margin-bottom:24px">같은 "에이전트"라도 실행 환경, 자율성, 접근 범위가 근본적으로 다릅니다.</div>
+    ${AGENT_CATS.map(cat => `
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-header-icon">${cat.icon}</span><span class="cat-header-title">${cat.title}</span></div>
+        <div class="cat-header-desc">${cat.desc}</div>
+        <div class="agent-row">
+          ${cat.agents.map(a => `
+            <div class="agent-card" style="border-top:3px solid ${a.color}">
+              <div class="agent-name-label">${a.name}</div>
+              <div class="agent-provider">${a.provider}</div>
+              <span class="agent-env-tag ${envTagClass[a.env]}">${a.envLabel}</span>
+              <div class="agent-desc">${a.desc}</div>
+              <div class="agent-chips">${a.chips.map(c => `<span class="agent-chip">${c}</span>`).join('')}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+
+    <div style="margin-top:28px">
+      <div class="section-label">Architecture Comparison</div>
+      <div class="section-title" style="font-size:16px;margin-bottom:14px">실행 환경 & 자율성 비교</div>
+      <div class="arch-matrix">
+        <table>
+          <thead><tr><th>항목</th><th style="color:#f59e0b">Claude Cowork</th><th style="color:#0ea5e9">Perplexity Computer</th><th style="color:#8b5cf6">Perplexity Personal</th><th style="color:#ef4444">OpenClaw Desktop</th></tr></thead>
+          <tbody>
+            ${ARCH_MATRIX.map(row => `<tr><td>${row.label}</td>${row.vals.map((v, i) => `<td class="${row.check ? (row.check[i] ? 'av' : 'ax') : ''}">${v}</td>`).join('')}</tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="section-label">Overlap Analysis</div>
+      <div class="section-title" style="font-size:16px;margin-bottom:14px">서비스 간 공통점 & 차이점</div>
+      <div class="overlap-grid">
+        ${OVERLAPS.map(o => `
+          <div class="overlap-card">
+            <div class="overlap-title">${o.title}</div>
+            <div class="overlap-sub">${o.sub}</div>
+            <div class="overlap-label" style="color:var(--green)">공통점</div>
+            ${o.common.map(c => `<div class="overlap-item common">${c}</div>`).join('')}
+            <div class="overlap-label" style="color:var(--amber);margin-top:8px">핵심 차이</div>
+            ${o.diffs.map(d => `<div class="overlap-item diff">${d}</div>`).join('')}
+          </div>
+        `).join('')}
+      </div>
     </div>
   </div>`;
 
